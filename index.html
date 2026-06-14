@@ -12,12 +12,35 @@ body {
   font-family:Arial,sans-serif;
 }
 .wrap {
-  max-width:760px;
+    
+  max-width:1200px;
   margin:auto;
   padding:16px 16px 18px;
   text-align:center;
   background:linear-gradient(180deg,#090909,#180a22);
   border-radius:20px;
+}
+.hmLayout{
+  display:flex;
+  gap:20px;
+  align-items:flex-start;
+  justify-content:center;
+  margin-top:20px;
+  flex-wrap:wrap;
+}
+
+.playerBlock{
+  width:420px;
+}
+
+.textBlock{
+  width:420px;
+  height:610px;
+  overflow-y:auto;
+  background:rgba(255,255,255,0.04);
+  border-radius:18px;
+  padding:20px;
+  box-sizing:border-box;
 }
 .small {
   font-size:22px;
@@ -69,6 +92,16 @@ body {
   opacity:.9;
 }
 @media(max-width:700px){
+    .hmLayout{
+  flex-direction:column;
+  align-items:center;
+}
+
+.playerBlock,
+.textBlock{
+  width:100%;
+  max-width:610px;
+}
   .big{font-size:34px}
   .cover img{width:min(220px,68vw)}
   .song{font-size:21px}
@@ -86,6 +119,9 @@ body {
 
 <div class="contentWrap">
 <div class="leftSide">
+<div class="hmLayout">
+
+<div class="playerBlock">
 <div class="cover">
 <img id="mainCover" src="01_Nordlichter.jpg">
 </div>
@@ -122,10 +158,17 @@ Lebensherausforderung
 </div>
 <div class="rightSide">
 
+</div>
+
+<div class="textBlock">
 <div id="songText" style="color:white; margin-top:20px; white-space:pre-line; max-width:700px; margin-left:auto; margin-right:auto; text-align:center;">
 01 Nordlichter Liedtext
 </div>
 
+
+</div>
+
+</div>
 
 </div>
 
@@ -366,4 +409,3 @@ while (shown < 3 && i < playlist.length) {
 </script>
 </body>
 </html>
-
