@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PulseDE Hall of Memories - Test5</title>
+<style>
+body {
+  margin:0;
+  background:#0d0d0d;
+  color:#fff;
+  font-family:Arial,sans-serif;
+}
+.wrap {
+    
+  max-width:760px;
+  margin:auto;
+  padding:16px 16px 18px;
+  text-align:center;
+  background:linear-gradient(180deg,#090909,#180a22);
+  border-radius:20px;
+}
+.hmLayout{
+  display:flex;
+  gap:20px;
+  align-items:flex-start;
+  justify-content:center;
+  margin-top:20px;
+  flex-wrap:wrap;
+}
+
+.playerBlock{
+  width:420px;
+}
+
+.textBlock{
+  width:420px;
+  height:610px;
+  overflow-y:auto;
+  background:rgba(255,255,255,0.04);
+  border-radius:18px;
+  padding:20px;
+  box-sizing:border-box;
+}
+.small {
+  font-size:22px;
+  color:#ffd76a;
+  font-weight:bold;
+}
+.big {
+  font-size:44px;
+  color:#ffd76a;
+  font-weight:bold;
+  line-height:1;
+}
+.sub {
+  color:#c998ff;
+  font-size:18px;
+  margin:4px 0 12px;
+}
+.cover img {
+  width:min(280px,72vw);
+  border-radius:18px;
+  box-shadow:0 0 22px rgba(255,180,60,.25);
+}
+.song {
+  font-size:24px;
+  margin-top:10px;
+}
+.artist {
+  font-size:18px;
+  color:#ddd;
+  margin:3px 0 10px;
+}
+.player {
+  width:72%;
+  max-width:560px;
+  margin:auto;
+}
+.player audio {
+  width:100%;
+}
+.next {
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:12px;
+}
+.next img {
+  width:72px;
+  border-radius:10px;
+  opacity:.9;
+}
+@media(max-width:700px){
+    .hmLayout{
+  flex-direction:column;
+  align-items:center;
+}
+
+.playerBlock,
+.textBlock{
+  width:100%;
+  max-width:610px;
+}
+  .big{font-size:34px}
+  .cover img{width:min(220px,68vw)}
+  .song{font-size:21px}
+  .player{width:96%; max-width:none;}
+  .next{margin-top:8px}
+  .wrap{padding-bottom:10px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="small">PulseDE</div>
+<div class="big">Hall of Memories</div>
+<div class="sub">🎵 Music Jukebox</div>
+
+<div class="contentWrap">
+<div class="leftSide">
+<div class="hmLayout">
+
+<div class="playerBlock">
+<div class="cover">
+<img id="mainCover" src="01_Nordlichter.jpg">
+</div>
+
+<div class="song" id="songTitle">01 Nordlichter</div>
+<div class="artist">Harry Bolero</div>
+
+<div class="player">
+    <audio controls autoplay id="audioPlayer">
+        <source src="01_Nordlichter.mp3" type="audio/mpeg">
+        Dein Browser unterstützt kein Audio.
+    </audio>
+</div>
+
+<div class="next" id="nextSongs">
+<img src="02_Straßenhunde.jpg" onclick="changeSong(1)">
+<img src="03_Auf der Straße zu Hause.jpg" onclick="changeSong(2)">
+<img src="04_Mein Weg zurück zu dir.jpg" onclick="changeSong(3)">
+</div>
+
+<div style="margin-top:20px; display:flex; justify-content:space-between; align-items:center; max-width:700px; margin-left:auto; margin-right:auto;">
+
+<div style="font-size:13px; text-align:left; max-width:320px; color:#ccc;">
+* = Song berührt Thema<br>
+Behinderung / Einschränkung /<br>
+Inklusion oder besondere<br>
+Lebensherausforderung
+</div>
+
+<button id="toggleText">
+📝 Song ausblenden
+</button>
+
+</div>
+<div class="rightSide">
+
+</div>
+
+<div class="textBlock">
+<div id="songText" style="color:white; margin-top:20px; white-space:pre-line; max-width:700px; margin-left:auto; margin-right:auto; text-align:center;">
+01 Nordlichter Liedtext
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+const playlist = [
+    "01_Nordlichter.mp3",
+    "02_Straßenhunde.mp3",
+    "03_Auf der Straße zu Hause.mp3",
+    "04_Mein Weg zurück zu dir.mp3",
+    "05_Bleib bei mir.mp3",
+    "06_Abschied am Telefon.mp3",
+    "07_Mehr als nur ich.mp3",
+    "08_Feierabend.mp3",
+    "09_In Unserer Mitte.mp3",
+    "10_Kinderlied_Fritzi_und_Emma_auf_Reisen.mp3",
+    "11_Wir Hören Dich.mp3",
+    "13_Hey Alter du hier auf Malta.mp3",
+    "15_Schatten in mir.mp3",
+    "16_Atemlos im Schatten der Zeit.mp3",
+    "17_Wenn der Spiegel mich nicht kennt.mp3",
+    "18_Armutsrente.mp3",
+    "19_Schritte im Nebel.mp3",
+    "21_Verschwommene Welt.mp3",
+    "22_Unsichtbarer Schmerz.mp3",
+    "23_Probleme.mp3",
+    "24_Krise des mittleren Lebens.mp3",
+    "25_Vergangenheit.mp3",
+    "26_Bleib bei mir.mp3",
+    "27_Der Feind.mp3",
+    "28_Die Jugendzeit.mp3",
+    "29_Lautlos fällt im Herbst das Laub.mp3",
+    "30_Nichts_ist_für_die_Ewigkeit_Vol_1.mp3",
+    "31_Nichts_ist_für_die_Ewigkeit_Vol_2.mp3",
+    "32_Nichts_ist_für_die_Ewigkeit_Vol_3.mp3",
+    "33_Sternenklare Nacht.mp3",
+    "34_Oberhausen Melancholie.mp3",
+    "35_Am Tag, als die Flamme verlosch.mp3",
+    "36_33 Jahre Gran Canaria.mp3",
+    "37_Vorstadt-Kids im Lichtermeer.mp3",
+    "38_Santa_Lucia-Insel_meiner_Träume.mp3",
+    "39_Drück den Knopf und dreh am Rad.mp3",
+    "40_Jenseits der Zeit.mp3",
+    "41_Spiel für mich, Maestro.mp3",
+    "42_Ein leiser Traum.mp3",
+    "43_Wenn du mich rufst.mp3",
+    "44_Endlos weit.mp3",
+    "45_100 Schmetterlinge.mp3",
+    "46_Wirtschaft und Arbeitswelt.mp3",
+    "47_Irgendwie irgendwann.mp3",
+    "48_Fühlst du dich allein.mp3",
+    "49_19 Grad im Januar (Camper-Blues)Spanien ist so nah.mp3",
+    "50_Where the Ocean Meets Your Eyes.mp3",
+    "51_Verborgene Flammen.mp3",
+    "52_Warum Kriege.mp3",
+    "53_Lichter im Baum.mp3",
+    "55_Sen ve Ben.mp3",
+    "56_Ein neues Leben_Vol_1.mp3",
+    "57_Licht nach mir_Vol_2.mp3",
+    "58_Licht der Ewigkeit_Vol_3.mp3",
+
+
+];
+
+const covers = [
+    "01_Nordlichter.jpg",
+    "02_Straßenhunde.jpg",
+    "03_Auf der Straße zu Hause.jpg",
+    "04_Mein Weg zurück zu dir.jpg",
+    "05_Bleib bei mir.jpg",
+    "06_Abschied am Telefon.jpg",
+    "07_Mehr als nur ich.jpg",
+    "08_Feierabend.jpg",
+    "09_In Unserer Mitte.jpg",
+    "10_Kinderlied_Fritzi_und_Emma_auf_Reisen.jpg",
+    "11_Wir Hören Dich.jpg",
+    "13_Hey Alter du hier auf Malta.jpg",
+    "15_Schatten in mir.jpg",
+    "16_Atemlos im Schatten der Zeit.jpg",
+    "17_Wenn der Spiegel mich nicht kennt.jpg",
+    "18_Armutsrente.jpg",
+    "19_Schritte im Nebel.jpg",
+    "21_Verschwommene Welt.jpg",
+    "22_Unsichtbarer Schmerz.jpg",
+    "23_Probleme.jpg",
+    "24_Krise des mittleren Lebens.jpg",
+    "25_Vergangenheit.jpg",
+    "26_Bleib bei mir.jpg",
+    "27_Der Feind.jpg",
+    "28_Die Jugendzeit.jpg",
+    "29_Lautlos fällt im Herbst das Laub.jpg",
+    "30_Nichts_ist_für_die_Ewigkeit_Vol_1.jpg",
+    "31_Nichts_ist_für_die_Ewigkeit_Vol_2.jpg",
+    "32_Nichts_ist_für_die_Ewigkeit_Vol_3.jpg",
+    "33_Sternenklare Nacht.jpg",
+    "34_Oberhausen Melancholie.jpg",
+    "35_Am Tag, als die Flamme verlosch.jpg",
+    "36_33 Jahre Gran Canaria.jpg",
+    "37_Vorstadt-Kids im Lichtermeer.jpg",
+    "38_Santa_Lucia-Insel_meiner_Träume.jpg",
+    "39_Drück den Knopf und dreh am Rad.jpg",
+    "40_Jenseits der Zeit.jpg",
+    "41_Spiel für mich, Maestro.jpg",
+    "42_Ein leiser Traum.jpg",
+    "43_Wenn du mich rufst.jpg",
+    "44_Endlos weit.jpg",
+    "45_100 Schmetterlinge.jpg",
+    "46_Wirtschaft und Arbeitswelt.jpg",
+    "47_Irgendwie irgendwann.jpg",
+    "48_Fühlst du dich allein.jpg",
+    "49_19 Grad im Januar (Camper-Blues)Spanien ist so nah.jpg",
+    "50_Where the Ocean Meets Your Eyes.jpg",
+    "51_Verborgene Flammen.jpg",
+    "52_Warum Kriege.jpg",
+    "53_Lichter im Baum.jpg",
+    "55_Sen ve Ben.jpg",
+    "56_Ein neues Leben_Vol_1.jpg",
+    "57_Licht nach mir_Vol_2.jpg",
+    "58_Licht der Ewigkeit_Vol_3.jpg",
+];
+
+let currentSong = 0;
+
+const player = document.getElementById("audioPlayer");
+const source = player.querySelector("source");
+const cover = document.getElementById("mainCover");
+const title = document.getElementById("songTitle");
+const text = document.getElementById("songText");
+const nextSongs = document.getElementById("nextSongs");
+
+
+async function loadText(songFile) {
+    const txtFile = songFile.replace(".mp3", ".txt");
+
+    try {
+        const response = await fetch(encodeURI(txtFile));
+        const data = await response.text();
+        text.innerText = data;
+    } catch (error) {
+        text.innerText = "Textdatei nicht gefunden.";
+    }
+}
+function changeSong(index) {
+
+    if (index >= playlist.length) return;
+
+    currentSong = index;
+
+    source.src = playlist[currentSong];
+
+    cover.src = playlist[currentSong]
+        .replace(".mp3", ".jpg");
+
+    title.innerText = playlist[currentSong]
+        .replace(".mp3", "")
+        .replaceAll("_", " ");
+
+    loadText(playlist[currentSong]);
+
+let html = "";
+let shown = 0;
+let i = currentSong + 1;
+
+while (shown < 3 && i < playlist.length) {
+
+    if (playlist[i] && covers[i]) {
+
+        html += `<img src="${covers[i]}" onclick="changeSong(${i})">`;
+        shown++;
+    }
+
+    i++;
+}
+nextSongs.innerHTML = html;
+    player.load();
+    player.play();
+}
+
+document.getElementById("toggleText")
+.addEventListener("click", function () {
+
+const songText =
+document.getElementById("songText");
+
+const textBlock =
+document.querySelector(".textBlock");
+
+if (songText.style.display === "none") {
+
+    songText.style.display = "block";
+    textBlock.style.display = "block";
+
+    this.innerText = "📝 Song ausblenden";
+
+} else {
+
+    songText.style.display = "none";
+    textBlock.style.display = "none";
+
+    this.innerText = "📝 Song lesen";
+
+}
+
+});
+player.addEventListener("ended", function () {
+    currentSong++;
+
+    if (currentSong < playlist.length) {
+
+        source.src = playlist[currentSong];
+
+        cover.src = playlist[currentSong]
+            .replace(".mp3", ".jpg");
+
+        title.innerText = playlist[currentSong]
+            .replace(".mp3", "")
+            .replaceAll("_", " ");
+
+        loadText(playlist[currentSong]);
+
+        let html = "";
+let shown = 0;
+let i = currentSong + 1;
+
+while (shown < 3 && i < playlist.length) {
+
+    if (playlist[i] && covers[i]) {
+
+        html += `<img src="${covers[i]}" onclick="changeSong(${i})">`;
+        shown++;
+    }
+
+    i++;
+}
+
+        nextSongs.innerHTML = html;
+
+        player.load();
+
+        player.oncanplaythrough = () => {
+            player.play();
+        };
+    }
+});	
+	
+</script>
+</body>
+</html>
