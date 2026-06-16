@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PulseDE Hall of Memories - Songtext rechts</title>
+<style>
+body {
+  margin:0;
+  background:#0d0d0d;
+  color:#fff;
+  font-family:Arial,sans-serif;
+}
+.wrap {
+  max-width:760px;
+  height:630px;
+  margin:auto;
+  padding:14px 18px 18px;
+  background:linear-gradient(180deg,#090909,#180a22);
+  border-radius:20px;
+  box-sizing:border-box;
+  overflow:hidden;
+}
+.header {
+  text-align:center;
+  margin-bottom:8px;
+}
+.small {font-size:22px;color:#ffd76a;font-weight:bold;}
+.big {font-size:32px;color:#ffd76a;font-weight:bold;line-height:1.05;}
+.sub {color:#c998ff;font-size:16px;margin:3px 0 8px;}
+#toggleLyrics {
+  display:block;
+  margin:0 auto 10px;
+  background:#ffd76a;
+  color:#120818;
+  border:0;
+  border-radius:12px;
+  padding:10px 16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.textBox {
+  height:510px;
+  overflow-y:auto;
+  background:rgba(255,255,255,0.04);
+  border-radius:18px;
+  padding:18px 22px;
+  box-sizing:border-box;
+}
+
+.textBox {
+  scrollbar-width:thin;
+  scrollbar-color:#ffd76a rgba(255,255,255,0.10);
+}
+.textBox::-webkit-scrollbar { width:10px; }
+.textBox::-webkit-scrollbar-track { background:rgba(255,255,255,0.08); border-radius:12px; }
+.textBox::-webkit-scrollbar-thumb { background:#ffd76a; border-radius:12px; }
+#songTitle {
+  color:#ffd76a;
+  font-size:22px;
+  font-weight:bold;
+  text-align:center;
+  margin-bottom:14px;
+}
+#songText {
+  white-space:pre-line;
+  line-height:1.5;
+  font-size:17px;
+  text-align:center;
+}
+.hint {
+  color:#ccc;
+  text-align:center;
+  margin-top:80px;
+  line-height:1.45;
+}
+@media(max-width:700px){
+  .wrap{height:630px;}
+  .big{font-size:30px;}
+  .textBox{height:500px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <div class="small">PulseDE</div>
+    <div class="big">Songtext</div>
+  </div>
+
+  <button id="toggleLyrics" type="button">Songtext öffnen</button>
+
+  <div class="textBox">
+    <div id="songTitle">Noch kein Songtext geöffnet</div>
+    <div id="songText" class="hint">
+      Rechts erscheint nur der passende Liedtext.
+
+      Kein zweiter Player. Kein Cover. Kein Andocken.
+
+      Song links wählen, dann hier öffnen.
+    </div>
+  </div>
+</div>
+
+<script>
+const titleEl = document.getElementById("songTitle");
+const textEl = document.getElementById("songText");
+const toggleBtn = document.getElementById("toggleLyrics");
+
+let currentTxtFile = "01_Nordlichter.txt";
+let currentTitle = "01 Nordlichter";
+let lyricsOpen = false;
+
+function cleanTitleFromTxt(txtFile) {
+  return decodeURIComponent(txtFile)
+    .replace(".txt", "")
+    .replaceAll("_", " ");
+}
+
+function showClosedHint() {
+  titleEl.innerText = currentTitle ? currentTitle : "Noch kein Songtext gewählt";
+  textEl.classList.add("hint");
+  textEl.innerText = "Songtext ist geschlossen.\n\nKlicke oben auf:\nSongtext öffnen\n\nDann erscheint hier nur der passende Liedtext.";
+  toggleBtn.innerText = "Songtext öffnen";
+}
+
+async function loadSongText() {
+  if (!currentTxtFile) {
+    showClosedHint();
+    return;
+  }
+
+  titleEl.innerText = currentTitle || cleanTitleFromTxt(currentTxtFile);
+  textEl.classList.remove("hint");
+  textEl.innerText = "Songtext wird geladen …";
+
+  try {
+    const response = await fetch(encodeURI(currentTxtFile), {cache:"no-store"});
+    if (!response.ok) throw new Error("not found");
+    const data = await response.text();
+    textEl.innerText = data;
+  } catch (error) {
+    textEl.innerText = "Textdatei nicht gefunden:\n" + currentTxtFile;
+  }
+}
+
+function receiveCurrentSong(data) {
+  if (!data || data.type !== "HM_CURRENT_SONG" || !data.txtFile) return;
+
+  currentTxtFile = data.txtFile;
+  currentTitle = data.title || cleanTitleFromTxt(data.txtFile);
+
+  if (lyricsOpen) {
+    loadSongText();
+  } else {
+    showClosedHint();
+  }
+}
+
+toggleBtn.addEventListener("click", function() {
+  lyricsOpen = !lyricsOpen;
+
+  if (lyricsOpen) {
+    toggleBtn.innerText = "Songtext schließen";
+    loadSongText();
+  } else {
+    showClosedHint();
+  }
+});
+
+window.addEventListener("message", function(event) {
+  receiveCurrentSong(event.data);
+});
+
+window.addEventListener("storage", function(event) {
+  if (event.key !== "hmCurrentSong" || !event.newValue) return;
+  try {
+    receiveCurrentSong(JSON.parse(event.newValue));
+  } catch (error) {}
+});
+
+try {
+  const saved = localStorage.getItem("hmCurrentSong");
+  if (saved) receiveCurrentSong(JSON.parse(saved));
+} catch (error) {}
+
+try {
+  window.parent.postMessage({type:"HM_REQUEST_CURRENT"}, "*");
+} catch (error) {}
+
+showClosedHint();
+</script>
+</body>
+</html>
