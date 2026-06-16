@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PulseDE HOME A1 Test</title>
+<style>
+body{margin:0;background:#0d0d0d;font-family:Arial,sans-serif;}
+.home{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  max-width:1500px;
+  margin:0 auto;
+  padding:10px;
+  box-sizing:border-box;
+}
+iframe{
+  width:100%;
+  height:630px;
+  border:0;
+  display:block;
+}
+@media(max-width:900px){
+  .home{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="home">
+  <iframe src="PulseDE_HM_PLAYER_LINKS_A1_V4.html" title="HM Player links"></iframe>
+  <iframe src="PulseDE_HM_SONGTEXT_RECHTS_A1_V4.html" title="Songtext rechts"></iframe>
+</div>
+<script>
+window.addEventListener("message", function(event){
+  const frames = document.querySelectorAll("iframe");
+  frames.forEach(frame => {
+    try { frame.contentWindow.postMessage(event.data, "*"); } catch(error) {}
+  });
+});
+</script>
+</body>
+</html>
