@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PulseDE HM Explorer Test V1</title>
+
+<style>
+
+body{
+    background:#111;
+    color:white;
+    font-family:Arial,sans-serif;
+    text-align:center;
+    margin:20px;
+}
+
+.folder{
+    max-width:520px;
+    margin:auto;
+}
+
+.folder img{
+    width:100%;
+    border-radius:12px;
+    cursor:pointer;
+}
+
+.songlist{
+    display:none;
+    margin-top:20px;
+    background:#222;
+    padding:15px;
+    border-radius:12px;
+}
+
+button{
+    padding:10px 15px;
+    margin:5px;
+    cursor:pointer;
+}
+
+</style>
+</head>
+<body>
+
+<div class="folder">
+
+<img src="HM_01_Gefuehl.jpg" onclick="openFolder()">
+
+<div id="songs" class="songlist">
+
+<h2>❤️ 01 Gefühl</h2>
+
+<button>▶️ Gesamten Ordner abspielen</button>
+
+<button onclick="closeFolder()">
+⏹ Wiedergabe beenden & Ordner schließen
+</button>
+
+<hr>
+
+<p>☐ 01 Nordlichter</p>
+<p>☐ 04 Mein Weg zurück zu dir</p>
+<p>☐ 05 Bleib bei mir</p>
+<p>☐ 06 Abschied am Telefon</p>
+
+<hr>
+
+<button onclick="closeFolder()">
+⏹ Wiedergabe beenden & Ordner schließen
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function openFolder(){
+    document.getElementById("songs").style.display="block";
+}
+
+function closeFolder(){
+    document.getElementById("songs").style.display="none";
+}
+
+</script>
+
+</body>
+</html>
