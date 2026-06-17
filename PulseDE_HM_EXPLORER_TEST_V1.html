@@ -4,16 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PulseDE HM Explorer Test V1</title>
+<title>PulseDE HM Explorer Test V2</title>
 
 <style>
-
 body{
     background:#111;
     color:white;
     font-family:Arial,sans-serif;
     text-align:center;
     margin:20px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(260px, 520px));
+    gap:22px;
+    justify-content:center;
 }
 
 .folder{
@@ -29,7 +35,7 @@ body{
 
 .songlist{
     display:none;
-    margin-top:20px;
+    margin-top:15px;
     background:#222;
     padding:15px;
     border-radius:12px;
@@ -41,51 +47,127 @@ button{
     cursor:pointer;
 }
 
+.hidden{
+    display:none;
+}
+
+@media(max-width:700px){
+    .grid{
+        grid-template-columns:1fr;
+    }
+}
 </style>
 </head>
+
 <body>
 
-<div class="folder">
+<h1>PulseDE Hall of Memories</h1>
+<p>Wähle einen Erlebnis-Ordner</p>
 
-<img src="HM_01_Gefuehl.jpg" onclick="openFolder()">
+<div class="grid">
 
-<div id="songs" class="songlist">
-
+<div class="folder" id="folder01">
+<img src="HM_01_Gefuehl.jpg" onclick="openFolder('folder01','songs01')">
+<div id="songs01" class="songlist">
 <h2>❤️ 01 Gefühl</h2>
-
 <button>▶️ Gesamten Ordner abspielen</button>
-
-<button onclick="closeFolder()">
-⏹ Wiedergabe beenden & Ordner schließen
-</button>
-
+<button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
-
 <p>☐ 01 Nordlichter</p>
 <p>☐ 04 Mein Weg zurück zu dir</p>
 <p>☐ 05 Bleib bei mir</p>
 <p>☐ 06 Abschied am Telefon</p>
-
 <hr>
+<button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
+</div>
+</div>
 
-<button onclick="closeFolder()">
-⏹ Wiedergabe beenden & Ordner schließen
-</button>
+<div class="folder" id="folder02">
+<img src="HM_02_Nachdenken.jpg" onclick="openFolder('folder02','songs02')">
+<div id="songs02" class="songlist">
+<h2>🌙 02 Nachdenken</h2>
+<button>▶️ Gesamten Ordner abspielen</button>
+<button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
+<hr>
+<p>☐ Test-Song Nachdenken</p>
+<hr>
+<button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
+</div>
+</div>
 
+<div class="folder" id="folder03">
+<img src="HM_03_Hoffnung.jpg" onclick="openFolder('folder03','songs03')">
+<div id="songs03" class="songlist">
+<h2>🍀 03 Hoffnung</h2>
+<button>▶️ Gesamten Ordner abspielen</button>
+<button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
+<hr>
+<p>☐ Test-Song Hoffnung</p>
+<hr>
+<button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
+</div>
+</div>
+
+<div class="folder" id="folder04">
+<img src="HM_04_Menschlichkeit.jpg" onclick="openFolder('folder04','songs04')">
+<div id="songs04" class="songlist">
+<h2>🤝 04 Menschlichkeit</h2>
+<button>▶️ Gesamten Ordner abspielen</button>
+<button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
+<hr>
+<p>☐ Test-Song Menschlichkeit</p>
+<hr>
+<button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
+</div>
+</div>
+
+<div class="folder" id="folder05">
+<img src="HM_05_Alltag_Leben.jpg" onclick="openFolder('folder05','songs05')">
+<div id="songs05" class="songlist">
+<h2>⚙️ 05 Alltag & Leben</h2>
+<button>▶️ Gesamten Ordner abspielen</button>
+<button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
+<hr>
+<p>☐ Test-Song Alltag & Leben</p>
+<hr>
+<button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
+</div>
+</div>
+
+<div class="folder" id="folder06">
+<img src="HM_06_Entscheidung.jpg" onclick="openFolder('folder06','songs06')">
+<div id="songs06" class="songlist">
+<h2>⚖️ 06 Entscheidung</h2>
+<button>▶️ Gesamten Ordner abspielen</button>
+<button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
+<hr>
+<p>☐ Test-Song Entscheidung</p>
+<hr>
+<button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
+</div>
 </div>
 
 </div>
 
 <script>
+function openFolder(folderId, songsId){
+    const folders = document.querySelectorAll('.folder');
+    folders.forEach(folder => {
+        if(folder.id !== folderId){
+            folder.classList.add('hidden');
+        }
+    });
 
-function openFolder(){
-    document.getElementById("songs").style.display="block";
+    document.getElementById(songsId).style.display = "block";
 }
 
 function closeFolder(){
-    document.getElementById("songs").style.display="none";
-}
+    const folders = document.querySelectorAll('.folder');
+    const songlists = document.querySelectorAll('.songlist');
 
+    folders.forEach(folder => folder.classList.remove('hidden'));
+    songlists.forEach(list => list.style.display = "none");
+}
 </script>
 
 </body>
