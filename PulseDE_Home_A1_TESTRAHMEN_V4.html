@@ -74,11 +74,13 @@ iframe{
     <div class="top-grid">
 
         <iframe
+            id="hmPlayerFrame"
             class="player-frame"
             src="https://pulsede2026-hb.github.io/pulsede-hall-of-memories/PulseDE_HM_PLAYER_LINKS_A1_V4.html">
         </iframe>
 
         <iframe
+            id="hmTextFrame"
             class="text-frame"
             src="https://pulsede2026-hb.github.io/pulsede-hall-of-memories/PulseDE_HM_SONGTEXT_RECHTS_A1_V4.html">
         </iframe>
@@ -90,11 +92,45 @@ iframe{
     </div>
 
     <iframe
+        id="hmExplorerFrame"
         class="explorer-frame"
         src="https://pulsede2026-hb.github.io/pulsede-hall-of-memories/PulseDE_HM_EXPLORER_TEST_V1.html">
     </iframe>
 
 </div>
+
+<script>
+const hmPlayerFrame = document.getElementById("hmPlayerFrame");
+const hmTextFrame = document.getElementById("hmTextFrame");
+
+function sendToPlayer(message){
+    if (!hmPlayerFrame || !hmPlayerFrame.contentWindow) return;
+    hmPlayerFrame.contentWindow.postMessage(message, "*");
+}
+
+function sendToText(message){
+    if (!hmTextFrame || !hmTextFrame.contentWindow) return;
+    hmTextFrame.contentWindow.postMessage(message, "*");
+}
+
+window.addEventListener("message", function(event){
+    const data = event.data;
+    if (!data || !data.type) return;
+
+    if (
+        data.type === "HM_SELECT_SONG" ||
+        data.type === "HM_PLAY_FOLDER" ||
+        data.type === "HM_STOP_AND_CLOSE" ||
+        data.type === "HM_REQUEST_CURRENT"
+    ){
+        sendToPlayer(data);
+    }
+
+    if (data.type === "HM_CURRENT_SONG"){
+        sendToText(data);
+    }
+});
+</script>
 
 </body>
 </html>
