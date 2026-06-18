@@ -264,6 +264,8 @@ const covers = [
 ];
 
 let currentSong = 0;
+let hmFolderQueue = null;
+let hmFolderQueuePosition = 0;
 
 const player = document.getElementById("audioPlayer");
 const source = player.querySelector("source");
@@ -301,8 +303,39 @@ function sendCurrentSongToRight() {
 }
 
 window.addEventListener("message", function(event) {
-  if (!event.data || event.data.type !== "HM_REQUEST_CURRENT") return;
-  sendCurrentSongToRight();
+  const data = event.data;
+  if (!data || !data.type) return;
+
+  if (data.type === "HM_REQUEST_CURRENT") {
+    sendCurrentSongToRight();
+    return;
+  }
+
+  if (data.type === "HM_SELECT_SONG") {
+    hmFolderQueue = null;
+    hmFolderQueuePosition = 0;
+    changeSong(Number(data.songIndex));
+    return;
+  }
+
+  if (data.type === "HM_PLAY_FOLDER") {
+    const list = Array.isArray(data.songIndexes) ? data.songIndexes.map(Number).filter(Number.isInteger) : [];
+    if (list.length === 0) return;
+
+    hmFolderQueue = list;
+    hmFolderQueuePosition = 0;
+    changeSong(hmFolderQueue[0]);
+    return;
+  }
+
+  if (data.type === "HM_STOP_AND_CLOSE") {
+    hmFolderQueue = null;
+    hmFolderQueuePosition = 0;
+    player.pause();
+    player.currentTime = 0;
+    sendCurrentSongToRight();
+    return;
+  }
 });
 
 window.addEventListener("DOMContentLoaded", function() {
@@ -341,6 +374,19 @@ function changeSong(index) {
 
 
 player.addEventListener("ended", function () {
+  if (hmFolderQueue && hmFolderQueue.length > 0) {
+    hmFolderQueuePosition++;
+
+    if (hmFolderQueuePosition < hmFolderQueue.length) {
+      changeSong(hmFolderQueue[hmFolderQueuePosition]);
+      return;
+    }
+
+    hmFolderQueue = null;
+    hmFolderQueuePosition = 0;
+    return;
+  }
+
   currentSong++;
 
   if (currentSong < playlist.length) {
