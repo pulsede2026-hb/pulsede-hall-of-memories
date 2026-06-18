@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PulseDE HM Explorer Test V2.2</title>
+<title>PulseDE HM Explorer Test V2.3</title>
 
 <style>
 body{
@@ -104,10 +104,10 @@ button{
 <button onclick="playWholeFolder('songs01')">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
-<label class="songChoice"><input type="checkbox" data-song-index="0"> 01 Nordlichter</label>
-<label class="songChoice"><input type="checkbox" data-song-index="3"> 04 Mein Weg zurück zu dir</label>
-<label class="songChoice"><input type="checkbox" data-song-index="4"> 05 Bleib bei mir</label>
-<label class="songChoice"><input type="checkbox" data-song-index="5"> 06 Abschied am Telefon</label>
+<label class="songChoice"><input type="checkbox" data-song-index="0" onchange="updateFolderSelection('songs01')"> 01 Nordlichter</label>
+<label class="songChoice"><input type="checkbox" data-song-index="3" onchange="updateFolderSelection('songs01')"> 04 Mein Weg zurück zu dir</label>
+<label class="songChoice"><input type="checkbox" data-song-index="4" onchange="updateFolderSelection('songs01')"> 05 Bleib bei mir</label>
+<label class="songChoice"><input type="checkbox" data-song-index="5" onchange="updateFolderSelection('songs01')"> 06 Abschied am Telefon</label>
 <hr>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 </div>
@@ -120,7 +120,7 @@ button{
 <button onclick="playWholeFolder('songs02')">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
-<label class="songChoice"><input type="checkbox" data-song-index="1"> Test-Song Nachdenken</label>
+<label class="songChoice"><input type="checkbox" data-song-index="1" onchange="updateFolderSelection('songs02')"> Test-Song Nachdenken</label>
 <hr>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 </div>
@@ -133,7 +133,7 @@ button{
 <button onclick="playWholeFolder('songs03')">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
-<label class="songChoice"><input type="checkbox" data-song-index="2"> Test-Song Hoffnung</label>
+<label class="songChoice"><input type="checkbox" data-song-index="2" onchange="updateFolderSelection('songs03')"> Test-Song Hoffnung</label>
 <hr>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 </div>
@@ -146,7 +146,7 @@ button{
 <button onclick="playWholeFolder('songs04')">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
-<label class="songChoice"><input type="checkbox" data-song-index="6"> Test-Song Menschlichkeit</label>
+<label class="songChoice"><input type="checkbox" data-song-index="6" onchange="updateFolderSelection('songs04')"> Test-Song Menschlichkeit</label>
 <hr>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 </div>
@@ -159,7 +159,7 @@ button{
 <button onclick="playWholeFolder('songs05')">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
-<label class="songChoice"><input type="checkbox" data-song-index="7"> Test-Song Alltag & Leben</label>
+<label class="songChoice"><input type="checkbox" data-song-index="7" onchange="updateFolderSelection('songs05')"> Test-Song Alltag & Leben</label>
 <hr>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 </div>
@@ -172,7 +172,7 @@ button{
 <button onclick="playWholeFolder('songs06')">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
-<label class="songChoice"><input type="checkbox" data-song-index="8"> Test-Song Entscheidung</label>
+<label class="songChoice"><input type="checkbox" data-song-index="8" onchange="updateFolderSelection('songs06')"> Test-Song Entscheidung</label>
 <hr>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 </div>
@@ -181,6 +181,9 @@ button{
 </div>
 
 <script>
+let activeSongListId = null;
+let folderPlaybackStarted = false;
+
 function openFolder(folderId, songsId){
     const folders = document.querySelectorAll('.folder');
     folders.forEach(folder => {
@@ -189,6 +192,8 @@ function openFolder(folderId, songsId){
         }
     });
 
+    activeSongListId = songsId;
+    folderPlaybackStarted = false;
     document.getElementById(songsId).style.display = "block";
 }
 
@@ -202,6 +207,8 @@ function closeFolder(){
     const songlists = document.querySelectorAll('.songlist');
 
     clearAllSelections();
+    activeSongListId = null;
+    folderPlaybackStarted = false;
 
     folders.forEach(folder => folder.classList.remove('hidden'));
     songlists.forEach(list => list.style.display = "none");
@@ -223,10 +230,26 @@ function playWholeFolder(songListId){
 
     boxes.forEach(box => box.checked = true);
 
+    activeSongListId = songListId;
+    folderPlaybackStarted = true;
+
     const indexes = getSelectedIndexes(songListId);
 
     window.parent.postMessage({
         type:"HM_PLAY_FOLDER",
+        songIndexes:indexes
+    }, "*");
+}
+
+function updateFolderSelection(songListId){
+    const indexes = getSelectedIndexes(songListId);
+
+    /* Wichtig: Checkboxen allein starten NICHTS.
+       Erst wenn der Ordner bereits gestartet wurde, wird die laufende Warteschlange aktualisiert. */
+    if (!folderPlaybackStarted || activeSongListId !== songListId) return;
+
+    window.parent.postMessage({
+        type:"HM_UPDATE_FOLDER_QUEUE",
         songIndexes:indexes
     }, "*");
 }
