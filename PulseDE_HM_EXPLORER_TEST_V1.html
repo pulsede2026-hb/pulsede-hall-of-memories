@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PulseDE HM Explorer Test V2</title>
+<title>PulseDE HM Explorer Test V2.1</title>
 
 <style>
 body{
@@ -47,6 +47,22 @@ button{
     cursor:pointer;
 }
 
+.songButton{
+    display:block;
+    width:90%;
+    max-width:420px;
+    margin:8px auto;
+    background:#333;
+    color:white;
+    border:1px solid #666;
+    border-radius:10px;
+    font-size:15px;
+}
+
+.songButton:hover{
+    background:#444;
+}
+
 .hidden{
     display:none;
 }
@@ -74,13 +90,13 @@ button{
 <img src="HM_01_Gefuehl.jpg" onclick="openFolder('folder01','songs01')">
 <div id="songs01" class="songlist">
 <h2>❤️ 01 Gefühl</h2>
-<button>▶️ Gesamten Ordner abspielen</button>
+<button onclick="playFolder([0,3,4,5])">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
-<p>☐ 01 Nordlichter</p>
-<p>☐ 04 Mein Weg zurück zu dir</p>
-<p>☐ 05 Bleib bei mir</p>
-<p>☐ 06 Abschied am Telefon</p>
+<button class="songButton" onclick="selectSong(0)">☐ 01 Nordlichter</button>
+<button class="songButton" onclick="selectSong(3)">☐ 04 Mein Weg zurück zu dir</button>
+<button class="songButton" onclick="selectSong(4)">☐ 05 Bleib bei mir</button>
+<button class="songButton" onclick="selectSong(5)">☐ 06 Abschied am Telefon</button>
 <hr>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 </div>
@@ -90,10 +106,10 @@ button{
 <img src="HM_02_Nachdenken.jpg" onclick="openFolder('folder02','songs02')">
 <div id="songs02" class="songlist">
 <h2>🌙 02 Nachdenken</h2>
-<button>▶️ Gesamten Ordner abspielen</button>
+<button onclick="playFolder([1])">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
-<p>☐ Test-Song Nachdenken</p>
+<button class="songButton" onclick="selectSong(1)">☐ Test-Song Nachdenken</button>
 <hr>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 </div>
@@ -103,10 +119,10 @@ button{
 <img src="HM_03_Hoffnung.jpg" onclick="openFolder('folder03','songs03')">
 <div id="songs03" class="songlist">
 <h2>🍀 03 Hoffnung</h2>
-<button>▶️ Gesamten Ordner abspielen</button>
+<button onclick="playFolder([2])">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
-<p>☐ Test-Song Hoffnung</p>
+<button class="songButton" onclick="selectSong(2)">☐ Test-Song Hoffnung</button>
 <hr>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 </div>
@@ -116,10 +132,10 @@ button{
 <img src="HM_04_Menschlichkeit.jpg" onclick="openFolder('folder04','songs04')">
 <div id="songs04" class="songlist">
 <h2>🤝 04 Menschlichkeit</h2>
-<button>▶️ Gesamten Ordner abspielen</button>
+<button onclick="playFolder([6])">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
-<p>☐ Test-Song Menschlichkeit</p>
+<button class="songButton" onclick="selectSong(6)">☐ Test-Song Menschlichkeit</button>
 <hr>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 </div>
@@ -129,10 +145,10 @@ button{
 <img src="HM_05_Alltag_Leben.jpg" onclick="openFolder('folder05','songs05')">
 <div id="songs05" class="songlist">
 <h2>⚙️ 05 Alltag & Leben</h2>
-<button>▶️ Gesamten Ordner abspielen</button>
+<button onclick="playFolder([7])">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
-<p>☐ Test-Song Alltag & Leben</p>
+<button class="songButton" onclick="selectSong(7)">☐ Test-Song Alltag & Leben</button>
 <hr>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 </div>
@@ -142,10 +158,10 @@ button{
 <img src="HM_06_Entscheidung.jpg" onclick="openFolder('folder06','songs06')">
 <div id="songs06" class="songlist">
 <h2>⚖️ 06 Entscheidung</h2>
-<button>▶️ Gesamten Ordner abspielen</button>
+<button onclick="playFolder([8])">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
-<p>☐ Test-Song Entscheidung</p>
+<button class="songButton" onclick="selectSong(8)">☐ Test-Song Entscheidung</button>
 <hr>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 </div>
@@ -171,9 +187,26 @@ function closeFolder(){
 
     folders.forEach(folder => folder.classList.remove('hidden'));
     songlists.forEach(list => list.style.display = "none");
+
+    window.parent.postMessage({
+        type:"HM_STOP_AND_CLOSE"
+    }, "*");
+}
+
+function selectSong(index){
+    window.parent.postMessage({
+        type:"HM_SELECT_SONG",
+        songIndex:index
+    }, "*");
+}
+
+function playFolder(indexList){
+    window.parent.postMessage({
+        type:"HM_PLAY_FOLDER",
+        songIndexes:indexList
+    }, "*");
 }
 </script>
 
 </body>
 </html>
-
