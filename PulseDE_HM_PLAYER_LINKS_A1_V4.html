@@ -302,6 +302,30 @@ function sendCurrentSongToRight() {
   } catch (error) {}
 }
 
+
+function syncFolderQueue(newQueue){
+  const list = Array.isArray(newQueue) ? newQueue.map(Number).filter(Number.isInteger) : [];
+
+  if (list.length === 0) {
+    hmFolderQueue = [];
+    hmFolderQueuePosition = 0;
+    player.pause();
+    return;
+  }
+
+  hmFolderQueue = list;
+
+  const currentPosition = hmFolderQueue.indexOf(currentSong);
+
+  if (currentPosition >= 0) {
+    hmFolderQueuePosition = currentPosition;
+    return;
+  }
+
+  hmFolderQueuePosition = 0;
+  changeSong(hmFolderQueue[0]);
+}
+
 window.addEventListener("message", function(event) {
   const data = event.data;
   if (!data || !data.type) return;
@@ -325,6 +349,11 @@ window.addEventListener("message", function(event) {
     hmFolderQueue = list;
     hmFolderQueuePosition = 0;
     changeSong(hmFolderQueue[0]);
+    return;
+  }
+
+  if (data.type === "HM_UPDATE_FOLDER_QUEUE") {
+    syncFolderQueue(data.songIndexes);
     return;
   }
 
