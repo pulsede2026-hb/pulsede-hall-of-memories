@@ -1,43 +1,100 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PulseDE HOME A1 Test</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PulseDE HOME Test – Player Songtext Explorer</title>
+
 <style>
-body{margin:0;background:#0d0d0d;font-family:Arial,sans-serif;}
-.home{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
-  max-width:1500px;
-  margin:0 auto;
-  padding:10px;
-  box-sizing:border-box;
+body{
+    margin:0;
+    background:#111;
+    color:white;
+    font-family:Arial, sans-serif;
+    text-align:center;
 }
+
+.home-wrap{
+    max-width:1200px;
+    margin:0 auto;
+    padding:20px;
+}
+
+.top-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    margin-bottom:25px;
+}
+
 iframe{
-  width:100%;
-  height:630px;
-  border:0;
-  display:block;
+    width:100%;
+    border:none;
+    border-radius:12px;
+    background:#111;
 }
-@media(max-width:900px){
-  .home{grid-template-columns:1fr;}
+
+.player-frame,
+.text-frame{
+    height:630px;
+}
+
+.info{
+    font-size:15px;
+    color:#cccccc;
+    margin:20px 0;
+}
+
+.explorer-frame{
+    height:700px;
+}
+
+@media(max-width:800px){
+    .top-grid{
+        grid-template-columns:1fr;
+    }
+
+    .player-frame,
+    .text-frame{
+        height:630px;
+    }
+
+    .explorer-frame{
+        height:700px;
+    }
 }
 </style>
 </head>
+
 <body>
-<div class="home">
-  <iframe src="PulseDE_HM_PLAYER_LINKS_A1_V4.html" title="HM Player links"></iframe>
-  <iframe src="PulseDE_HM_SONGTEXT_RECHTS_A1_V4.html" title="Songtext rechts"></iframe>
+
+<div class="home-wrap">
+
+    <div class="top-grid">
+
+        <iframe
+            class="player-frame"
+            src="https://pulsede2026-hb.github.io/pulsede-hall-of-memories/PulseDE_HM_PLAYER_LINKS_A1_V4.html">
+        </iframe>
+
+        <iframe
+            class="text-frame"
+            src="https://pulsede2026-hb.github.io/pulsede-hall-of-memories/PulseDE_HM_SONGTEXT_RECHTS_A1_V4.html">
+        </iframe>
+
+    </div>
+
+    <div class="info">
+        Wähle Deine Musik aus den Erlebnis-Ordnern der Hall of Memories.
+    </div>
+
+    <iframe
+        class="explorer-frame"
+        src="https://pulsede2026-hb.github.io/pulsede-hall-of-memories/PulseDE_HM_EXPLORER_TEST_V1.html">
+    </iframe>
+
 </div>
-<script>
-window.addEventListener("message", function(event){
-  const frames = document.querySelectorAll("iframe");
-  frames.forEach(frame => {
-    try { frame.contentWindow.postMessage(event.data, "*"); } catch(error) {}
-  });
-});
-</script>
+
 </body>
 </html>
