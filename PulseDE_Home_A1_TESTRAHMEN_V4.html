@@ -121,6 +121,7 @@ window.addEventListener("message", function(event){
         data.type === "HM_SELECT_SONG" ||
         data.type === "HM_PLAY_FOLDER" ||
         data.type === "HM_STOP_AND_CLOSE" ||
+        data.type === "HM_UPDATE_FOLDER_QUEUE" ||
         data.type === "HM_REQUEST_CURRENT"
     ){
         sendToPlayer(data);
