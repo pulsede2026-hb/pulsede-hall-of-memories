@@ -50,13 +50,14 @@ button{
 .songButton{
     display:block;
     width:90%;
-    max-width:420px;
+    max-width:430px;
     margin:8px auto;
     background:#333;
     color:white;
     border:1px solid #666;
     border-radius:10px;
     font-size:15px;
+    text-align:left;
 }
 
 .songButton:hover{
@@ -87,7 +88,7 @@ button{
 <div class="grid">
 
 <div class="folder" id="folder01">
-<img src="HM_01_Gefuehl.jpg" onclick="openFolder('folder01','songs01')">
+<img src="HM_01_Gefuehl.jpg" onclick="openFolder('folder01','songs01')" alt="01 Gefühl">
 <div id="songs01" class="songlist">
 <h2>❤️ 01 Gefühl</h2>
 <button onclick="playFolder([0,3,4,5])">▶️ Gesamten Ordner abspielen</button>
@@ -103,7 +104,7 @@ button{
 </div>
 
 <div class="folder" id="folder02">
-<img src="HM_02_Nachdenken.jpg" onclick="openFolder('folder02','songs02')">
+<img src="HM_02_Nachdenken.jpg" onclick="openFolder('folder02','songs02')" alt="02 Nachdenken">
 <div id="songs02" class="songlist">
 <h2>🌙 02 Nachdenken</h2>
 <button onclick="playFolder([1])">▶️ Gesamten Ordner abspielen</button>
@@ -116,7 +117,7 @@ button{
 </div>
 
 <div class="folder" id="folder03">
-<img src="HM_03_Hoffnung.jpg" onclick="openFolder('folder03','songs03')">
+<img src="HM_03_Hoffnung.jpg" onclick="openFolder('folder03','songs03')" alt="03 Hoffnung">
 <div id="songs03" class="songlist">
 <h2>🍀 03 Hoffnung</h2>
 <button onclick="playFolder([2])">▶️ Gesamten Ordner abspielen</button>
@@ -129,7 +130,7 @@ button{
 </div>
 
 <div class="folder" id="folder04">
-<img src="HM_04_Menschlichkeit.jpg" onclick="openFolder('folder04','songs04')">
+<img src="HM_04_Menschlichkeit.jpg" onclick="openFolder('folder04','songs04')" alt="04 Menschlichkeit">
 <div id="songs04" class="songlist">
 <h2>🤝 04 Menschlichkeit</h2>
 <button onclick="playFolder([6])">▶️ Gesamten Ordner abspielen</button>
@@ -142,7 +143,7 @@ button{
 </div>
 
 <div class="folder" id="folder05">
-<img src="HM_05_Alltag_Leben.jpg" onclick="openFolder('folder05','songs05')">
+<img src="HM_05_Alltag_Leben.jpg" onclick="openFolder('folder05','songs05')" alt="05 Alltag & Leben">
 <div id="songs05" class="songlist">
 <h2>⚙️ 05 Alltag & Leben</h2>
 <button onclick="playFolder([7])">▶️ Gesamten Ordner abspielen</button>
@@ -155,7 +156,7 @@ button{
 </div>
 
 <div class="folder" id="folder06">
-<img src="HM_06_Entscheidung.jpg" onclick="openFolder('folder06','songs06')">
+<img src="HM_06_Entscheidung.jpg" onclick="openFolder('folder06','songs06')" alt="06 Entscheidung">
 <div id="songs06" class="songlist">
 <h2>⚖️ 06 Entscheidung</h2>
 <button onclick="playFolder([8])">▶️ Gesamten Ordner abspielen</button>
@@ -189,21 +190,24 @@ function closeFolder(){
     songlists.forEach(list => list.style.display = "none");
 
     window.parent.postMessage({
-        type:"HM_STOP_AND_CLOSE"
+        type:"HM_STOP_AND_CLOSE",
+        time:Date.now()
     }, "*");
 }
 
 function selectSong(index){
     window.parent.postMessage({
         type:"HM_SELECT_SONG",
-        songIndex:index
+        songIndex:index,
+        time:Date.now()
     }, "*");
 }
 
 function playFolder(indexList){
     window.parent.postMessage({
         type:"HM_PLAY_FOLDER",
-        songIndexes:indexList
+        songIndexes:indexList,
+        time:Date.now()
     }, "*");
 }
 </script>
