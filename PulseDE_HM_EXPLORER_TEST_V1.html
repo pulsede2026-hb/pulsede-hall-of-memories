@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PulseDE HM Explorer Test V2.3</title>
+<title>PulseDE HM Explorer Vollversion Feinschliff</title>
 
 <style>
 body{
@@ -29,45 +29,54 @@ body{
 
 .folder img{
     width:100%;
-    border-radius:12px;
+    border-radius:14px;
     cursor:pointer;
+    box-shadow:0 6px 18px rgba(0,0,0,0.45);
 }
 
 .songlist{
     display:none;
     margin-top:15px;
-    background:linear-gradient(180deg,#1d1d1d,#151015);
+    background:linear-gradient(180deg,#181818,#24152d);
     padding:15px;
     border:2px solid #d6a84f;
-    border-radius:18px;
+    border-radius:22px;
     box-shadow:
-        0 0 14px rgba(214,168,79,0.38),
-        inset 0 0 10px rgba(255,220,140,0.12);
+        0 0 18px rgba(214,168,79,0.38),
+        inset 0 0 12px rgba(255,220,140,0.14),
+        0 8px 24px rgba(0,0,0,0.55);
 }
 
 .folderHint{
     font-size:12px;
     line-height:1.45;
-    color:#e8d7a4;
-    background:rgba(214,168,79,0.10);
-    border:1px solid rgba(214,168,79,0.35);
+    color:#e6d7b2;
+    background:rgba(255,215,106,0.08);
+    border:1px solid rgba(214,168,79,0.45);
     border-radius:12px;
-    padding:10px 12px;
+    padding:10px;
     margin:10px auto 12px;
     max-width:430px;
 }
 
-.starSong{
-    color:#ffb347;
-    font-weight:bold;
-    border-color:#d6a84f;
-    box-shadow:0 0 8px rgba(214,168,79,0.22);
+.topNote{
+    font-size:12px;
+    color:#bbbbbb;
+    margin-bottom:20px;
 }
 
 button{
     padding:10px 15px;
     margin:5px;
     cursor:pointer;
+    border-radius:10px;
+    border:1px solid #d6a84f;
+    background:#2a2230;
+    color:#fff;
+}
+
+button:hover{
+    background:#3a2d40;
 }
 
 .songChoice{
@@ -75,8 +84,8 @@ button{
     align-items:center;
     justify-content:flex-start;
     gap:10px;
-    width:90%;
-    max-width:420px;
+    width:92%;
+    max-width:450px;
     margin:8px auto;
     padding:9px 12px;
     background:#333;
@@ -86,6 +95,7 @@ button{
     font-size:15px;
     cursor:pointer;
     box-sizing:border-box;
+    text-align:left;
 }
 
 .songChoice:hover{
@@ -95,6 +105,19 @@ button{
 .songChoice input{
     transform:scale(1.15);
     cursor:pointer;
+    flex:0 0 auto;
+}
+
+.starSong{
+    color:#ffb347;
+    font-weight:bold;
+    border-color:#d6a84f;
+    background:rgba(214,168,79,0.12);
+}
+
+.starMark{
+    margin-left:auto;
+    color:#ffb347;
 }
 
 .hidden{
@@ -102,8 +125,13 @@ button{
 }
 
 @media(max-width:700px){
+    body{margin:12px;}
     .grid{
         grid-template-columns:1fr;
+    }
+    .songChoice{
+        width:96%;
+        font-size:14px;
     }
 }
 </style>
@@ -111,123 +139,329 @@ button{
 
 <body>
 
-<p style="font-size:12px; color:#bbbbbb; margin-bottom:20px;">
-* = Song berührt die Themen Behinderung, Einschränkung oder besondere Lebenserfahrung.
+<p class="topNote">
+★ = Song berührt die Themen Behinderung, Einschränkung oder besondere Lebenserfahrung.
 </p>
 
 <div class="grid">
 
 <div class="folder" id="folder01">
-<img src="HM_01_Gefuehl.jpg" onclick="openFolder('folder01','songs01')">
+<img src="HM_01_Gefuehl.jpg" onclick="openFolder('folder01','songs01')" alt="01 Gefühl">
 <div id="songs01" class="songlist">
 <h2>❤️ 01 Gefühl</h2>
 <div class="folderHint">
-💡 Tipp: Hake einzelne Songs an und drücke anschließend ▶️ im Player.
-Mit „Gesamten Ordner abspielen“ werden alle Songs im Ordner ausgewählt.
-Du kannst Songs jederzeit abwählen; die Wiedergabe passt sich sofort an.
+  <strong>Hinweis:</strong><br>
+  Einzelne Songs per Haken auswählen und anschließend mit ▶️ im Player starten.<br>
+  Mit „▶️ Gesamten Ordner abspielen“ werden alle Songs dieses Ordners ausgewählt und direkt gestartet.<br>
+  Haken können während der Wiedergabe geändert werden.
 </div>
 <button onclick="playWholeFolder('songs01')">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
 <label class="songChoice"><input type="checkbox" data-song-index="0" onchange="updateFolderSelection('songs01')"> 01 Nordlichter</label>
+<label class="songChoice"><input type="checkbox" data-song-index="1" onchange="updateFolderSelection('songs01')"> 02 Straßenhunde</label>
 <label class="songChoice"><input type="checkbox" data-song-index="3" onchange="updateFolderSelection('songs01')"> 04 Mein Weg zurück zu dir</label>
 <label class="songChoice"><input type="checkbox" data-song-index="4" onchange="updateFolderSelection('songs01')"> 05 Bleib bei mir</label>
 <label class="songChoice"><input type="checkbox" data-song-index="5" onchange="updateFolderSelection('songs01')"> 06 Abschied am Telefon</label>
+<label class="songChoice"><input type="checkbox" data-song-index="8" onchange="updateFolderSelection('songs01')"> 09 In Unserer Mitte</label>
+<label class="songChoice"><input type="checkbox" data-song-index="9" onchange="updateFolderSelection('songs01')"> 10 Kinderlied: Fritzi und Emma auf Reisen</label>
+<label class="songChoice"><input type="checkbox" data-song-index="11" onchange="updateFolderSelection('songs01')"> 13 Hey Alter du hier auf Malta</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="14" onchange="updateFolderSelection('songs01')"> 17 Wenn der Spiegel mich nicht kennt <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="21" onchange="updateFolderSelection('songs01')"> 25 Vergangenheit</label>
+<label class="songChoice"><input type="checkbox" data-song-index="22" onchange="updateFolderSelection('songs01')"> 26 Bleib bei mir</label>
+<label class="songChoice"><input type="checkbox" data-song-index="24" onchange="updateFolderSelection('songs01')"> 28 Die Jugendzeit</label>
+<label class="songChoice"><input type="checkbox" data-song-index="25" onchange="updateFolderSelection('songs01')"> 29 Lautlos fällt im Herbst das Laub</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="27" onchange="updateFolderSelection('songs01')"> 31 Nichts ist für die Ewigkeit Vol 2 <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="28" onchange="updateFolderSelection('songs01')"> 32 Nichts ist für die Ewigkeit Vol 3 <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="29" onchange="updateFolderSelection('songs01')"> 33 Sternenklare Nacht</label>
+<label class="songChoice"><input type="checkbox" data-song-index="30" onchange="updateFolderSelection('songs01')"> 34 Oberhausen Melancholie</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="31" onchange="updateFolderSelection('songs01')"> 35 Am Tag, als die Flamme verlosch <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="32" onchange="updateFolderSelection('songs01')"> 36 33 Jahre Gran Canaria</label>
+<label class="songChoice"><input type="checkbox" data-song-index="34" onchange="updateFolderSelection('songs01')"> 38 Santa Lucia – Insel meiner Träume</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="36" onchange="updateFolderSelection('songs01')"> 40 Jenseits der Zeit <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="37" onchange="updateFolderSelection('songs01')"> 41 Spiel für mich, Maestro</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="39" onchange="updateFolderSelection('songs01')"> 43 Wenn du mich rufst <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="43" onchange="updateFolderSelection('songs01')"> 47 Irgendwie irgendwann</label>
+<label class="songChoice"><input type="checkbox" data-song-index="44" onchange="updateFolderSelection('songs01')"> 48 Fühlst du dich allein</label>
+<label class="songChoice"><input type="checkbox" data-song-index="46" onchange="updateFolderSelection('songs01')"> 50 Where the Ocean Meets Your Eyes</label>
+<label class="songChoice"><input type="checkbox" data-song-index="47" onchange="updateFolderSelection('songs01')"> 51 Verborgene Flammen</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="49" onchange="updateFolderSelection('songs01')"> 53 Lichter im Baum <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="50" onchange="updateFolderSelection('songs01')"> 55 Sen ve Ben</label>
 <hr>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 </div>
 </div>
-
 <div class="folder" id="folder02">
-<img src="HM_02_Nachdenken.jpg" onclick="openFolder('folder02','songs02')">
+<img src="HM_02_Nachdenken.jpg" onclick="openFolder('folder02','songs02')" alt="02 Nachdenken">
 <div id="songs02" class="songlist">
 <h2>🌙 02 Nachdenken</h2>
 <div class="folderHint">
-💡 Tipp: Hake einzelne Songs an und drücke anschließend ▶️ im Player.
-Mit „Gesamten Ordner abspielen“ werden alle Songs im Ordner ausgewählt.
-Du kannst Songs jederzeit abwählen; die Wiedergabe passt sich sofort an.
+  <strong>Hinweis:</strong><br>
+  Einzelne Songs per Haken auswählen und anschließend mit ▶️ im Player starten.<br>
+  Mit „▶️ Gesamten Ordner abspielen“ werden alle Songs dieses Ordners ausgewählt und direkt gestartet.<br>
+  Haken können während der Wiedergabe geändert werden.
 </div>
 <button onclick="playWholeFolder('songs02')">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
-<label class="songChoice"><input type="checkbox" data-song-index="1" onchange="updateFolderSelection('songs02')"> Test-Song Nachdenken</label>
+<label class="songChoice"><input type="checkbox" data-song-index="0" onchange="updateFolderSelection('songs02')"> 01 Nordlichter</label>
+<label class="songChoice"><input type="checkbox" data-song-index="1" onchange="updateFolderSelection('songs02')"> 02 Straßenhunde</label>
+<label class="songChoice"><input type="checkbox" data-song-index="2" onchange="updateFolderSelection('songs02')"> 03 Auf der Straße zu Hause</label>
+<label class="songChoice"><input type="checkbox" data-song-index="5" onchange="updateFolderSelection('songs02')"> 06 Abschied am Telefon</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="7" onchange="updateFolderSelection('songs02')"> 08 Feierabend <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="11" onchange="updateFolderSelection('songs02')"> 13 Hey Alter du hier auf Malta</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="12" onchange="updateFolderSelection('songs02')"> 15 Schatten in mir <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="13" onchange="updateFolderSelection('songs02')"> 16 Atemlos im Schatten der Zeit <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="15" onchange="updateFolderSelection('songs02')"> 18 Armutsrente <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="20" onchange="updateFolderSelection('songs02')"> 24 Krise des mittleren Lebens</label>
+<label class="songChoice"><input type="checkbox" data-song-index="21" onchange="updateFolderSelection('songs02')"> 25 Vergangenheit</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="23" onchange="updateFolderSelection('songs02')"> 27 Der Feind <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="24" onchange="updateFolderSelection('songs02')"> 28 Die Jugendzeit</label>
+<label class="songChoice"><input type="checkbox" data-song-index="25" onchange="updateFolderSelection('songs02')"> 29 Lautlos fällt im Herbst das Laub</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="26" onchange="updateFolderSelection('songs02')"> 30 Nichts ist für die Ewigkeit Vol 1 <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="27" onchange="updateFolderSelection('songs02')"> 31 Nichts ist für die Ewigkeit Vol 2 <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="28" onchange="updateFolderSelection('songs02')"> 32 Nichts ist für die Ewigkeit Vol 3 <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="30" onchange="updateFolderSelection('songs02')"> 34 Oberhausen Melancholie</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="31" onchange="updateFolderSelection('songs02')"> 35 Am Tag, als die Flamme verlosch <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="34" onchange="updateFolderSelection('songs02')"> 38 Santa Lucia – Insel meiner Träume</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="35" onchange="updateFolderSelection('songs02')"> 39 Drück den Knopf und dreh am Rad <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="36" onchange="updateFolderSelection('songs02')"> 40 Jenseits der Zeit <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="37" onchange="updateFolderSelection('songs02')"> 41 Spiel für mich, Maestro</label>
+<label class="songChoice"><input type="checkbox" data-song-index="40" onchange="updateFolderSelection('songs02')"> 44 Endlos weit</label>
+<label class="songChoice"><input type="checkbox" data-song-index="42" onchange="updateFolderSelection('songs02')"> 46 Wirtschaft und Arbeitswelt</label>
+<label class="songChoice"><input type="checkbox" data-song-index="44" onchange="updateFolderSelection('songs02')"> 48 Fühlst du dich allein</label>
+<label class="songChoice"><input type="checkbox" data-song-index="45" onchange="updateFolderSelection('songs02')"> 49 19 Grad im Januar (Camper-Blues) Spanien ist so nah</label>
+<label class="songChoice"><input type="checkbox" data-song-index="47" onchange="updateFolderSelection('songs02')"> 51 Verborgene Flammen</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="48" onchange="updateFolderSelection('songs02')"> 52 Warum Kriege <span class="starMark">★</span></label>
 <hr>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 </div>
 </div>
-
 <div class="folder" id="folder03">
-<img src="HM_03_Hoffnung.jpg" onclick="openFolder('folder03','songs03')">
+<img src="HM_03_Hoffnung.jpg" onclick="openFolder('folder03','songs03')" alt="03 Hoffnung">
 <div id="songs03" class="songlist">
 <h2>🍀 03 Hoffnung</h2>
 <div class="folderHint">
-💡 Tipp: Hake einzelne Songs an und drücke anschließend ▶️ im Player.
-Mit „Gesamten Ordner abspielen“ werden alle Songs im Ordner ausgewählt.
-Du kannst Songs jederzeit abwählen; die Wiedergabe passt sich sofort an.
+  <strong>Hinweis:</strong><br>
+  Einzelne Songs per Haken auswählen und anschließend mit ▶️ im Player starten.<br>
+  Mit „▶️ Gesamten Ordner abspielen“ werden alle Songs dieses Ordners ausgewählt und direkt gestartet.<br>
+  Haken können während der Wiedergabe geändert werden.
 </div>
 <button onclick="playWholeFolder('songs03')">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
-<label class="songChoice"><input type="checkbox" data-song-index="2" onchange="updateFolderSelection('songs03')"> Test-Song Hoffnung</label>
+<label class="songChoice"><input type="checkbox" data-song-index="0" onchange="updateFolderSelection('songs03')"> 01 Nordlichter</label>
+<label class="songChoice"><input type="checkbox" data-song-index="1" onchange="updateFolderSelection('songs03')"> 02 Straßenhunde</label>
+<label class="songChoice"><input type="checkbox" data-song-index="2" onchange="updateFolderSelection('songs03')"> 03 Auf der Straße zu Hause</label>
+<label class="songChoice"><input type="checkbox" data-song-index="3" onchange="updateFolderSelection('songs03')"> 04 Mein Weg zurück zu dir</label>
+<label class="songChoice"><input type="checkbox" data-song-index="4" onchange="updateFolderSelection('songs03')"> 05 Bleib bei mir</label>
+<label class="songChoice"><input type="checkbox" data-song-index="6" onchange="updateFolderSelection('songs03')"> 07 Mehr als nur ich</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="7" onchange="updateFolderSelection('songs03')"> 08 Feierabend <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="8" onchange="updateFolderSelection('songs03')"> 09 In Unserer Mitte</label>
+<label class="songChoice"><input type="checkbox" data-song-index="9" onchange="updateFolderSelection('songs03')"> 10 Kinderlied: Fritzi und Emma auf Reisen</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="10" onchange="updateFolderSelection('songs03')"> 11 Wir Hören Dich <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="11" onchange="updateFolderSelection('songs03')"> 13 Hey Alter du hier auf Malta</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="12" onchange="updateFolderSelection('songs03')"> 15 Schatten in mir <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="13" onchange="updateFolderSelection('songs03')"> 16 Atemlos im Schatten der Zeit <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="14" onchange="updateFolderSelection('songs03')"> 17 Wenn der Spiegel mich nicht kennt <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="16" onchange="updateFolderSelection('songs03')"> 19 Schritte im Nebel <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="17" onchange="updateFolderSelection('songs03')"> 21 Verschwommene Welt <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="18" onchange="updateFolderSelection('songs03')"> 22 Unsichtbarer Schmerz <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="19" onchange="updateFolderSelection('songs03')"> 23 Probleme <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="20" onchange="updateFolderSelection('songs03')"> 24 Krise des mittleren Lebens</label>
+<label class="songChoice"><input type="checkbox" data-song-index="21" onchange="updateFolderSelection('songs03')"> 25 Vergangenheit</label>
+<label class="songChoice"><input type="checkbox" data-song-index="22" onchange="updateFolderSelection('songs03')"> 26 Bleib bei mir</label>
+<label class="songChoice"><input type="checkbox" data-song-index="25" onchange="updateFolderSelection('songs03')"> 29 Lautlos fällt im Herbst das Laub</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="26" onchange="updateFolderSelection('songs03')"> 30 Nichts ist für die Ewigkeit Vol 1 <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="27" onchange="updateFolderSelection('songs03')"> 31 Nichts ist für die Ewigkeit Vol 2 <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="28" onchange="updateFolderSelection('songs03')"> 32 Nichts ist für die Ewigkeit Vol 3 <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="29" onchange="updateFolderSelection('songs03')"> 33 Sternenklare Nacht</label>
+<label class="songChoice"><input type="checkbox" data-song-index="30" onchange="updateFolderSelection('songs03')"> 34 Oberhausen Melancholie</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="31" onchange="updateFolderSelection('songs03')"> 35 Am Tag, als die Flamme verlosch <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="32" onchange="updateFolderSelection('songs03')"> 36 33 Jahre Gran Canaria</label>
+<label class="songChoice"><input type="checkbox" data-song-index="33" onchange="updateFolderSelection('songs03')"> 37 Vorstadt-Kids im Lichtermeer</label>
+<label class="songChoice"><input type="checkbox" data-song-index="34" onchange="updateFolderSelection('songs03')"> 38 Santa Lucia – Insel meiner Träume</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="36" onchange="updateFolderSelection('songs03')"> 40 Jenseits der Zeit <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="37" onchange="updateFolderSelection('songs03')"> 41 Spiel für mich, Maestro</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="38" onchange="updateFolderSelection('songs03')"> 42 Ein leiser Traum <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="39" onchange="updateFolderSelection('songs03')"> 43 Wenn du mich rufst <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="40" onchange="updateFolderSelection('songs03')"> 44 Endlos weit</label>
+<label class="songChoice"><input type="checkbox" data-song-index="41" onchange="updateFolderSelection('songs03')"> 45 100 Schmetterlinge</label>
+<label class="songChoice"><input type="checkbox" data-song-index="43" onchange="updateFolderSelection('songs03')"> 47 Irgendwie irgendwann</label>
+<label class="songChoice"><input type="checkbox" data-song-index="44" onchange="updateFolderSelection('songs03')"> 48 Fühlst du dich allein</label>
+<label class="songChoice"><input type="checkbox" data-song-index="45" onchange="updateFolderSelection('songs03')"> 49 19 Grad im Januar (Camper-Blues) Spanien ist so nah</label>
+<label class="songChoice"><input type="checkbox" data-song-index="46" onchange="updateFolderSelection('songs03')"> 50 Where the Ocean Meets Your Eyes</label>
+<label class="songChoice"><input type="checkbox" data-song-index="47" onchange="updateFolderSelection('songs03')"> 51 Verborgene Flammen</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="48" onchange="updateFolderSelection('songs03')"> 52 Warum Kriege <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="49" onchange="updateFolderSelection('songs03')"> 53 Lichter im Baum <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="50" onchange="updateFolderSelection('songs03')"> 55 Sen ve Ben</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="51" onchange="updateFolderSelection('songs03')"> 56 Ein neues Leben Vol 1 <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="52" onchange="updateFolderSelection('songs03')"> 57 Licht nach mir Vol 2 <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="53" onchange="updateFolderSelection('songs03')"> 58 Licht der Ewigkeit Vol 3 <span class="starMark">★</span></label>
 <hr>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 </div>
 </div>
-
 <div class="folder" id="folder04">
-<img src="HM_04_Menschlichkeit.jpg" onclick="openFolder('folder04','songs04')">
+<img src="HM_04_Menschlichkeit.jpg" onclick="openFolder('folder04','songs04')" alt="04 Menschlichkeit">
 <div id="songs04" class="songlist">
 <h2>🤝 04 Menschlichkeit</h2>
 <div class="folderHint">
-💡 Tipp: Hake einzelne Songs an und drücke anschließend ▶️ im Player.
-Mit „Gesamten Ordner abspielen“ werden alle Songs im Ordner ausgewählt.
-Du kannst Songs jederzeit abwählen; die Wiedergabe passt sich sofort an.
+  <strong>Hinweis:</strong><br>
+  Einzelne Songs per Haken auswählen und anschließend mit ▶️ im Player starten.<br>
+  Mit „▶️ Gesamten Ordner abspielen“ werden alle Songs dieses Ordners ausgewählt und direkt gestartet.<br>
+  Haken können während der Wiedergabe geändert werden.
 </div>
 <button onclick="playWholeFolder('songs04')">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
-<label class="songChoice"><input type="checkbox" data-song-index="6" onchange="updateFolderSelection('songs04')"> Test-Song Menschlichkeit</label>
+<label class="songChoice"><input type="checkbox" data-song-index="1" onchange="updateFolderSelection('songs04')"> 02 Straßenhunde</label>
+<label class="songChoice"><input type="checkbox" data-song-index="6" onchange="updateFolderSelection('songs04')"> 07 Mehr als nur ich</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="7" onchange="updateFolderSelection('songs04')"> 08 Feierabend <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="8" onchange="updateFolderSelection('songs04')"> 09 In Unserer Mitte</label>
+<label class="songChoice"><input type="checkbox" data-song-index="9" onchange="updateFolderSelection('songs04')"> 10 Kinderlied: Fritzi und Emma auf Reisen</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="10" onchange="updateFolderSelection('songs04')"> 11 Wir Hören Dich <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="11" onchange="updateFolderSelection('songs04')"> 13 Hey Alter du hier auf Malta</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="12" onchange="updateFolderSelection('songs04')"> 15 Schatten in mir <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="13" onchange="updateFolderSelection('songs04')"> 16 Atemlos im Schatten der Zeit <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="14" onchange="updateFolderSelection('songs04')"> 17 Wenn der Spiegel mich nicht kennt <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="15" onchange="updateFolderSelection('songs04')"> 18 Armutsrente <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="16" onchange="updateFolderSelection('songs04')"> 19 Schritte im Nebel <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="17" onchange="updateFolderSelection('songs04')"> 21 Verschwommene Welt <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="18" onchange="updateFolderSelection('songs04')"> 22 Unsichtbarer Schmerz <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="19" onchange="updateFolderSelection('songs04')"> 23 Probleme <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="22" onchange="updateFolderSelection('songs04')"> 26 Bleib bei mir</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="23" onchange="updateFolderSelection('songs04')"> 27 Der Feind <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="24" onchange="updateFolderSelection('songs04')"> 28 Die Jugendzeit</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="26" onchange="updateFolderSelection('songs04')"> 30 Nichts ist für die Ewigkeit Vol 1 <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="27" onchange="updateFolderSelection('songs04')"> 31 Nichts ist für die Ewigkeit Vol 2 <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="28" onchange="updateFolderSelection('songs04')"> 32 Nichts ist für die Ewigkeit Vol 3 <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="31" onchange="updateFolderSelection('songs04')"> 35 Am Tag, als die Flamme verlosch <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="35" onchange="updateFolderSelection('songs04')"> 39 Drück den Knopf und dreh am Rad <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="36" onchange="updateFolderSelection('songs04')"> 40 Jenseits der Zeit <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="38" onchange="updateFolderSelection('songs04')"> 42 Ein leiser Traum <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="39" onchange="updateFolderSelection('songs04')"> 43 Wenn du mich rufst <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="41" onchange="updateFolderSelection('songs04')"> 45 100 Schmetterlinge</label>
+<label class="songChoice"><input type="checkbox" data-song-index="42" onchange="updateFolderSelection('songs04')"> 46 Wirtschaft und Arbeitswelt</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="48" onchange="updateFolderSelection('songs04')"> 52 Warum Kriege <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="49" onchange="updateFolderSelection('songs04')"> 53 Lichter im Baum <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="51" onchange="updateFolderSelection('songs04')"> 56 Ein neues Leben Vol 1 <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="52" onchange="updateFolderSelection('songs04')"> 57 Licht nach mir Vol 2 <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="53" onchange="updateFolderSelection('songs04')"> 58 Licht der Ewigkeit Vol 3 <span class="starMark">★</span></label>
 <hr>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 </div>
 </div>
-
 <div class="folder" id="folder05">
-<img src="HM_05_Alltag_Leben.jpg" onclick="openFolder('folder05','songs05')">
+<img src="HM_05_Alltag_Leben.jpg" onclick="openFolder('folder05','songs05')" alt="05 Alltag &amp; Leben">
 <div id="songs05" class="songlist">
 <h2>⚙️ 05 Alltag & Leben</h2>
 <div class="folderHint">
-💡 Tipp: Hake einzelne Songs an und drücke anschließend ▶️ im Player.
-Mit „Gesamten Ordner abspielen“ werden alle Songs im Ordner ausgewählt.
-Du kannst Songs jederzeit abwählen; die Wiedergabe passt sich sofort an.
+  <strong>Hinweis:</strong><br>
+  Einzelne Songs per Haken auswählen und anschließend mit ▶️ im Player starten.<br>
+  Mit „▶️ Gesamten Ordner abspielen“ werden alle Songs dieses Ordners ausgewählt und direkt gestartet.<br>
+  Haken können während der Wiedergabe geändert werden.
 </div>
 <button onclick="playWholeFolder('songs05')">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
-<label class="songChoice starSong"><input type="checkbox" data-song-index="7" onchange="updateFolderSelection('songs05')"> Test-Song Alltag & Leben</label>
+<label class="songChoice"><input type="checkbox" data-song-index="2" onchange="updateFolderSelection('songs05')"> 03 Auf der Straße zu Hause</label>
+<label class="songChoice"><input type="checkbox" data-song-index="6" onchange="updateFolderSelection('songs05')"> 07 Mehr als nur ich</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="7" onchange="updateFolderSelection('songs05')"> 08 Feierabend <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="10" onchange="updateFolderSelection('songs05')"> 11 Wir Hören Dich <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="12" onchange="updateFolderSelection('songs05')"> 15 Schatten in mir <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="13" onchange="updateFolderSelection('songs05')"> 16 Atemlos im Schatten der Zeit <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="14" onchange="updateFolderSelection('songs05')"> 17 Wenn der Spiegel mich nicht kennt <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="15" onchange="updateFolderSelection('songs05')"> 18 Armutsrente <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="16" onchange="updateFolderSelection('songs05')"> 19 Schritte im Nebel <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="17" onchange="updateFolderSelection('songs05')"> 21 Verschwommene Welt <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="18" onchange="updateFolderSelection('songs05')"> 22 Unsichtbarer Schmerz <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="19" onchange="updateFolderSelection('songs05')"> 23 Probleme <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="20" onchange="updateFolderSelection('songs05')"> 24 Krise des mittleren Lebens</label>
+<label class="songChoice"><input type="checkbox" data-song-index="21" onchange="updateFolderSelection('songs05')"> 25 Vergangenheit</label>
+<label class="songChoice"><input type="checkbox" data-song-index="22" onchange="updateFolderSelection('songs05')"> 26 Bleib bei mir</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="23" onchange="updateFolderSelection('songs05')"> 27 Der Feind <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="24" onchange="updateFolderSelection('songs05')"> 28 Die Jugendzeit</label>
+<label class="songChoice"><input type="checkbox" data-song-index="25" onchange="updateFolderSelection('songs05')"> 29 Lautlos fällt im Herbst das Laub</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="26" onchange="updateFolderSelection('songs05')"> 30 Nichts ist für die Ewigkeit Vol 1 <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="27" onchange="updateFolderSelection('songs05')"> 31 Nichts ist für die Ewigkeit Vol 2 <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="28" onchange="updateFolderSelection('songs05')"> 32 Nichts ist für die Ewigkeit Vol 3 <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="30" onchange="updateFolderSelection('songs05')"> 34 Oberhausen Melancholie</label>
+<label class="songChoice"><input type="checkbox" data-song-index="32" onchange="updateFolderSelection('songs05')"> 36 33 Jahre Gran Canaria</label>
+<label class="songChoice"><input type="checkbox" data-song-index="33" onchange="updateFolderSelection('songs05')"> 37 Vorstadt-Kids im Lichtermeer</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="35" onchange="updateFolderSelection('songs05')"> 39 Drück den Knopf und dreh am Rad <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="37" onchange="updateFolderSelection('songs05')"> 41 Spiel für mich, Maestro</label>
+<label class="songChoice"><input type="checkbox" data-song-index="40" onchange="updateFolderSelection('songs05')"> 44 Endlos weit</label>
+<label class="songChoice"><input type="checkbox" data-song-index="42" onchange="updateFolderSelection('songs05')"> 46 Wirtschaft und Arbeitswelt</label>
+<label class="songChoice"><input type="checkbox" data-song-index="45" onchange="updateFolderSelection('songs05')"> 49 19 Grad im Januar (Camper-Blues) Spanien ist so nah</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="49" onchange="updateFolderSelection('songs05')"> 53 Lichter im Baum <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="50" onchange="updateFolderSelection('songs05')"> 55 Sen ve Ben</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="51" onchange="updateFolderSelection('songs05')"> 56 Ein neues Leben Vol 1 <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="52" onchange="updateFolderSelection('songs05')"> 57 Licht nach mir Vol 2 <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="53" onchange="updateFolderSelection('songs05')"> 58 Licht der Ewigkeit Vol 3 <span class="starMark">★</span></label>
 <hr>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 </div>
 </div>
-
 <div class="folder" id="folder06">
-<img src="HM_06_Entscheidung.jpg" onclick="openFolder('folder06','songs06')">
+<img src="HM_06_Entscheidung.jpg" onclick="openFolder('folder06','songs06')" alt="06 Entscheidung">
 <div id="songs06" class="songlist">
 <h2>⚖️ 06 Entscheidung</h2>
 <div class="folderHint">
-💡 Tipp: Hake einzelne Songs an und drücke anschließend ▶️ im Player.
-Mit „Gesamten Ordner abspielen“ werden alle Songs im Ordner ausgewählt.
-Du kannst Songs jederzeit abwählen; die Wiedergabe passt sich sofort an.
+  <strong>Hinweis:</strong><br>
+  Einzelne Songs per Haken auswählen und anschließend mit ▶️ im Player starten.<br>
+  Mit „▶️ Gesamten Ordner abspielen“ werden alle Songs dieses Ordners ausgewählt und direkt gestartet.<br>
+  Haken können während der Wiedergabe geändert werden.
 </div>
 <button onclick="playWholeFolder('songs06')">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
-<label class="songChoice"><input type="checkbox" data-song-index="8" onchange="updateFolderSelection('songs06')"> Test-Song Entscheidung</label>
+<label class="songChoice"><input type="checkbox" data-song-index="3" onchange="updateFolderSelection('songs06')"> 04 Mein Weg zurück zu dir</label>
+<label class="songChoice"><input type="checkbox" data-song-index="4" onchange="updateFolderSelection('songs06')"> 05 Bleib bei mir</label>
+<label class="songChoice"><input type="checkbox" data-song-index="5" onchange="updateFolderSelection('songs06')"> 06 Abschied am Telefon</label>
+<label class="songChoice"><input type="checkbox" data-song-index="6" onchange="updateFolderSelection('songs06')"> 07 Mehr als nur ich</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="7" onchange="updateFolderSelection('songs06')"> 08 Feierabend <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="8" onchange="updateFolderSelection('songs06')"> 09 In Unserer Mitte</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="12" onchange="updateFolderSelection('songs06')"> 15 Schatten in mir <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="13" onchange="updateFolderSelection('songs06')"> 16 Atemlos im Schatten der Zeit <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="14" onchange="updateFolderSelection('songs06')"> 17 Wenn der Spiegel mich nicht kennt <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="15" onchange="updateFolderSelection('songs06')"> 18 Armutsrente <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="16" onchange="updateFolderSelection('songs06')"> 19 Schritte im Nebel <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="17" onchange="updateFolderSelection('songs06')"> 21 Verschwommene Welt <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="18" onchange="updateFolderSelection('songs06')"> 22 Unsichtbarer Schmerz <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="19" onchange="updateFolderSelection('songs06')"> 23 Probleme <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="20" onchange="updateFolderSelection('songs06')"> 24 Krise des mittleren Lebens</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="23" onchange="updateFolderSelection('songs06')"> 27 Der Feind <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="26" onchange="updateFolderSelection('songs06')"> 30 Nichts ist für die Ewigkeit Vol 1 <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="27" onchange="updateFolderSelection('songs06')"> 31 Nichts ist für die Ewigkeit Vol 2 <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="28" onchange="updateFolderSelection('songs06')"> 32 Nichts ist für die Ewigkeit Vol 3 <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="29" onchange="updateFolderSelection('songs06')"> 33 Sternenklare Nacht</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="31" onchange="updateFolderSelection('songs06')"> 35 Am Tag, als die Flamme verlosch <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="32" onchange="updateFolderSelection('songs06')"> 36 33 Jahre Gran Canaria</label>
+<label class="songChoice"><input type="checkbox" data-song-index="33" onchange="updateFolderSelection('songs06')"> 37 Vorstadt-Kids im Lichtermeer</label>
+<label class="songChoice"><input type="checkbox" data-song-index="34" onchange="updateFolderSelection('songs06')"> 38 Santa Lucia – Insel meiner Träume</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="35" onchange="updateFolderSelection('songs06')"> 39 Drück den Knopf und dreh am Rad <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="36" onchange="updateFolderSelection('songs06')"> 40 Jenseits der Zeit <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="38" onchange="updateFolderSelection('songs06')"> 42 Ein leiser Traum <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="39" onchange="updateFolderSelection('songs06')"> 43 Wenn du mich rufst <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="40" onchange="updateFolderSelection('songs06')"> 44 Endlos weit</label>
+<label class="songChoice"><input type="checkbox" data-song-index="41" onchange="updateFolderSelection('songs06')"> 45 100 Schmetterlinge</label>
+<label class="songChoice"><input type="checkbox" data-song-index="42" onchange="updateFolderSelection('songs06')"> 46 Wirtschaft und Arbeitswelt</label>
+<label class="songChoice"><input type="checkbox" data-song-index="43" onchange="updateFolderSelection('songs06')"> 47 Irgendwie irgendwann</label>
+<label class="songChoice"><input type="checkbox" data-song-index="44" onchange="updateFolderSelection('songs06')"> 48 Fühlst du dich allein</label>
+<label class="songChoice"><input type="checkbox" data-song-index="45" onchange="updateFolderSelection('songs06')"> 49 19 Grad im Januar (Camper-Blues) Spanien ist so nah</label>
+<label class="songChoice"><input type="checkbox" data-song-index="46" onchange="updateFolderSelection('songs06')"> 50 Where the Ocean Meets Your Eyes</label>
+<label class="songChoice"><input type="checkbox" data-song-index="47" onchange="updateFolderSelection('songs06')"> 51 Verborgene Flammen</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="48" onchange="updateFolderSelection('songs06')"> 52 Warum Kriege <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="49" onchange="updateFolderSelection('songs06')"> 53 Lichter im Baum <span class="starMark">★</span></label>
+<label class="songChoice"><input type="checkbox" data-song-index="50" onchange="updateFolderSelection('songs06')"> 55 Sen ve Ben</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="51" onchange="updateFolderSelection('songs06')"> 56 Ein neues Leben Vol 1 <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="52" onchange="updateFolderSelection('songs06')"> 57 Licht nach mir Vol 2 <span class="starMark">★</span></label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="53" onchange="updateFolderSelection('songs06')"> 58 Licht der Ewigkeit Vol 3 <span class="starMark">★</span></label>
 <hr>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 </div>
 </div>
-
 </div>
 
 <script>
@@ -292,14 +526,13 @@ function playWholeFolder(songListId){
 }
 
 function updateFolderSelection(songListId){
-    const indexes = getSelectedIndexes(songListId);
-
     activeSongListId = songListId;
 
-    /* Neue HM-Logik:
-       Checkboxen bereiten die Auswahl sofort vor.
-       Wenn die Wiedergabe bereits läuft, wird die Warteschlange direkt angepasst.
-       Wenn noch nichts läuft, merkt sich der Player die Auswahl für ▶️ Play. */
+    const indexes = getSelectedIndexes(songListId);
+
+    /* Haken setzen/entfernen bereitet nur die Auswahl vor.
+       Die Wiedergabe startet erst über den Player-Play-Button.
+       Wenn bereits abgespielt wird, aktualisiert der Player die laufende Warteschlange. */
     window.parent.postMessage({
         type:"HM_UPDATE_FOLDER_QUEUE",
         songIndexes:indexes
