@@ -58,6 +58,11 @@ body {
   font-weight:bold;
   min-height:28px;
 }
+.song.starSong {
+  color:#ffb347;
+  font-weight:bold;
+  text-shadow:0 0 8px rgba(255,179,71,0.35);
+}
 .artist {
   font-size:16px;
   color:#ddd;
@@ -275,6 +280,51 @@ const covers = [
 
 ];
 
+
+const starSongFiles = new Set([
+    "08_Feierabend.mp3",
+    "11_Wir_hoeren_Dich.mp3",
+    "15_Schatten in mir.mp3",
+    "16_Atemlos im Schatten der Zeit.mp3",
+    "17_Wenn der Spiegel mich nicht kennt.mp3",
+    "18_Armutsrente.mp3",
+    "19_Schritte im Nebel.mp3",
+    "21_Verschwommene Welt.mp3",
+    "22_Unsichtbarer Schmerz.mp3",
+    "23_Probleme.mp3",
+    "27_Der Feind.mp3",
+    "30_Nichts_ist_für_die_Ewigkeit_Vol_1.mp3",
+    "31_Nichts_ist_für_die_Ewigkeit_Vol_2.mp3",
+    "32_Nichts_ist_für_die_Ewigkeit_Vol_3.mp3",
+    "35_Am Tag, als die Flamme verlosch.mp3",
+    "39_Drück den Knopf und dreh am Rad.mp3",
+    "40_Jenseits der Zeit.mp3",
+    "42_Ein leiser Traum.mp3",
+    "43_Wenn du mich rufst.mp3",
+    "52_Warum Kriege.mp3",
+    "53_Lichter im Baum.mp3",
+    "56_Ein neues Leben_Vol_1.mp3",
+    "57_Licht nach mir_Vol_2.mp3",
+    "58_Licht der Ewigkeit_Vol_3.mp3"
+]);
+
+function isStarSong(songFile) {
+  return starSongFiles.has(songFile);
+}
+
+function displaySongTitle(songFile) {
+  const baseTitle = songNameFromFile(songFile);
+  return isStarSong(songFile) ? baseTitle + " *" : baseTitle;
+}
+
+function applySongTitleStyle(songFile) {
+  if (isStarSong(songFile)) {
+    title.classList.add("starSong");
+  } else {
+    title.classList.remove("starSong");
+  }
+}
+
 let currentSong = null;
 let hmFolderQueue = null;
 let hmFolderQueuePosition = 0;
@@ -308,7 +358,7 @@ function currentSongMessage() {
     type: "HM_CURRENT_SONG",
     songFile: songFile,
     txtFile: txtFile,
-    title: songNameFromFile(songFile),
+    title: displaySongTitle(songFile),
     time: Date.now()
   };
 }
@@ -339,6 +389,7 @@ function syncFolderQueue(newQueue){
     source.src = "";
     title.innerText = "🎵 Bitte Erlebnis-Ordner wählen";
     title.classList.add("waiting");
+    title.classList.remove("starSong");
     nextSongs.innerHTML = '<span class="nextHint">🎵 Songs im Erlebnis-Ordner auswählen und anschließend mit ▶️ im Player starten.</span>';
     player.load();
     sendCurrentSongToRight();
@@ -368,6 +419,7 @@ function syncFolderQueue(newQueue){
   source.src = playlist[hmFolderQueue[0]];
   title.innerText = "🎵 " + list.length + " Song" + (list.length === 1 ? "" : "s") + " ausgewählt – ▶️ im Player drücken";
   title.classList.add("waiting");
+  title.classList.remove("starSong");
   nextSongs.innerHTML = '<span class="nextHint">🎵 Auswahl vorbereitet. Start über den Play-Button im Player.</span>';
   player.load();
   sendCurrentSongToRight();
@@ -414,6 +466,7 @@ window.addEventListener("message", function(event) {
     source.src = "";
     title.innerText = "🎵 Bitte Erlebnis-Ordner wählen";
     title.classList.add("waiting");
+    title.classList.remove("starSong");
     nextSongs.innerHTML = '<span class="nextHint">🎵 Songs im Erlebnis-Ordner auswählen und anschließend mit ▶️ im Player starten.</span>';
     player.load();
     sendCurrentSongToRight();
@@ -442,8 +495,9 @@ function changeSong(index) {
   currentSong = index;
   source.src = playlist[currentSong];
   cover.src = playlist[currentSong].replace(".mp3", ".jpg");
-  title.innerText = songNameFromFile(playlist[currentSong]);
+  title.innerText = displaySongTitle(playlist[currentSong]);
   title.classList.remove("waiting");
+  applySongTitleStyle(playlist[currentSong]);
   updateNextCovers();
   sendCurrentSongToRight();
 
@@ -461,8 +515,9 @@ player.addEventListener("play", function () {
     hasActiveSong = true;
     source.src = playlist[currentSong];
     cover.src = playlist[currentSong].replace(".mp3", ".jpg");
-    title.innerText = songNameFromFile(playlist[currentSong]);
+    title.innerText = displaySongTitle(playlist[currentSong]);
     title.classList.remove("waiting");
+    applySongTitleStyle(playlist[currentSong]);
     updateNextCovers();
     sendCurrentSongToRight();
   }
