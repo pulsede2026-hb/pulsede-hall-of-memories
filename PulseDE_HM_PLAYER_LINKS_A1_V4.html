@@ -83,6 +83,12 @@ body {
   opacity:.9;
   cursor:pointer;
 }
+.nextHint {
+  font-size:13px;
+  color:#d9c28a;
+  max-width:520px;
+  line-height:1.35;
+}
 .infoRow {
   position:absolute;
   left:16px;
@@ -137,7 +143,7 @@ body {
       </audio>
     </div>
 
-    <div class="next" id="nextSongs"></div>
+    <div class="next" id="nextSongs"><span class="nextHint">🎵 Songs im Erlebnis-Ordner auswählen und anschließend mit ▶️ im Player starten.</span></div>
 
     <div class="infoRow">
       <div class="note">
@@ -326,21 +332,45 @@ function syncFolderQueue(newQueue){
   if (list.length === 0) {
     hmFolderQueue = [];
     hmFolderQueuePosition = 0;
+    hasActiveSong = false;
+    currentSong = null;
     player.pause();
+    player.currentTime = 0;
+    source.src = "";
+    title.innerText = "🎵 Bitte Erlebnis-Ordner wählen";
+    title.classList.add("waiting");
+    nextSongs.innerHTML = '<span class="nextHint">🎵 Songs im Erlebnis-Ordner auswählen und anschließend mit ▶️ im Player starten.</span>';
+    player.load();
+    sendCurrentSongToRight();
     return;
   }
 
   hmFolderQueue = list;
 
-  const currentPosition = hmFolderQueue.indexOf(currentSong);
+  const currentPosition = currentSong !== null ? hmFolderQueue.indexOf(currentSong) : -1;
 
-  if (currentPosition >= 0) {
-    hmFolderQueuePosition = currentPosition;
+  /* Wenn bereits Wiedergabe läuft, wird die Warteschlange sofort angepasst. */
+  if (hasActiveSong && !player.paused) {
+    if (currentPosition >= 0) {
+      hmFolderQueuePosition = currentPosition;
+      return;
+    }
+
+    hmFolderQueuePosition = 0;
+    changeSong(hmFolderQueue[0]);
     return;
   }
 
+  /* Wenn noch nichts läuft: nur vorbereiten, nicht starten. */
+  hasActiveSong = false;
+  currentSong = null;
   hmFolderQueuePosition = 0;
-  changeSong(hmFolderQueue[0]);
+  source.src = playlist[hmFolderQueue[0]];
+  title.innerText = "🎵 " + list.length + " Song" + (list.length === 1 ? "" : "s") + " ausgewählt – ▶️ im Player drücken";
+  title.classList.add("waiting");
+  nextSongs.innerHTML = '<span class="nextHint">🎵 Auswahl vorbereitet. Start über den Play-Button im Player.</span>';
+  player.load();
+  sendCurrentSongToRight();
 }
 
 window.addEventListener("message", function(event) {
@@ -384,7 +414,7 @@ window.addEventListener("message", function(event) {
     source.src = "";
     title.innerText = "🎵 Bitte Erlebnis-Ordner wählen";
     title.classList.add("waiting");
-    nextSongs.innerHTML = "";
+    nextSongs.innerHTML = '<span class="nextHint">🎵 Songs im Erlebnis-Ordner auswählen und anschließend mit ▶️ im Player starten.</span>';
     player.load();
     sendCurrentSongToRight();
     return;
@@ -396,11 +426,12 @@ window.addEventListener("DOMContentLoaded", function() {
 });
 
 function updateNextCovers() {
-  /* HM-Logik:
-     Der Explorer / Erlebnis-Ordner steuert die Auswahl.
-     Deshalb werden hier keine Vorschau-Cover aus der Gesamtplaylist angezeigt.
-     So entsteht kein falscher Eindruck, dass Songs aus anderen Ordnern folgen. */
-  nextSongs.innerHTML = "";
+  /* HM-Logik: keine kleinen Folge-Cover anzeigen, damit keine Ordner-Verwirrung entsteht. */
+  if (hmFolderQueue && hmFolderQueue.length > 0) {
+    nextSongs.innerHTML = '<span class="nextHint">🎵 Ausgewählte Wiedergabe aktiv.</span>';
+  } else {
+    nextSongs.innerHTML = '<span class="nextHint">🎵 Einzelner Song aktiv.</span>';
+  }
 }
 
 function changeSong(index) {
@@ -420,6 +451,22 @@ function changeSong(index) {
   player.play();
 }
 
+
+
+player.addEventListener("play", function () {
+  /* Wenn eine Auswahl vorbereitet wurde, startet der echte Player-Play-Button den ersten gewählten Song. */
+  if (!hasActiveSong && hmFolderQueue && hmFolderQueue.length > 0) {
+    currentSong = hmFolderQueue[0];
+    hmFolderQueuePosition = 0;
+    hasActiveSong = true;
+    source.src = playlist[currentSong];
+    cover.src = playlist[currentSong].replace(".mp3", ".jpg");
+    title.innerText = songNameFromFile(playlist[currentSong]);
+    title.classList.remove("waiting");
+    updateNextCovers();
+    sendCurrentSongToRight();
+  }
+});
 
 player.addEventListener("ended", function () {
   if (hmFolderQueue && hmFolderQueue.length > 0) {
