@@ -396,19 +396,11 @@ window.addEventListener("DOMContentLoaded", function() {
 });
 
 function updateNextCovers() {
-  let html = "";
-  let shown = 0;
-  let i = currentSong + 1;
-
-  while (shown < 3 && i < playlist.length) {
-    if (playlist[i] && covers[i]) {
-      html += `<img src="${covers[i]}" onclick="changeSong(${i})" alt="Nächster Song">`;
-      shown++;
-    }
-    i++;
-  }
-
-  nextSongs.innerHTML = html;
+  /* HM-Logik:
+     Der Explorer / Erlebnis-Ordner steuert die Auswahl.
+     Deshalb werden hier keine Vorschau-Cover aus der Gesamtplaylist angezeigt.
+     So entsteht kein falscher Eindruck, dass Songs aus anderen Ordnern folgen. */
+  nextSongs.innerHTML = "";
 }
 
 function changeSong(index) {
