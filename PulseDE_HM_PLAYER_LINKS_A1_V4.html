@@ -18,10 +18,15 @@ body {
   padding:16px 16px 18px;
   text-align:center;
   background:linear-gradient(180deg,#090909,#180a22);
-  border-radius:20px;
+  border:2px solid #d6a84f;
+  border-radius:22px;
   box-sizing:border-box;
   overflow:hidden;
   position:relative;
+  box-shadow:
+    0 0 18px rgba(214,168,79,0.38),
+    inset 0 0 12px rgba(255,220,140,0.14),
+    0 8px 24px rgba(0,0,0,0.55);
 }
 .small {
   font-size:22px;
@@ -47,6 +52,11 @@ body {
 .song {
   font-size:22px;
   margin-top:10px;
+}
+.song.waiting {
+  color:#ffd76a;
+  font-weight:bold;
+  min-height:28px;
 }
 .artist {
   font-size:16px;
@@ -117,21 +127,17 @@ body {
       <img id="mainCover" src="01_Nordlichter.jpg" alt="Cover">
     </div>
 
-    <div class="song" id="songTitle">01 Nordlichter</div>
+    <div class="song waiting" id="songTitle">🎵 Bitte Erlebnis-Ordner wählen</div>
     <div class="artist">Harry Bolero</div>
 
     <div class="player">
-      <audio controls autoplay id="audioPlayer" controlsList="nodownload noplaybackrate" oncontextmenu="return false;">
-        <source src="01_Nordlichter.mp3" type="audio/mpeg">
+      <audio controls preload="none" id="audioPlayer" controlsList="nodownload noplaybackrate" oncontextmenu="return false;">
+        <source src="" type="audio/mpeg">
         Dein Browser unterstützt kein Audio.
       </audio>
     </div>
 
-    <div class="next" id="nextSongs">
-      <img src="02_Straßenhunde.jpg" onclick="changeSong(1)" alt="Nächster Song">
-      <img src="03_Auf der Straße zu Hause.jpg" onclick="changeSong(2)" alt="Nächster Song">
-      <img src="04_Mein Weg zurück zu dir.jpg" onclick="changeSong(3)" alt="Nächster Song">
-    </div>
+    <div class="next" id="nextSongs"></div>
 
     <div class="infoRow">
       <div class="note">
@@ -263,9 +269,10 @@ const covers = [
 
 ];
 
-let currentSong = 0;
+let currentSong = null;
 let hmFolderQueue = null;
 let hmFolderQueuePosition = 0;
+let hasActiveSong = false;
 
 const player = document.getElementById("audioPlayer");
 const source = player.querySelector("source");
@@ -278,6 +285,16 @@ function songNameFromFile(songFile) {
 }
 
 function currentSongMessage() {
+  if (!hasActiveSong || currentSong === null || !playlist[currentSong]) {
+    return {
+      type: "HM_CURRENT_SONG",
+      songFile: "",
+      txtFile: "",
+      title: "🎵 Bitte Erlebnis-Ordner wählen",
+      time: Date.now()
+    };
+  }
+
   const songFile = playlist[currentSong];
   const txtFile = songFile.replace(".mp3", ".txt");
 
@@ -360,8 +377,15 @@ window.addEventListener("message", function(event) {
   if (data.type === "HM_STOP_AND_CLOSE") {
     hmFolderQueue = null;
     hmFolderQueuePosition = 0;
+    hasActiveSong = false;
+    currentSong = null;
     player.pause();
     player.currentTime = 0;
+    source.src = "";
+    title.innerText = "🎵 Bitte Erlebnis-Ordner wählen";
+    title.classList.add("waiting");
+    nextSongs.innerHTML = "";
+    player.load();
     sendCurrentSongToRight();
     return;
   }
@@ -388,12 +412,15 @@ function updateNextCovers() {
 }
 
 function changeSong(index) {
-  if (index >= playlist.length) return;
+  index = Number(index);
+  if (!Number.isInteger(index) || index < 0 || index >= playlist.length) return;
 
+  hasActiveSong = true;
   currentSong = index;
   source.src = playlist[currentSong];
   cover.src = playlist[currentSong].replace(".mp3", ".jpg");
   title.innerText = songNameFromFile(playlist[currentSong]);
+  title.classList.remove("waiting");
   updateNextCovers();
   sendCurrentSongToRight();
 
@@ -416,21 +443,10 @@ player.addEventListener("ended", function () {
     return;
   }
 
-  currentSong++;
-
-  if (currentSong < playlist.length) {
-    source.src = playlist[currentSong];
-    cover.src = playlist[currentSong].replace(".mp3", ".jpg");
-    title.innerText = songNameFromFile(playlist[currentSong]);
-    updateNextCovers();
-    sendCurrentSongToRight();
-
-    player.load();
-
-    player.oncanplaythrough = () => {
-      player.play();
-    };
-  }
+  /* Einzelne Songs laufen nicht automatisch in die komplette 01-58-Playlist weiter. */
+  hmFolderQueue = null;
+  hmFolderQueuePosition = 0;
+  player.pause();
 });
 </script>
 </body>
