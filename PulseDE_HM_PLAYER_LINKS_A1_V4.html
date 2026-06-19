@@ -58,6 +58,11 @@ body {
   font-weight:bold;
   min-height:28px;
 }
+.song.starSong {
+  color:#ffb347;
+  font-weight:bold;
+  text-shadow:0 0 10px rgba(255,179,71,0.35);
+}
 .artist {
   font-size:16px;
   color:#ddd;
@@ -286,8 +291,33 @@ const cover = document.getElementById("mainCover");
 const title = document.getElementById("songTitle");
 const nextSongs = document.getElementById("nextSongs");
 
+const starSongIndexes = new Set([
+  7, 10, 12, 13, 14, 15, 16, 17, 18, 19,
+  23, 26, 27, 28, 31, 35, 36, 38, 39,
+  48, 49, 51, 52, 53
+]);
+
+function isStarSong(index) {
+  return starSongIndexes.has(Number(index));
+}
+
 function songNameFromFile(songFile) {
   return songFile.replace(".mp3", "").replaceAll("_", " ");
+}
+
+function displaySongTitle(index) {
+  const baseTitle = songNameFromFile(playlist[index]);
+  return isStarSong(index) ? baseTitle + " *" : baseTitle;
+}
+
+function applySongTitleStyle(index) {
+  title.classList.remove("waiting");
+  title.classList.toggle("starSong", isStarSong(index));
+}
+
+function applyWaitingTitleStyle() {
+  applyWaitingTitleStyle();
+  title.classList.remove("starSong");
 }
 
 function currentSongMessage() {
@@ -308,7 +338,7 @@ function currentSongMessage() {
     type: "HM_CURRENT_SONG",
     songFile: songFile,
     txtFile: txtFile,
-    title: songNameFromFile(songFile),
+    title: displaySongTitle(currentSong),
     time: Date.now()
   };
 }
@@ -338,7 +368,7 @@ function syncFolderQueue(newQueue){
     player.currentTime = 0;
     source.src = "";
     title.innerText = "🎵 Bitte Erlebnis-Ordner wählen";
-    title.classList.add("waiting");
+    applyWaitingTitleStyle();
     nextSongs.innerHTML = '<span class="nextHint">🎵 Songs im Erlebnis-Ordner auswählen und anschließend mit ▶️ im Player starten.</span>';
     player.load();
     sendCurrentSongToRight();
@@ -367,7 +397,7 @@ function syncFolderQueue(newQueue){
   hmFolderQueuePosition = 0;
   source.src = playlist[hmFolderQueue[0]];
   title.innerText = "🎵 " + list.length + " Song" + (list.length === 1 ? "" : "s") + " ausgewählt – ▶️ im Player drücken";
-  title.classList.add("waiting");
+  applyWaitingTitleStyle();
   nextSongs.innerHTML = '<span class="nextHint">🎵 Auswahl vorbereitet. Start über den Play-Button im Player.</span>';
   player.load();
   sendCurrentSongToRight();
@@ -413,7 +443,7 @@ window.addEventListener("message", function(event) {
     player.currentTime = 0;
     source.src = "";
     title.innerText = "🎵 Bitte Erlebnis-Ordner wählen";
-    title.classList.add("waiting");
+    applyWaitingTitleStyle();
     nextSongs.innerHTML = '<span class="nextHint">🎵 Songs im Erlebnis-Ordner auswählen und anschließend mit ▶️ im Player starten.</span>';
     player.load();
     sendCurrentSongToRight();
@@ -442,8 +472,8 @@ function changeSong(index) {
   currentSong = index;
   source.src = playlist[currentSong];
   cover.src = playlist[currentSong].replace(".mp3", ".jpg");
-  title.innerText = songNameFromFile(playlist[currentSong]);
-  title.classList.remove("waiting");
+  title.innerText = displaySongTitle(currentSong);
+  applySongTitleStyle(currentSong);
   updateNextCovers();
   sendCurrentSongToRight();
 
@@ -461,8 +491,8 @@ player.addEventListener("play", function () {
     hasActiveSong = true;
     source.src = playlist[currentSong];
     cover.src = playlist[currentSong].replace(".mp3", ".jpg");
-    title.innerText = songNameFromFile(playlist[currentSong]);
-    title.classList.remove("waiting");
+    title.innerText = displaySongTitle(currentSong);
+    applySongTitleStyle(currentSong);
     updateNextCovers();
     sendCurrentSongToRight();
   }
