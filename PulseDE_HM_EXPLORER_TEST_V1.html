@@ -36,9 +36,32 @@ body{
 .songlist{
     display:none;
     margin-top:15px;
-    background:#222;
+    background:linear-gradient(180deg,#1d1d1d,#151015);
     padding:15px;
+    border:2px solid #d6a84f;
+    border-radius:18px;
+    box-shadow:
+        0 0 14px rgba(214,168,79,0.38),
+        inset 0 0 10px rgba(255,220,140,0.12);
+}
+
+.folderHint{
+    font-size:12px;
+    line-height:1.45;
+    color:#e8d7a4;
+    background:rgba(214,168,79,0.10);
+    border:1px solid rgba(214,168,79,0.35);
     border-radius:12px;
+    padding:10px 12px;
+    margin:10px auto 12px;
+    max-width:430px;
+}
+
+.starSong{
+    color:#ffb347;
+    font-weight:bold;
+    border-color:#d6a84f;
+    box-shadow:0 0 8px rgba(214,168,79,0.22);
 }
 
 button{
@@ -98,6 +121,11 @@ button{
 <img src="HM_01_Gefuehl.jpg" onclick="openFolder('folder01','songs01')">
 <div id="songs01" class="songlist">
 <h2>❤️ 01 Gefühl</h2>
+<div class="folderHint">
+💡 Tipp: Hake einzelne Songs an und drücke anschließend ▶️ im Player.
+Mit „Gesamten Ordner abspielen“ werden alle Songs im Ordner ausgewählt.
+Du kannst Songs jederzeit abwählen; die Wiedergabe passt sich sofort an.
+</div>
 <button onclick="playWholeFolder('songs01')">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
@@ -114,6 +142,11 @@ button{
 <img src="HM_02_Nachdenken.jpg" onclick="openFolder('folder02','songs02')">
 <div id="songs02" class="songlist">
 <h2>🌙 02 Nachdenken</h2>
+<div class="folderHint">
+💡 Tipp: Hake einzelne Songs an und drücke anschließend ▶️ im Player.
+Mit „Gesamten Ordner abspielen“ werden alle Songs im Ordner ausgewählt.
+Du kannst Songs jederzeit abwählen; die Wiedergabe passt sich sofort an.
+</div>
 <button onclick="playWholeFolder('songs02')">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
@@ -127,6 +160,11 @@ button{
 <img src="HM_03_Hoffnung.jpg" onclick="openFolder('folder03','songs03')">
 <div id="songs03" class="songlist">
 <h2>🍀 03 Hoffnung</h2>
+<div class="folderHint">
+💡 Tipp: Hake einzelne Songs an und drücke anschließend ▶️ im Player.
+Mit „Gesamten Ordner abspielen“ werden alle Songs im Ordner ausgewählt.
+Du kannst Songs jederzeit abwählen; die Wiedergabe passt sich sofort an.
+</div>
 <button onclick="playWholeFolder('songs03')">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
@@ -140,6 +178,11 @@ button{
 <img src="HM_04_Menschlichkeit.jpg" onclick="openFolder('folder04','songs04')">
 <div id="songs04" class="songlist">
 <h2>🤝 04 Menschlichkeit</h2>
+<div class="folderHint">
+💡 Tipp: Hake einzelne Songs an und drücke anschließend ▶️ im Player.
+Mit „Gesamten Ordner abspielen“ werden alle Songs im Ordner ausgewählt.
+Du kannst Songs jederzeit abwählen; die Wiedergabe passt sich sofort an.
+</div>
 <button onclick="playWholeFolder('songs04')">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
@@ -153,10 +196,15 @@ button{
 <img src="HM_05_Alltag_Leben.jpg" onclick="openFolder('folder05','songs05')">
 <div id="songs05" class="songlist">
 <h2>⚙️ 05 Alltag & Leben</h2>
+<div class="folderHint">
+💡 Tipp: Hake einzelne Songs an und drücke anschließend ▶️ im Player.
+Mit „Gesamten Ordner abspielen“ werden alle Songs im Ordner ausgewählt.
+Du kannst Songs jederzeit abwählen; die Wiedergabe passt sich sofort an.
+</div>
 <button onclick="playWholeFolder('songs05')">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
-<label class="songChoice"><input type="checkbox" data-song-index="7" onchange="updateFolderSelection('songs05')"> Test-Song Alltag & Leben</label>
+<label class="songChoice starSong"><input type="checkbox" data-song-index="7" onchange="updateFolderSelection('songs05')"> Test-Song Alltag & Leben</label>
 <hr>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 </div>
@@ -166,6 +214,11 @@ button{
 <img src="HM_06_Entscheidung.jpg" onclick="openFolder('folder06','songs06')">
 <div id="songs06" class="songlist">
 <h2>⚖️ 06 Entscheidung</h2>
+<div class="folderHint">
+💡 Tipp: Hake einzelne Songs an und drücke anschließend ▶️ im Player.
+Mit „Gesamten Ordner abspielen“ werden alle Songs im Ordner ausgewählt.
+Du kannst Songs jederzeit abwählen; die Wiedergabe passt sich sofort an.
+</div>
 <button onclick="playWholeFolder('songs06')">▶️ Gesamten Ordner abspielen</button>
 <button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>
 <hr>
@@ -241,10 +294,12 @@ function playWholeFolder(songListId){
 function updateFolderSelection(songListId){
     const indexes = getSelectedIndexes(songListId);
 
-    /* Wichtig: Checkboxen allein starten NICHTS.
-       Erst wenn der Ordner bereits gestartet wurde, wird die laufende Warteschlange aktualisiert. */
-    if (!folderPlaybackStarted || activeSongListId !== songListId) return;
+    activeSongListId = songListId;
 
+    /* Neue HM-Logik:
+       Checkboxen bereiten die Auswahl sofort vor.
+       Wenn die Wiedergabe bereits läuft, wird die Warteschlange direkt angepasst.
+       Wenn noch nichts läuft, merkt sich der Player die Auswahl für ▶️ Play. */
     window.parent.postMessage({
         type:"HM_UPDATE_FOLDER_QUEUE",
         songIndexes:indexes
