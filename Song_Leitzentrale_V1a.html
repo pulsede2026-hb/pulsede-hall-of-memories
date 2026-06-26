@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PulseDE Song-Leitzentrale V1a – HM Einpflege</title>
+<style>
+:root{
+  --bg:#0d0d0d; --panel:#17111d; --panel2:#24152d; --gold:#ffd76a; --gold2:#d6a84f;
+  --text:#fff; --muted:#cfc7d8; --star:#ffb347; --ok:#75d68a; --warn:#ffcf6a; --bad:#ff7a7a;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,#080808,#17091f);color:var(--text);font-family:Arial, sans-serif}
+.wrap{max-width:1180px;margin:auto;padding:18px}
+.header{border:2px solid var(--gold2);border-radius:22px;padding:18px;text-align:center;background:linear-gradient(180deg,#090909,#1d1028);box-shadow:0 0 18px rgba(214,168,79,.35)}
+.small{color:var(--gold);font-weight:bold;font-size:20px}
+.big{color:var(--gold);font-weight:bold;font-size:34px;line-height:1.05}
+.sub{color:#c998ff;margin-top:6px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.card{border:1px solid rgba(214,168,79,.55);border-radius:18px;background:rgba(255,255,255,.04);padding:16px}
+.card h2{margin:0 0 12px;color:var(--gold);font-size:20px}
+label{display:block;font-weight:bold;margin:12px 0 6px;color:#f3e4b7}
+input[type="text"], textarea, select{
+  width:100%;padding:10px;border-radius:10px;border:1px solid #6d5a78;background:#0d0d0d;color:#fff;font-size:15px
+}
+textarea{min-height:160px;resize:vertical;white-space:pre-wrap}
+.file{background:#120b18;border:1px dashed #8e729f;padding:10px;border-radius:12px;margin-bottom:10px}
+.file input{width:100%}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+button{
+  border:1px solid var(--gold2);border-radius:12px;background:#2a2230;color:#fff;padding:10px 14px;cursor:pointer;font-weight:bold
+}
+button.primary{background:#7b4d00;border-color:#ffd76a;color:#fff}
+button:hover{filter:brightness(1.12)}
+.out{white-space:pre-wrap;background:#050505;border:1px solid #4b3b55;border-radius:12px;padding:12px;min-height:70px;color:#eee;font-family:Consolas, monospace;font-size:13px}
+.ok{color:var(--ok)} .warn{color:var(--warn)} .bad{color:var(--bad)} .star{color:var(--star);font-weight:bold}
+.downloads a{display:inline-block;margin:6px 8px 6px 0;padding:9px 11px;border-radius:10px;border:1px solid var(--gold2);color:#fff;text-decoration:none;background:#2a2230}
+.note{font-size:13px;color:var(--muted);line-height:1.45}
+.full{grid-column:1 / -1}
+.pill{display:inline-block;border:1px solid rgba(214,168,79,.55);padding:3px 8px;border-radius:999px;margin:3px;color:#f3e4b7}
+@media(max-width:850px){.grid{grid-template-columns:1fr}.row{grid-template-columns:1fr}.big{font-size:28px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <div class="small">PulseDE Leitzentrale</div>
+    <div class="big">🧩 Song-Leitzentrale V1a</div>
+    <div class="sub">Interner GitHub-Testbereich · Helfer 1: HM-Einpflege · nicht öffentlich einbauen</div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>1️⃣ Aktuelle GitHub-HTML-Dateien laden</h2>
+      <div class="file"><label>Player links HTML</label><input type="file" id="filePlayer" accept=".html,text/html"></div>
+      <div class="file"><label>Explorer HTML</label><input type="file" id="fileExplorer" accept=".html,text/html"></div>
+      <div class="file"><label>Index / Gesamt-Test HTML (optional)</label><input type="file" id="fileIndex" accept=".html,text/html"></div>
+      <div class="file"><label>HOME Testrahmen (optional, wird nicht verändert)</label><input type="file" id="fileHome" accept=".html,text/html"></div>
+      <div class="file"><label>Songtext rechts (optional, wird nicht verändert)</label><input type="file" id="fileText" accept=".html,text/html"></div>
+      <p class="note">V1 arbeitet lokal im Browser. Es werden keine Dateien hochgeladen. Die Leitzentrale erzeugt neue HTML-Dateien zum Herunterladen.</p>
+    </div>
+
+    <div class="card">
+      <h2>2️⃣ Neuer Song</h2>
+      <label>MP3-Datei <span class="bad">(Pflicht)</span></label>
+      <input type="file" id="mp3File" accept=".mp3,audio/mpeg">
+      <input type="text" id="mp3Name" placeholder="optional: MP3-Dateiname, falls Datei später umbenannt wird">
+
+      <label>Songtitel optional überschreiben</label>
+      <input type="text" id="titleOverride" placeholder="leer lassen = Titel aus MP3-Dateiname">
+
+      <div class="row">
+        <div>
+          <label>* Kennzeichnung</label>
+          <select id="starFlag">
+            <option value="ja">Ja – * Song</option>
+            <option value="nein">Nein – ohne *</option>
+          </select>
+        </div>
+        <div>
+          <label>Cover.jpg <span class="bad">(Pflicht)</span></label>
+          <input type="file" id="coverFile" accept=".jpg,.jpeg,image/jpeg">
+          <input type="text" id="coverName" placeholder="optional: Cover-Dateiname">
+        </div>
+      </div>
+
+      <label>Songtext oder TXT-Datei <span class="bad">(Pflicht)</span></label>
+      <input type="file" id="txtFile" accept=".txt,text/plain">
+      <textarea id="lyrics" placeholder="Songtext hier einfügen oder TXT-Datei wählen"></textarea>
+      <div id="pflichtStatus" class="out" style="margin-top:12px;min-height:50px;">Pflichtprüfung wird geladen …</div>
+    </div>
+
+    <div class="card full">
+      <h2>3️⃣ Erstellen</h2>
+      <button class="primary" id="generateBtn" onclick="runGenerator()" disabled>🧠 Bürovorsteher UWE: HM-Einpflege vorbereiten</button>
+      <button onclick="clearAll()">Zurücksetzen</button>
+      <div id="summary" class="out" style="margin-top:12px;">Bereit.</div>
+      <div id="downloads" class="downloads" style="margin-top:12px;"></div>
+    </div>
+
+    <div class="card full">
+      <h2>Interne V1-Regeln</h2>
+      <p class="note">
+        <span class="pill">Nächste Nummer automatisch</span>
+        <span class="pill">Playlist + Coverliste</span>
+        <span class="pill">starSongFiles bei * Ja</span>
+        <span class="pill">Explorer-Labels mit bestehender Farbe</span>
+        <span class="pill">TXT-Datei erzeugen</span>
+        <span class="pill">Cover.jpg Pflicht</span>
+        <span class="pill">Einpflege gesperrt bei fehlenden Pflichtdaten</span>
+      </p>
+      <p class="note">
+        HM-Automatik V1a: Bei <b>* Ja</b> wird der Song wie die zuletzt eingepflegten Songs 56–58 in die Räume
+        <b>03 Hoffnung</b>, <b>04 Menschlichkeit</b>, <b>05 Alltag & Leben</b> und <b>06 Entscheidung</b> gelegt.
+        Bei <b>* Nein</b> entscheidet eine einfache Text-/Titel-Heuristik über die Erlebnisräume. Diese Logik kann später durch echte HM-Raumlogik erweitert werden.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+const state = { player:null, explorer:null, index:null, home:null, text:null, lyricsFromFile:null };
+
+
+function getFileObject(id){
+  const el = document.getElementById(id);
+  return el && el.files && el.files[0] ? el.files[0] : null;
+}
+function hasStarSelection(){
+  const el = document.getElementById("starFlag");
+  return !!(el && (el.value === "ja" || el.value === "nein"));
+}
+function getMandatoryStatus(){
+  const mp3Obj = getFileObject("mp3File");
+  const mp3Name = document.getElementById("mp3Name").value.trim();
+  const mp3Ok = !!(mp3Obj || (mp3Name && mp3Name.toLowerCase().endsWith(".mp3")));
+
+  const coverObj = getFileObject("coverFile");
+  const coverTyped = document.getElementById("coverName").value.trim();
+  const coverOk = !!(coverObj || (coverTyped && /\.(jpg|jpeg)$/i.test(coverTyped)));
+
+  const lyricsOk = !!(document.getElementById("lyrics").value.trim() || getFileObject("txtFile"));
+  const starOk = hasStarSelection();
+  const htmlOk = !!(getFileObject("filePlayer") && getFileObject("fileExplorer"));
+
+  return {mp3Ok, coverOk, lyricsOk, starOk, htmlOk, allOk: mp3Ok && coverOk && lyricsOk && starOk && htmlOk};
+}
+function renderMandatoryStatus(){
+  const st = getMandatoryStatus();
+  const line = (ok, text) => (ok ? "🟢 " : "🔴 ") + text;
+  const box = document.getElementById("pflichtStatus");
+  if(box){
+    box.innerText = [
+      line(st.htmlOk, "Player + Explorer HTML vorhanden"),
+      line(st.mp3Ok, "MP3 vorhanden"),
+      line(st.coverOk, "Cover.jpg vorhanden"),
+      line(st.lyricsOk, "Songtext vorhanden"),
+      line(st.starOk, "* Ja/Nein angegeben"),
+      "",
+      st.allOk ? "✅ Bereit: Einpflege kann gestartet werden." : "⛔ Gesperrt: Erst alle Pflichtfelder vollständig bereitstellen."
+    ].join("\n");
+  }
+  const btn = document.getElementById("generateBtn");
+  if(btn) btn.disabled = !st.allOk;
+}
+function makeFileDownload(name, file){
+  const url = URL.createObjectURL(file);
+  const a = document.createElement("a");
+  a.href = url; a.download = name; a.textContent = "⬇ " + name;
+  return a;
+}
+
+function readFileInput(id){
+  const el = document.getElementById(id);
+  if(!el.files || !el.files[0]) return Promise.resolve(null);
+  return el.files[0].text().then(text => ({name:el.files[0].name, text}));
+}
+function getFileNameInput(fileId, textId){
+  const f = document.getElementById(fileId).files?.[0];
+  const t = document.getElementById(textId).value.trim();
+  return f ? f.name : t;
+}
+document.getElementById("txtFile").addEventListener("change", async function(){
+  if(this.files && this.files[0]){
+    document.getElementById("lyrics").value = await this.files[0].text();
+  }
+  renderMandatoryStatus();
+});
+["filePlayer","fileExplorer","mp3File","coverFile","txtFile","mp3Name","coverName","lyrics","starFlag","titleOverride"].forEach(id => {
+  const el = document.getElementById(id);
+  if(el){ el.addEventListener("change", renderMandatoryStatus); el.addEventListener("input", renderMandatoryStatus); }
+});
+window.addEventListener("DOMContentLoaded", renderMandatoryStatus);
+
+function cleanBaseName(name){
+  return (name || "")
+    .replace(/^.*[\\\/]/,"")
+    .replace(/\.(mp3|jpg|jpeg|png|txt|html)$/i,"")
+    .replace(/^\d+[_\-\s]+/,"")
+    .trim();
+}
+function displayTitleFromBase(base){
+  return base.replaceAll("_"," ").replace(/\s+/g," ").trim();
+}
+function fileSafeTitle(title){
+  return title
+    .replace(/[\\\/:*?"<>|]/g,"")
+    .replace(/\s+/g," ")
+    .trim();
+}
+function maxSongNumberFromHtml(...htmls){
+  let max = 0;
+  const re = /["'](\d{1,4})[_][^"']+\.(?:mp3|jpg|txt)["']/gi;
+  for(const html of htmls.filter(Boolean)){
+    let m;
+    while((m = re.exec(html)) !== null){
+      const n = parseInt(m[1],10);
+      if(Number.isFinite(n) && n > max) max = n;
+    }
+  }
+  return max;
+}
+function extractPlaylistLength(playerHtml){
+  const arr = extractArrayBody(playerHtml, "playlist");
+  if(!arr) return 0;
+  const matches = arr.match(/"[^"]+\.mp3"/g) || [];
+  return matches.length;
+}
+function extractArrayBody(html, name){
+  const re = new RegExp("(const\\s+"+name+"\\s*=\\s*\\[)([\\s\\S]*?)(\\n\\s*\\];)");
+  const m = html.match(re);
+  return m ? m[2] : null;
+}
+function appendArrayEntry(html, name, value){
+  const re = new RegExp("(const\\s+"+name+"\\s*=\\s*\\[)([\\s\\S]*?)(\\n\\s*\\];)");
+  return html.replace(re, (all, start, body, end) => {
+    if(body.includes('"'+value+'"')) return all;
+    const trimmed = body.replace(/\s*$/,"");
+    return start + trimmed + '\n    "' + value + '",' + end;
+  });
+}
+function appendSetEntry(html, name, value){
+  const re = new RegExp("(const\\s+"+name+"\\s*=\\s*new\\s+Set\\(\\s*\\[)([\\s\\S]*?)(\\n\\s*\\]\\s*\\);)");
+  return html.replace(re, (all, start, body, end) => {
+    if(body.includes('"'+value+'"')) return all;
+    const trimmed = body.replace(/\s*$/,"");
+    return start + trimmed + '\n    "' + value + '",' + end;
+  });
+}
+function folderRange(html, folderId){
+  const start = html.indexOf('<div id="'+folderId+'" class="songlist">');
+  if(start < 0) return null;
+  const next = html.indexOf('<div class="folder" id="folder', start + 10);
+  const end = next > 0 ? next : html.indexOf('</div>\n\n<script>', start);
+  return {start, end: end > 0 ? end : html.length};
+}
+function addExplorerLabel(html, folderId, songIndex, number, title, star){
+  const range = folderRange(html, folderId);
+  if(!range) return html;
+  const part = html.slice(range.start, range.end);
+  const display = number + " " + title;
+  if(part.includes("data-song-index=\""+songIndex+"\"") || part.includes(display)) return html;
+  const onchange = "updateFolderSelection('"+folderId+"')";
+  const label = star
+    ? '<label class="songChoice starSong"><input type="checkbox" data-song-index="'+songIndex+'" onchange="'+onchange+'"> '+display+' <span class="starMark">★</span></label>\n'
+    : '<label class="songChoice"><input type="checkbox" data-song-index="'+songIndex+'" onchange="'+onchange+'"> '+display+'</label>\n';
+  const closeMarker = '<hr>\n<button onclick="closeFolder()">⏹ Wiedergabe beenden & Ordner schließen</button>';
+  const insertAtLocal = part.lastIndexOf(closeMarker);
+  if(insertAtLocal < 0) return html;
+  const insertAt = range.start + insertAtLocal;
+  return html.slice(0, insertAt) + label + html.slice(insertAt);
+}
+function chooseFolders(title, lyrics, star){
+  if(star) return ["songs03","songs04","songs05","songs06"];
+  const text = (title+" "+lyrics).toLowerCase();
+  const score = {
+    songs01: ["liebe","herz","gefühl","träum","freund","allein","sehnsucht","nacht","augen","meer"],
+    songs02: ["warum","frage","zeit","denken","vergangen","krise","schatten","spiegel","welt","krieg"],
+    songs03: ["hoffnung","licht","leben","neu","morgen","stern","wieder","glaub","mut","schmetterling"],
+    songs04: ["mensch","wir","gemeinsam","kind","helfen","inklusion","behinderung","zusammen","mitte"],
+    songs05: ["alltag","arbeit","wirtschaft","straße","camper","reise","leben","knopf","rad","feierabend"],
+    songs06: ["entscheidung","weg","gehen","bleib","abschied","zurück","zukunft","schluss","weiter"]
+  };
+  const pts = Object.entries(score).map(([folder, words]) => [folder, words.reduce((s,w)=>s+(text.includes(w)?1:0),0)]);
+  pts.sort((a,b)=>b[1]-a[1]);
+  let chosen = pts.filter(p=>p[1]>0).slice(0,3).map(p=>p[0]);
+  if(chosen.length === 0) chosen = ["songs01","songs03"];
+  if(!chosen.includes("songs03")) chosen.push("songs03");
+  return [...new Set(chosen)];
+}
+function makeDownload(name, content, mime="text/html"){
+  const blob = new Blob([content], {type:mime+";charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = name; a.textContent = "⬇ " + name;
+  return a;
+}
+async function runGenerator(){
+  const summary = document.getElementById("summary");
+  const downloads = document.getElementById("downloads");
+  downloads.innerHTML = "";
+  summary.innerHTML = "Lese Dateien …";
+
+  const [playerFile, explorerFile, indexFile, homeFile, textFile] = await Promise.all([
+    readFileInput("filePlayer"),
+    readFileInput("fileExplorer"),
+    readFileInput("fileIndex"),
+    readFileInput("fileHome"),
+    readFileInput("fileText")
+  ]);
+
+  if(!playerFile || !explorerFile){
+    summary.innerHTML = '<span class="bad">Fehler:</span> Player HTML und Explorer HTML sind Pflicht.';
+    return;
+  }
+
+  const mandatory = getMandatoryStatus();
+  if(!mandatory.allOk){
+    renderMandatoryStatus();
+    summary.innerHTML = '<span class="bad">Stopp:</span> Einpflege gesperrt. MP3, Cover.jpg, Songtext, * Ja/Nein sowie Player + Explorer HTML sind Pflicht.';
+    return;
+  }
+
+  const mp3Input = getFileNameInput("mp3File","mp3Name");
+  if(!mp3Input || !mp3Input.toLowerCase().endsWith(".mp3")){
+    summary.innerHTML = '<span class="bad">Fehler:</span> Bitte MP3-Datei wählen oder MP3-Dateiname mit .mp3 eintragen.';
+    return;
+  }
+
+  const coverObj = getFileObject("coverFile");
+  const coverInputName = (coverObj ? coverObj.name : document.getElementById("coverName").value.trim());
+  if(!coverInputName || !/\.(jpg|jpeg)$/i.test(coverInputName)){
+    summary.innerHTML = '<span class="bad">Fehler:</span> Bitte Cover.jpg auswählen oder JPG-Dateiname eintragen.';
+    return;
+  }
+
+  const lyrics = document.getElementById("lyrics").value || "";
+  if(!lyrics.trim()){
+    summary.innerHTML = '<span class="bad">Fehler:</span> Bitte Songtext einfügen oder TXT-Datei wählen.';
+    return;
+  }
+
+  const maxNo = maxSongNumberFromHtml(playerFile.text, explorerFile.text, indexFile?.text || "");
+  const nextNo = maxNo + 1;
+  const number = String(nextNo).padStart(2,"0");
+  const songIndex = extractPlaylistLength(playerFile.text);
+
+  const titleRaw = document.getElementById("titleOverride").value.trim() || displayTitleFromBase(cleanBaseName(mp3Input));
+  const title = fileSafeTitle(titleRaw);
+  const base = number + "_" + title;
+  const mp3Name = base + ".mp3";
+  const coverTyped = document.getElementById("coverName").value.trim();
+  let coverName = (coverTyped || (base + ".jpg")).replace(/[\\\/:*?"<>|]/g,"");
+  coverName = coverName.replace(/\.jpeg$/i, ".jpg");
+  if(!coverName.toLowerCase().endsWith(".jpg")) coverName += ".jpg";
+  const txtName = base + ".txt";
+  const star = document.getElementById("starFlag").value === "ja";
+  const folders = chooseFolders(title, lyrics, star);
+
+  let newPlayer = playerFile.text;
+  newPlayer = appendArrayEntry(newPlayer, "playlist", mp3Name);
+  newPlayer = appendArrayEntry(newPlayer, "covers", coverName);
+  if(star) newPlayer = appendSetEntry(newPlayer, "starSongFiles", mp3Name);
+
+  let newExplorer = explorerFile.text;
+  folders.forEach(f => newExplorer = addExplorerLabel(newExplorer, f, songIndex, number, title, star));
+
+  let newIndex = null;
+  if(indexFile){
+    newIndex = indexFile.text;
+    newIndex = appendArrayEntry(newIndex, "playlist", mp3Name);
+    newIndex = appendArrayEntry(newIndex, "covers", coverName);
+  }
+
+  downloads.appendChild(makeDownload("PulseDE_HM_PLAYER_LINKS_A1_V4.html", newPlayer));
+  downloads.appendChild(makeDownload("PulseDE_HM_EXPLORER_TEST_V1.html", newExplorer));
+  downloads.appendChild(makeDownload(txtName, lyrics, "text/plain"));
+  if(coverObj) downloads.appendChild(makeFileDownload(coverName, coverObj));
+  if(newIndex) downloads.appendChild(makeDownload("index.html", newIndex));
+  if(homeFile) downloads.appendChild(makeDownload("PulseDE_Home_A1_TESTRAHMEN_V4.html", homeFile.text));
+  if(textFile) downloads.appendChild(makeDownload("PulseDE_HM_SONGTEXT_RECHTS_A1_V4.html", textFile.text));
+
+  const folderNames = {songs01:"01 Gefühl",songs02:"02 Nachdenken",songs03:"03 Hoffnung",songs04:"04 Menschlichkeit",songs05:"05 Alltag & Leben",songs06:"06 Entscheidung"};
+  summary.innerHTML =
+`✅ HM-Einpflege vorbereitet
+
+Neue Nummer: ${number}
+Song-Index im Player/Explorer: ${songIndex}
+MP3 erwartet: ${mp3Name}
+Cover erwartet: ${coverName}
+TXT erzeugt: ${txtName}
+* Kennzeichnung: ${star ? "JA – bestehende Sternfarbe/Klasse wird verwendet" : "NEIN"}
+HM-Räume: ${folders.map(f=>folderNames[f]||f).join(", ")}
+
+Nächster Schritt:
+1. Downloads speichern.
+2. MP3 exakt auf den oben genannten Dateinamen umbenennen.
+3. Cover-Download speichern oder Cover exakt auf den oben genannten Dateinamen umbenennen.
+4. HTML + MP3 + JPG + TXT in GitHub-Testbereich hochladen.
+4. GitHub Pages prüfen.`;
+}
+function clearAll(){
+  document.querySelectorAll("input").forEach(i => { if(i.type==="file") i.value=""; else i.value=""; });
+  document.querySelectorAll("textarea").forEach(t => t.value="");
+  document.getElementById("starFlag").value="ja";
+  document.getElementById("summary").innerText="Bereit.";
+  document.getElementById("downloads").innerHTML="";
+  renderMandatoryStatus();
+}
+</script>
+</body>
+</html>
