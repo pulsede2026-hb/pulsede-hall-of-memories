@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PulseDE HM-Leitzentrale V1b</title>
+<style>
+:root{--bg:#0b0b0f;--card:#17111f;--gold:#d6a84f;--gold2:#ffd76a;--txt:#fff;--muted:#cfc6d8;--ok:#63d471;--bad:#ff6b6b;--warn:#ffca5f;--violet:#c998ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#221136,#08080b 60%);color:var(--txt);font-family:Arial,sans-serif;line-height:1.35}.wrap{max-width:1180px;margin:0 auto;padding:18px}.hero{border:2px solid var(--gold);border-radius:24px;background:linear-gradient(180deg,#12091c,#090909);box-shadow:0 0 18px rgba(214,168,79,.35),0 8px 28px rgba(0,0,0,.55);padding:18px;text-align:center}.hero h1{margin:.2rem 0;color:var(--gold2);font-size:34px}.hero p{margin:.25rem 0;color:var(--muted)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.card{background:rgba(23,17,31,.96);border:1px solid rgba(214,168,79,.6);border-radius:18px;padding:15px;box-shadow:0 6px 20px rgba(0,0,0,.35)}h2{margin:0 0 10px;color:var(--gold2);font-size:22px}h3{color:var(--violet);margin:12px 0 8px}label{display:block;margin:10px 0 4px;color:#eee;font-weight:bold}input[type=text],select,textarea{width:100%;border:1px solid #5c4a70;background:#0e0b13;color:white;border-radius:10px;padding:10px;font-size:15px}textarea{min-height:92px}input[type=file]{width:100%;border:1px dashed var(--gold);border-radius:10px;padding:10px;background:#110b18;color:#fff}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.folders{display:grid;grid-template-columns:1fr 1fr;gap:8px}.check{display:flex;gap:8px;align-items:center;font-weight:normal;margin:6px 0;color:#fff}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}button,.download{border:1px solid var(--gold);background:#2a2230;color:#fff;border-radius:12px;padding:10px 13px;cursor:pointer;text-decoration:none;font-weight:bold;display:inline-block}button.primary{background:#583078;border-color:#ffd76a}button.ok{background:#164d22}.status{white-space:pre-wrap;background:#09070c;border:1px solid #3e3150;border-radius:14px;padding:12px;min-height:160px;color:#e9e0f2}.pill{display:inline-block;padding:4px 9px;border-radius:999px;border:1px solid #777;margin:3px;font-size:12px}.green{color:var(--ok);border-color:var(--ok)}.red{color:var(--bad);border-color:var(--bad)}.yellow{color:var(--warn);border-color:var(--warn)}.downloads a{margin:5px 6px 5px 0}.full{grid-column:1/-1}.small{font-size:13px;color:#cfc6d8}.freeze{font-weight:bold;color:#ffd76a}.visu{border:2px solid #63d471}.mono{font-family:Consolas,monospace;font-size:13px}@media(max-width:850px){.grid,.row{grid-template-columns:1fr}.folders{grid-template-columns:1fr}.hero h1{font-size:28px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>🧩 PulseDE HM‑Leitzentrale V1b</h1>
+    <p class="freeze">Produktiver Aufbau: Testrahmen → Explorer → Player ↔ Songtext → MP3/JPG/TXT</p>
+    <p>Keine index.html. Keine V5‑Altdateien. Finale Freigabe nur durch Visu.</p>
+  </div>
+
+  <div class="grid">
+    <section class="card">
+      <h2>1. Produktive HTML-Dateien laden</h2>
+      <label>Explorer HTML</label><input id="explorerFile" type="file" accept=".html,.htm">
+      <label>Player HTML</label><input id="playerFile" type="file" accept=".html,.htm">
+      <label>Songtext HTML</label><input id="textFile" type="file" accept=".html,.htm">
+      <label>Testrahmen HTML</label><input id="frameFile" type="file" accept=".html,.htm">
+      <div class="actions"><button onclick="analyse()" class="primary">🔍 Bestand analysieren</button></div>
+      <p class="small">Nur diese produktiven Dateien verwenden. index.html und Archivdateien bleiben draußen.</p>
+    </section>
+
+    <section class="card">
+      <h2>2. Neuer Song</h2>
+      <div class="row"><div><label>Songtitel</label><input id="songTitle" type="text" placeholder="z. B. Neuer Song"></div><div><label>* Ja/Nein</label><select id="star"><option value="Nein">Nein</option><option value="Ja">Ja</option></select></div></div>
+      <label>MP3</label><input id="mp3File" type="file" accept="audio/mpeg,.mp3">
+      <label>Cover JPG</label><input id="jpgFile" type="file" accept="image/jpeg,.jpg,.jpeg">
+      <label>Songtext TXT</label><input id="txtUpload" type="file" accept=".txt,text/plain">
+      <label>oder Songtext hier einfügen</label><textarea id="txtText" placeholder="Songtext einfügen, wenn keine TXT-Datei hochgeladen wird"></textarea>
+      <h3>Erlebnis-Ordner</h3>
+      <div class="folders">
+        <label class="check"><input type="checkbox" class="folderBox" value="songs01">❤️ 01 Gefühl</label>
+        <label class="check"><input type="checkbox" class="folderBox" value="songs02">🌙 02 Nachdenken</label>
+        <label class="check"><input type="checkbox" class="folderBox" value="songs03">🍀 03 Hoffnung</label>
+        <label class="check"><input type="checkbox" class="folderBox" value="songs04">🤝 04 Menschlichkeit</label>
+        <label class="check"><input type="checkbox" class="folderBox" value="songs05">⚙️ 05 Alltag & Leben</label>
+        <label class="check"><input type="checkbox" class="folderBox" value="songs06">⚖️ 06 Entscheidung</label>
+      </div>
+    </section>
+
+    <section class="card full visu">
+      <h2>3. V1b erzeugen</h2>
+      <div class="actions">
+        <button onclick="buildV1b()" class="ok">🐻 V1b sauBÄR erzeugen</button>
+        <button onclick="resetAll()">Zurücksetzen</button>
+      </div>
+      <p class="small">Nummer wird aus höchster vorhandener Songnummer berechnet. Fehlversuch verbraucht keine Nummer. Beispiel: Bestand endet 58 → neuer Versuch bleibt 59, bis Visu freigibt.</p>
+      <div id="summary"></div>
+    </section>
+
+    <section class="card">
+      <h2>Status</h2>
+      <div id="status" class="status">Bereit. Zuerst HTML-Dateien laden und Bestand analysieren.</div>
+    </section>
+
+    <section class="card">
+      <h2>Downloads</h2>
+      <div id="downloads" class="downloads small">Noch keine Ausgabe.</div>
+      <h3>Finale Visu-Prüfung</h3>
+      <p class="small">Nach Upload auf GitHub prüfen: Testrahmen öffnen → Ordner wählen → neuen Song starten → Cover → Songtext öffnen → TTS testen → Vor/Zurück/Ordnerlogik prüfen.</p>
+    </section>
+  </div>
+</div>
+
+<script>
+const S = {explorer:'', player:'', text:'', frame:'', playlist:[], covers:[], starFiles:[], nextNo:null, newIndex:null, generated:[]};
+function $(id){return document.getElementById(id)}
+function log(msg){$('status').textContent = msg}
+async function readFileInput(id){const f=$(id).files[0]; if(!f) return ''; return await f.text()}
+function escReg(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
+function parseStringArray(src, name){const m=src.match(new RegExp('const\\s+'+name+'\\s*=\\s*\\[([\\s\\S]*?)\\];')); if(!m) return []; const arr=[]; const re=/"([^"]+)"/g; let x; while((x=re.exec(m[1]))) arr.push(x[1]); return arr}
+function parseStarSet(src){const m=src.match(/const\s+starSongFiles\s*=\s*new\s+Set\s*\(\s*\[([\s\S]*?)\]\s*\)/); if(!m) return []; const arr=[]; const re=/"([^"]+)"/g; let x; while((x=re.exec(m[1]))) arr.push(x[1]); return arr}
+function leadingNo(file){const m=file.match(/^(\d+)_/); return m?Number(m[1]):0}
+function cleanTitle(t){return (t||'').trim().replace(/\.mp3$/i,'').replace(/^\d+_?/,'').replaceAll('_',' ')}
+function slugTitle(t){return (t||'Neuer Song').trim().replace(/[\\/:*?"<>|]/g,'').replace(/\s+/g,' ').trim()}
+function pad2(n){return String(n).padStart(2,'0')}
+function targetBase(){const title=slugTitle($('songTitle').value); return pad2(S.nextNo||1)+'_'+title}
+function analyse(){Promise.all([readFileInput('explorerFile'),readFileInput('playerFile'),readFileInput('textFile'),readFileInput('frameFile')]).then(([e,p,t,f])=>{S.explorer=e;S.player=p;S.text=t;S.frame=f;S.playlist=parseStringArray(p,'playlist');S.covers=parseStringArray(p,'covers');S.starFiles=parseStarSet(p); const max=Math.max(0,...S.playlist.map(leadingNo)); S.nextNo=max+1; S.newIndex=S.playlist.length; const ok=[]; if(e) ok.push('Explorer geladen'); if(p) ok.push('Player geladen'); if(t) ok.push('Songtext geladen'); if(f) ok.push('Testrahmen geladen'); log('Analyse fertig.\n'+ok.join('\n')+'\n\nSongs im Player: '+S.playlist.length+'\nHöchste Nummer: '+max+'\nNächste Nummer: '+S.nextNo+'\nNeuer data-song-index: '+S.newIndex); $('summary').innerHTML='<span class="pill green">Nächste Nummer: '+S.nextNo+'</span><span class="pill green">Neuer Index: '+S.newIndex+'</span><span class="pill yellow">Final: Visu</span>';}).catch(err=>log('Analysefehler: '+err.message))}
+function replaceArray(src,name,arr){const body='const '+name+' = [\n'+arr.map(v=>'    '+JSON.stringify(v)+',').join('\n')+'\n\n];'; return src.replace(new RegExp('const\\s+'+name+'\\s*=\\s*\\[[\\s\\S]*?\\];'), body)}
+function replaceStarSet(src,arr){const body='const starSongFiles = new Set([\n'+arr.map((v,i)=>'    '+JSON.stringify(v)+(i<arr.length-1?',':'')).join('\n')+'\n]);'; return src.replace(/const\s+starSongFiles\s*=\s*new\s+Set\s*\(\s*\[[\s\S]*?\]\s*\);/, body)}
+function ensurePlayerTTS(src){ if(src.includes('HM_TTS_STATUS')) return src; const block=`\n\nlet hmSavedVolume = null;\nfunction hmSetTtsStatus(active){\n  try {\n    if (active) {\n      if (hmSavedVolume === null) hmSavedVolume = player.volume;\n      player.volume = 0;\n    } else {\n      if (hmSavedVolume !== null) player.volume = hmSavedVolume;\n      hmSavedVolume = null;\n    }\n  } catch (error) {}\n}\n`; src=src.replace('const nextSongs = document.getElementById("nextSongs");','const nextSongs = document.getElementById("nextSongs");'+block); src=src.replace('if (data.type === "HM_REQUEST_CURRENT") {','if (data.type === "HM_TTS_STATUS") {\n    hmSetTtsStatus(Boolean(data.active));\n    return;\n  }\n\n  if (data.type === "HM_REQUEST_CURRENT") {'); return src; }
+function ensureTextTTS(src){ if(src.includes('ttsSpeakBtn')) return src; src=src.replace('<button id="toggleLyrics" type="button">Songtext öffnen</button>','<button id="toggleLyrics" type="button">Songtext öffnen</button>\n  <div class="ttsControls">\n    <button id="ttsSpeakBtn" type="button">🔉 Vorlesen</button>\n    <button id="ttsPauseBtn" type="button">⏸ Pause</button>\n    <button id="ttsStopBtn" type="button">⏹ Stop</button>\n  </div>'); src=src.replace('#toggleLyrics {','#toggleLyrics, .ttsControls button {'); src=src.replace('  margin:0 auto 10px;','  margin:0 auto 10px;'); const css='\n.ttsControls{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:0 auto 10px}.ttsControls button{margin:0;background:#2a2230;color:#fff;border:1px solid #ffd76a}.ttsControls button:first-child{background:#ffd76a;color:#120818}\n'; src=src.replace('</style>',css+'</style>'); const js=`\n\nconst ttsSpeakBtn = document.getElementById("ttsSpeakBtn");\nconst ttsPauseBtn = document.getElementById("ttsPauseBtn");\nconst ttsStopBtn = document.getElementById("ttsStopBtn");\nlet hmTtsUtterance = null;\nfunction sendTtsStatus(active){\n  try { window.parent.postMessage({type:"HM_TTS_STATUS", active:Boolean(active), time:Date.now()}, "*"); } catch(error){}\n}\nfunction stopTts(){\n  try { speechSynthesis.cancel(); } catch(error){}\n  sendTtsStatus(false);\n}\nfunction speakCurrentText(){\n  if (!('speechSynthesis' in window)) { alert('TTS wird von diesem Browser nicht unterstützt.'); return; }\n  const text = (textEl.innerText || '').trim();\n  if (!text || text.includes('Songtext ist geschlossen') || text.includes('Songtext wird geladen')) {\n    alert('Bitte zuerst den Songtext öffnen.');\n    return;\n  }\n  stopTts();\n  hmTtsUtterance = new SpeechSynthesisUtterance(text);\n  hmTtsUtterance.lang = 'de-DE';\n  hmTtsUtterance.onstart = () => sendTtsStatus(true);\n  hmTtsUtterance.onend = () => sendTtsStatus(false);\n  hmTtsUtterance.onerror = () => sendTtsStatus(false);\n  speechSynthesis.speak(hmTtsUtterance);\n}\nttsSpeakBtn.addEventListener('click', speakCurrentText);\nttsPauseBtn.addEventListener('click', function(){ try { if (speechSynthesis.speaking && !speechSynthesis.paused) speechSynthesis.pause(); else speechSynthesis.resume(); } catch(error){} });\nttsStopBtn.addEventListener('click', stopTts);\nwindow.addEventListener('beforeunload', stopTts);\n`; src=src.replace('showClosedHint();', 'showClosedHint();'+js); return src; }
+function ensureFrameTTS(src){ if(src.includes('HM_TTS_STATUS')) return src; src=src.replace('data.type === "HM_REQUEST_CURRENT"','data.type === "HM_REQUEST_CURRENT" ||\n        data.type === "HM_TTS_STATUS"'); return src; }
+function insertExplorerLabel(src, folderId, html){ const re=new RegExp('(<div id="'+escReg(folderId)+'" class="songlist">[\\s\\S]*?)(<hr>)'); if(!re.test(src)) return src; return src.replace(re,(m,a,b)=> a+html+'\n'+b); }
+function downloadBlob(name, blob){const a=document.createElement('a'); a.className='download'; a.textContent='⬇ '+name; a.href=URL.createObjectURL(blob); a.download=name; $('downloads').appendChild(a)}
+async function buildV1b(){
+  $('downloads').innerHTML='';
+  if(!S.player || !S.explorer || !S.text || !S.frame){ log('Bitte zuerst alle vier produktiven HTML-Dateien laden und analysieren.'); return; }
+  const mp3=$('mp3File').files[0], jpg=$('jpgFile').files[0], txtFile=$('txtUpload').files[0];
+  const textManual=$('txtText').value;
+  const title=slugTitle($('songTitle').value);
+  if(!title || !mp3 || !jpg || (!txtFile && !textManual.trim())){ log('Pflichtprüfung nicht bestanden: Songtitel, MP3, JPG und TXT/Songtext werden benötigt.'); return; }
+  if(!/\.mp3$/i.test(mp3.name) || mp3.size < 100000){ log('MP3-Prüfung Warnung/Fehler: Datei muss .mp3 sein und plausibel größer als 100 KB. Aktuell: '+mp3.name+' / '+mp3.size+' Bytes'); return; }
+  if(!/\.jpe?g$/i.test(jpg.name) || jpg.size < 1000){ log('JPG-Prüfung nicht bestanden: '+jpg.name+' / '+jpg.size+' Bytes'); return; }
+  const folders=Array.from(document.querySelectorAll('.folderBox:checked')).map(x=>x.value);
+  if(folders.length===0){ log('Bitte mindestens einen Erlebnis-Ordner auswählen.'); return; }
+  if(!S.nextNo) analyse();
+  const base=targetBase(), mp3Name=base+'.mp3', jpgName=base+'.jpg', txtName=base+'.txt';
+  if(S.playlist.includes(mp3Name)){ log('Dieser Song ist bereits in der Playlist vorhanden: '+mp3Name); return; }
+  const newPlaylist=S.playlist.concat([mp3Name]);
+  const newCovers=S.covers.concat([jpgName]);
+  let newStars=S.starFiles.slice(); if($('star').value==='Ja' && !newStars.includes(mp3Name)) newStars.push(mp3Name);
+  let player=replaceArray(S.player,'playlist',newPlaylist); player=replaceArray(player,'covers',newCovers); player=replaceStarSet(player,newStars); player=ensurePlayerTTS(player);
+  const labelClass=$('star').value==='Ja'?'songChoice starSong':'songChoice'; const starMark=$('star').value==='Ja'?' <span class="starMark">★</span>':'';
+  const label='<label class="'+labelClass+'"><input type="checkbox" data-song-index="'+S.newIndex+'" onchange="updateFolderSelection(\''+'FOLDERX'+'\')"> '+pad2(S.nextNo)+' '+title+starMark+'</label>';
+  let explorer=S.explorer;
+  for(const f of folders){ explorer=insertExplorerLabel(explorer, f, label.replace('FOLDERX',f)); }
+  let text=ensureTextTTS(S.text);
+  let frame=ensureFrameTTS(S.frame);
+  downloadBlob('PulseDE_HM_PLAYER_LINKS_A1_V4.html', new Blob([player],{type:'text/html;charset=utf-8'}));
+  downloadBlob('PulseDE_HM_EXPLORER_TEST_V1.html', new Blob([explorer],{type:'text/html;charset=utf-8'}));
+  downloadBlob('PulseDE_HM_SONGTEXT_RECHTS_A1_V4.html', new Blob([text],{type:'text/html;charset=utf-8'}));
+  downloadBlob('PulseDE_Home_A1_TESTRAHMEN_V4.html', new Blob([frame],{type:'text/html;charset=utf-8'}));
+  downloadBlob(mp3Name, mp3);
+  downloadBlob(jpgName, jpg);
+  const txtBlob=txtFile ? txtFile : new Blob([textManual],{type:'text/plain;charset=utf-8'}); downloadBlob(txtName, txtBlob);
+  const report='V1b erstellt.\n\nNeue Nummer: '+S.nextNo+'\nNeuer Index: '+S.newIndex+'\nDateien:\n- '+mp3Name+'\n- '+jpgName+'\n- '+txtName+'\n\nGeänderte HTML-Dateien:\n- Player: Playlist/Cover/* + TTS-Mute-Regel\n- Explorer: gewählte Ordner + neuer Song\n- Songtext: TTS-Buttons\n- Testrahmen: TTS-Weiterleitung\n\nFinale Freigabe: Visu-Prüfung.';
+  log(report);
+}
+function resetAll(){location.reload()}
+</script>
+</body>
+</html>
