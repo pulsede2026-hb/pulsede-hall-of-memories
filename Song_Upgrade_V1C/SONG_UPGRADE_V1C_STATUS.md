@@ -45,6 +45,15 @@ Noch offen: Generatorfehler dauerhaft korrigieren und durch Regressionstest absi
 
 GitHub-Freigabe wurde durch Harald erteilt. Commit und Push folgen erst nach abschließender Dateilistenprüfung; der Status `githubUpdated` wird erst nach erfolgreichem Push gesetzt.
 
+## GitHub-Abschluss 02.07.2026, 11:27 Uhr
+
+- Hauptcommit `b604cea744b894ba7882317047910da4d8f3ea82` erfolgreich nach `origin/main` übertragen
+- Workflowstatus `githubUpdated`: true
+- Song 12 vollständig auf GitHub bereitgestellt
+- große lokale `runs/`-Ordner nicht veröffentlicht
+- Google Sites nicht verändert
+- endgültige Außenprüfung: Harald testet nach Wartezeit mit F5 beziehungsweise Strg+F5
+
 ## 1. Stand
 
 30.06.2026, Europe/Berlin

@@ -167,3 +167,5 @@ Nach ausdrücklicher Freigabe wurden die beiden Array-Trennzeichen ausschließli
 - 22 von 22 Kerntests und 29 Generatorprüfungen erfolgreich; Browseroberfläche ohne Projektfehler.
 
 Reproduzierbare große Laufordner unter `runs/` bleiben lokal und werden nicht nach GitHub übertragen.
+
+GitHub wurde am 02.07.2026 erfolgreich aktualisiert. Hauptcommit: `b604cea744b894ba7882317047910da4d8f3ea82`. Google Sites selbst wurde nicht bearbeitet; der abschließende Hard-Reload-Test erfolgt durch Harald.
