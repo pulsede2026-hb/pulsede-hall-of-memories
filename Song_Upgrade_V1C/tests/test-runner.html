@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Song Upgrade V1C – Kerntests</title>
+  <style>
+    :root{color-scheme:dark}body{margin:0;padding:2rem;font-family:system-ui,sans-serif;color:#eef7ff;background:#07111f}main{max-width:900px;margin:auto}h1{color:#45c4ff}.summary{border:1px solid #34506c;border-radius:.8rem;padding:1rem;margin-bottom:1rem}.ok{color:#58dc9b}.bad{color:#ff7f91}table{width:100%;border-collapse:collapse;background:#102237}th,td{border:1px solid #34506c;padding:.7rem;text-align:left}th{color:#45c4ff}
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Song Upgrade V1C – Kerntests</h1>
+    <div id="summary" class="summary">Tests laufen …</div>
+    <table>
+      <thead><tr><th>Test</th><th>Status</th><th>Hinweis</th></tr></thead>
+      <tbody id="results"></tbody>
+    </table>
+  </main>
+  <script type="module">
+    import { runCoreTests } from "./core-tests.js";
+    import { runHmSuggestionTests } from "./hm-suggestion-tests.js";
+    import { runTitleServiceTests } from "./title-service-tests.js";
+    const results = [
+      ...(await runCoreTests()),
+      ...(await runTitleServiceTests()),
+      ...(await runHmSuggestionTests())
+    ];
+    const passed = results.filter((result) => result.passed).length;
+    const summary = document.querySelector("#summary");
+    summary.className = `summary ${passed === results.length ? "ok" : "bad"}`;
+    summary.textContent = `${passed} von ${results.length} Tests erfolgreich`;
+    const body = document.querySelector("#results");
+    results.forEach((result) => {
+      const row = document.createElement("tr");
+      [result.name, result.passed ? "✓ Bestanden" : "✗ Fehlgeschlagen", result.error || "–"].forEach((text) => {
+        const cell = document.createElement("td");
+        cell.textContent = text;
+        row.append(cell);
+      });
+      body.append(row);
+    });
+    window.__TEST_RESULTS__ = results;
+  </script>
+</body>
+</html>

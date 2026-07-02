@@ -218,6 +218,7 @@ const playlist = [
     "56_Ein neues Leben_Vol_1.mp3",
     "57_Licht nach mir_Vol_2.mp3",
     "58_Licht der Ewigkeit_Vol_3.mp3",
+    "12_Das WIR gewinnt.mp3"
 
 
 
@@ -278,6 +279,7 @@ const covers = [
     "56_Ein neues Leben_Vol_1.jpg",
     "57_Licht nach mir_Vol_2.jpg",
     "58_Licht der Ewigkeit_Vol_3.jpg",
+    "12_Das WIR gewinnt.jpg"
 
 ];
 
@@ -306,7 +308,8 @@ const starSongFiles = new Set([
     "53_Lichter im Baum.mp3",
     "56_Ein neues Leben_Vol_1.mp3",
     "57_Licht nach mir_Vol_2.mp3",
-    "58_Licht der Ewigkeit_Vol_3.mp3"
+    "58_Licht der Ewigkeit_Vol_3.mp3",
+    "12_Das WIR gewinnt.mp3"
 ]);
 
 function isStarSong(songFile) {
@@ -338,7 +341,7 @@ const title = document.getElementById("songTitle");
 const nextSongs = document.getElementById("nextSongs");
 
 function songNameFromFile(songFile) {
-  return songFile.replace(".mp3", "").replaceAll("_", " ");
+  return decodeURIComponent(songFile.split("/").pop()).replace(".mp3", "").replaceAll("_", " ");
 }
 
 function currentSongMessage() {
@@ -353,7 +356,7 @@ function currentSongMessage() {
   }
 
   const songFile = playlist[currentSong];
-  const txtFile = songFile.replace(".mp3", ".txt");
+  const txtFile = (source.src || songFile).replace(/\.mp3(?:$|\?)/i, ".txt");
 
   return {
     type: "HM_CURRENT_SONG",

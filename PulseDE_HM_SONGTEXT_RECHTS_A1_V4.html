@@ -143,7 +143,7 @@ async function loadSongText() {
   textEl.innerText = "Songtext wird geladen …";
 
   try {
-    const response = await fetch(encodeURI(currentTxtFile), {cache:"no-store"});
+    const response = await fetch(decodeURI(currentTxtFile), {cache:"no-store"});
     if (!response.ok) throw new Error("not found");
     const data = await response.text();
     textEl.innerText = data;

@@ -1,0 +1,6 @@
+# Lokale, große und reproduzierbare Integrationsläufe
+Song_Upgrade_V1C/runs/
+Song_Upgrade_V1C/test-integration-song-59/
+
+# Lokale temporäre Arbeitsdaten
+tmp/

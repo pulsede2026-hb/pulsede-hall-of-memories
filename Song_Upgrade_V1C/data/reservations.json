@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "reservations": [
+    {
+      "number": 12,
+      "title": "Das WIR gewinnt",
+      "runName": "song-12-das-wir-gewinnt-final",
+      "hms": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "06"
+      ],
+      "featured": true,
+      "recognized": true,
+      "prepared": true,
+      "hmConfirmed": true,
+      "localTested": true,
+      "reserved": true,
+      "released": false,
+      "stemApproved": true,
+      "stemIntegrated": true,
+      "githubApproved": true,
+      "githubUpdated": false,
+      "updatedAt": "2026-07-02T09:24:50.571Z"
+    }
+  ]
+}

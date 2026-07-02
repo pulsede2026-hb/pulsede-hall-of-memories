@@ -1,0 +1,3 @@
+@media(max-width:1050px){.category-grid{grid-template-columns:repeat(3,1fr)}.hall-top-grid{grid-template-columns:1fr}.text-frame{height:330px}}
+@media(max-width:720px){.app-header,.hero,.section-heading,.now-playing,.hall-heading{align-items:stretch;flex-direction:column}.system-status{align-self:flex-start}.metrics{grid-template-columns:1fr}.catalog-controls{flex-direction:column}.catalog-controls input,.catalog-controls select{width:100%}.category-grid{grid-template-columns:repeat(2,1fr)}.song-list{grid-template-columns:1fr}.current-song{text-align:left}.primary-button,.secondary-button{width:100%}.explorer-frame{height:1050px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}

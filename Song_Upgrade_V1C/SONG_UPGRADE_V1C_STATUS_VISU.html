@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Visueller Projektstand von PulseDE Song Upgrade V1C">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect width=%2264%22 height=%2264%22 rx=%2215%22 fill=%22%2358dc9b%22/><text x=%2232%22 y=%2244%22 text-anchor=%22middle%22 font-size=%2237%22 font-family=%22sans-serif%22 font-weight=%22900%22 fill=%22%2307111f%22>✓</text></svg>">
+  <title>Song Upgrade V1C – Projektstatus</title>
+  <style>
+    :root{color-scheme:dark;--bg:#07111f;--panel:#102237;--line:rgba(144,201,255,.22);--text:#eef7ff;--muted:#a9b9ca;--blue:#45c4ff;--green:#58dc9b;--gold:#ffd45c}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:radial-gradient(circle at 90% 0,rgba(69,196,255,.2),transparent 34rem),linear-gradient(145deg,#050b14,var(--bg))}.wrap{width:min(1100px,calc(100% - 2rem));margin:auto;padding:2rem 0 4rem}h1,h2,p{margin-top:0}.eyebrow{margin-bottom:.25rem;color:var(--blue);font-size:.74rem;font-weight:850;letter-spacing:.13em;text-transform:uppercase}.top,.hero{display:flex;align-items:center;justify-content:space-between;gap:1rem}.top{margin-bottom:1rem}.top h1{margin-bottom:0}.stamp{color:var(--muted);text-align:right}.hero,.card,.metric{border:1px solid var(--line);border-radius:1rem;background:rgba(16,34,55,.94);box-shadow:0 18px 45px rgba(0,0,0,.24)}.hero{padding:1.35rem;margin-bottom:1rem}.hero p{margin:0;color:var(--muted)}.badge{white-space:nowrap;border:1px solid var(--green);border-radius:999px;padding:.55rem .8rem;color:var(--green);font-weight:850}.principles{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-bottom:1rem}.principles span{border:1px solid var(--line);border-radius:.75rem;padding:.7rem;color:var(--muted);background:rgba(16,34,55,.65);text-align:center;font-size:.82rem}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1rem}.metric{padding:1rem;text-align:center}.metric strong{display:block;color:var(--blue);font-size:2rem}.metric span{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.card{padding:1.15rem}.card h2{font-size:1.05rem}.card ul,.card ol{margin:0;padding-left:1.2rem}.card li{margin:.45rem 0;color:var(--muted);line-height:1.45}.wide{grid-column:1/-1}.ok{color:var(--green)}.warn{color:var(--gold)}code{color:#d5f2ff}.rule{margin-top:1rem;border:1px solid var(--blue);border-radius:.9rem;padding:1rem;text-align:center;color:var(--blue);font-weight:850}footer{margin-top:1rem;color:var(--muted);font-size:.85rem}@media(max-width:760px){.top,.hero{align-items:flex-start;flex-direction:column}.stamp{text-align:left}.principles,.metrics,.grid{grid-template-columns:1fr}.wide{grid-column:auto}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <div><p class="eyebrow">PulseDE · internes Arbeitsmodul</p><h1>Song Upgrade V1C</h1></div>
+      <div class="stamp">Tagesabschluss<br><strong>30.06.2026</strong></div>
+    </header>
+
+    <section class="principles" aria-label="Projektgrundsätze">
+      <span>So einfach wie möglich.</span>
+      <span>So hilfreich wie nötig.</span>
+      <span>Dauerhaft kostenlos.</span>
+      <span>Für Menschen mit und ohne Behinderung.</span>
+    </section>
+
+    <section class="hero">
+      <div><p class="eyebrow">Arbeitsabschnitte 3 und 4</p><h2>Baseline und vollständige Testintegration abgeschlossen</h2><p>Song 59 wurde isoliert integriert. Wiedergabe, Cover, Songtext, Explorer/HM, Sternstatus und V1B wurden von Harald praktisch validiert.</p></div>
+      <span class="badge">🟢 Praxistest bestanden</span>
+    </section>
+
+    <section class="metrics" aria-label="Kennzahlen">
+      <article class="metric"><strong>54</strong><span>Songs in der Baseline</span></article>
+      <article class="metric"><strong>55</strong><span>Songs in der Testkopie</span></article>
+      <article class="metric"><strong>22/22</strong><span>Automatisierte V1C-Tests</span></article>
+    </section>
+
+    <div class="grid">
+      <section class="card">
+        <h2 class="ok">✓ Erledigte Arbeiten</h2>
+        <ul>
+          <li>54 Songs vollständig als Baseline analysiert</li>
+          <li>Nummern, Indizes und Kollisionen geprüft</li>
+          <li>TXT-basierte HM-Vorschläge und Bestätigung</li>
+          <li>Song 59 in isolierter Testkopie integriert</li>
+          <li>lokaler Pflichtest vollständig bestanden</li>
+          <li>GoFullPage-Nachweis geprüft und gesichert</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2 class="warn">○ Bewusst noch offen</h2>
+        <ul>
+          <li>automatische Baseline-Erfassung</li>
+          <li>dynamische Nummern- und Indexermittlung</li>
+          <li>automatische Kollisionsprüfung</li>
+          <li>Generator für Testkopie und Upload-Paket</li>
+          <li>Arbeitsabschnitt 5 – noch nicht begonnen</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Qualitätssicherung</h2>
+        <ul>
+          <li>22 von 22 automatisierte Tests bestanden</li>
+          <li>162 Bestandsdateien inhaltlich geprüft</li>
+          <li>55 eindeutige Testindizes bestätigt</li>
+          <li>vollständiger Praxistest durch Harald</li>
+          <li>Player, Text, Explorer und V1B synchron</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Bekannte Risiken</h2>
+        <ul>
+          <li>Regelbasierte Begriffe erkennen nicht jede Metapher.</li>
+          <li>Negationen können zusätzliche Vorschläge erzeugen.</li>
+          <li>Vorschläge bleiben deshalb stets unverbindlich.</li>
+          <li>Lokaler Betrieb benötigt wegen TXT-fetch einen HTTP-Server.</li>
+          <li>Autoplay kann browserseitig blockiert werden.</li>
+        </ul>
+      </section>
+
+      <section class="card wide">
+        <h2>Schutzbereich bestätigt</h2>
+        <p>Alle Teständerungen liegen ausschließlich unter <code>/Song_Upgrade_V1C/</code>. Produktive Hall-, Player-, Explorer-, Songtext-, Medien- und <code>/v1b/</code>-Dateien blieben unverändert. GitHub und Google Sites wurden nicht aktualisiert. Es wurde kein Commit erstellt.</p>
+      </section>
+
+      <section class="card wide">
+        <h2>Nächste empfohlene Schritte</h2>
+        <ol>
+          <li>Fortsetzung am 01.07.2026 ab 10:00 Uhr</li>
+          <li>Einpflege-Modul robust und vollständig entwickeln</li>
+          <li>Arbeitsabschnitt 5 erst nach ausdrücklicher Freigabe beginnen</li>
+        </ol>
+      </section>
+
+      <section class="card wide">
+        <h2>Lokaler Integrationscheck Song 12 – 02.07.2026, 10:01 Uhr</h2>
+        <p>Die vollständige isolierte Kopie enthält Mutterbestand, MP3, JPG, TXT, HOME, Player, Explorer, Songtext und Katalog. Song 12 ist in fünf HM-Bereichen sichtbar; die Dateien und Katalogpfade sind vorhanden.</p>
+        <p><strong>Status: nicht bestanden.</strong> Explorer und Katalog verwenden Index 54. Ein doppeltes Komma im erzeugten Player erzeugt dort jedoch eine leere Arrayposition und verschiebt Song 12 auf Position 55. Wiedergabe und Songtextübergabe sind dadurch blockiert.</p>
+        <p>Keine Reparatur, keine Produktivänderung, kein GitHub, kein Google Sites und kein Commit. Nächster Schritt erst nach Haralds Freigabe.</p>
+      </section>
+
+      <section class="card wide">
+        <h2>Nachtest Song 12 – bestanden, 02.07.2026 10:09 Uhr</h2>
+        <p>Die doppelten Array-Trennzeichen wurden ausschließlich in der isolierten Kopie korrigiert. Playlist, Coverliste, Explorer und Katalog verwenden nun gemeinsam Index 54.</p>
+        <p><strong>Erfolgreich:</strong> Song 12 ist in HM sichtbar, Player und Cover werden korrekt gesetzt, die MP3 wird lokal geladen und der vollständige TXT-Songtext erscheint rechts.</p>
+        <p><strong>Noch offen:</strong> Ursache im Generator dauerhaft korrigieren, Regressionstest ergänzen, neues Übergabepaket erzeugen und erst nach Haralds gesonderter Freigabe vollständig in den Projektstamm übernehmen.</p>
+      </section>
+
+      <section class="card wide">
+        <h2>Dauerhafte Umsetzung – 02.07.2026, 11:22 Uhr</h2>
+        <p><strong>Grün:</strong> Generator dauerhaft korrigiert, 29 Generatorprüfungen und 22 Kerntests erfolgreich. Reservierung und transparente Freigabevorschau sind aktiv.</p>
+        <p>Song 12 ist auf Index 54 vollständig im lokalen Projektstamm integriert und Nummer 12 dauerhaft reserviert. Die nächste sichere Nummer ist 14. HM 01, 02, 03, 04 und 06 sind bestätigt.</p>
+        <p><code>*</code> bleibt ausschließlich die inhaltliche Kennzeichnung für Songs über Behinderung oder mit Lebenserfahrung. Google Sites wurde nicht verändert.</p>
+      </section>
+    </div>
+
+    <div class="rule">Vorschlagen → Abstimmen → Freigabe → Umsetzen → lokal prüfen → erst danach produktiv</div>
+    <footer>Produktivfreigaben erfolgen ausschließlich durch Harald.</footer>
+  </main>
+</body>
+</html>

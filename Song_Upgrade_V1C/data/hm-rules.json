@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "categories": [
+    {
+      "id": "01",
+      "name": "Gefühl",
+      "topics": [
+        {"label": "Liebe", "terms": ["liebe", "lieben", "geliebt", "verliebt"]},
+        {"label": "Sehnsucht", "terms": ["sehnsucht", "sehnsüchtig"]},
+        {"label": "Abschied", "terms": ["abschied", "verabschieden"]},
+        {"label": "Erinnerungen", "terms": ["erinnerung", "erinnerungen", "erinnern"]},
+        {"label": "Freundschaft", "terms": ["freundschaft", "freunde", "freundin", "freund"]},
+        {"label": "Romantik", "terms": ["romantik", "romantisch"]}
+      ]
+    },
+    {
+      "id": "02",
+      "name": "Nachdenken",
+      "topics": [
+        {"label": "Lebensfragen", "terms": ["lebensfrage", "lebensfragen", "sinn des lebens"]},
+        {"label": "Vergangenheit", "terms": ["vergangenheit", "vergangen"]},
+        {"label": "Alter", "terms": ["alter", "älter", "alt werden"]},
+        {"label": "Tod", "terms": ["tod", "sterben", "gestorben", "verstorben"]},
+        {"label": "Philosophie", "terms": ["philosophie", "philosophisch"]},
+        {"label": "Einsamkeit", "terms": ["einsamkeit", "einsam", "allein"]}
+      ]
+    },
+    {
+      "id": "03",
+      "name": "Hoffnung",
+      "topics": [
+        {"label": "Neubeginn", "terms": ["neubeginn", "neuer anfang"]},
+        {"label": "Mut", "terms": ["mut", "mutig"]},
+        {"label": "Zukunft", "terms": ["zukunft"]},
+        {"label": "Vertrauen", "terms": ["vertrauen", "vertraue"]},
+        {"label": "Heilung", "terms": ["heilung", "heilen", "geheilt"]}
+      ]
+    },
+    {
+      "id": "04",
+      "name": "Menschlichkeit",
+      "topics": [
+        {"label": "Inklusion", "terms": ["inklusion", "inklusiv"]},
+        {"label": "Behinderung", "terms": ["behinderung", "behindert"]},
+        {"label": "Zusammenhalt", "terms": ["zusammenhalt", "gemeinsam"]},
+        {"label": "Familie", "terms": ["familie"]},
+        {"label": "Frieden", "terms": ["frieden", "friedlich"]},
+        {"label": "Mitgefühl", "terms": ["mitgefühl", "mitfühlen"]}
+      ]
+    },
+    {
+      "id": "05",
+      "name": "Alltag & Leben",
+      "topics": [
+        {"label": "Arbeit", "terms": ["arbeit", "arbeiten", "arbeitswelt", "feierabend"]},
+        {"label": "Urlaub", "terms": ["urlaub"]},
+        {"label": "Ruhrgebiet", "terms": ["ruhrgebiet", "ruhrpott"]},
+        {"label": "Reisen", "terms": ["reisen", "reise"]},
+        {"label": "Gesellschaft", "terms": ["gesellschaft", "gesellschaftlich"]},
+        {"label": "Alltag", "terms": ["alltag", "alltäglich"]}
+      ]
+    },
+    {
+      "id": "06",
+      "name": "Entscheidung",
+      "topics": [
+        {"label": "Wendepunkt", "terms": ["wendepunkt"]},
+        {"label": "Trennung", "terms": ["trennung", "getrennt"]},
+        {"label": "Neuanfang", "terms": ["neuanfang", "neu anfangen"]},
+        {"label": "Entscheidung", "terms": ["entscheidung", "entscheiden", "entschieden"]},
+        {"label": "Verantwortung", "terms": ["verantwortung", "verantwortlich"]},
+        {"label": "Schicksal", "terms": ["schicksal"]}
+      ]
+    }
+  ]
+}

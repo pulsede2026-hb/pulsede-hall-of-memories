@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PulseDE Song-Leitzentrale V2">
+  <title>PulseDE Song-Leitzentrale V2</title>
+  <link rel="stylesheet" href="./css/app.css">
+  <link rel="stylesheet" href="./css/hm-transparency.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+  <header class="app-header">
+    <div><p class="eyebrow">PulseDE · lokale Einpflege</p><h1>Song-Leitzentrale V2</h1><p class="subtitle">Ein Ordner. Automatische Prüfung. Sichere Ausgabepakete.</p></div>
+    <span class="mode-badge">Lokal · keine Veröffentlichung</span>
+  </header>
+
+  <main id="main" class="layout">
+    <section class="panel" aria-labelledby="input-title">
+      <div class="section-heading"><div><p class="step">01</p><h2 id="input-title">Songordner auswählen</h2></div><span id="number-chip" class="number-chip">Nummer wird geprüft</span></div>
+      <p class="field-help">Der Ordner enthält genau eine MP3, eine JPG/JPEG und eine TXT. Weitere Dateiauswahlen entfallen.</p>
+      <label class="folder-picker" for="folder-input"><strong>📁 Songordner auswählen</strong><span>MP3, Cover und Songtext werden automatisch erkannt.</span></label>
+      <input id="folder-input" type="file" webkitdirectory multiple accept=".mp3,.jpg,.jpeg,.txt">
+      <p id="folder-name" class="folder-name">Noch kein Ordner gewählt.</p>
+
+      <div class="traffic-card" aria-live="polite">
+        <h3>Pflichtprüfung</h3>
+        <ul id="mandatory-list" class="traffic-list"></ul>
+      </div>
+
+      <label for="song-title">Automatisch erkannter Songtitel</label>
+      <input id="song-title" type="text" autocomplete="off" placeholder="Wird aus TXT oder Dateinamen erkannt">
+      <p id="title-source" class="field-help">Titelquelle: noch keine Datei</p>
+
+      <fieldset>
+        <legend>HM-Vorschläge aus dem Songtext</legend>
+        <div id="hm-suggestion-summary" class="suggestion-summary">Noch kein Songtext analysiert.</div>
+        <div id="hm-options" class="hm-grid"></div>
+        <button id="confirm-hm" class="confirm-button" type="button">HM-Vorschläge bestätigen</button>
+        <p id="hm-confirmation" class="confirmation-state">Noch nicht bestätigt.</p>
+      </fieldset>
+
+      <label for="featured">Inhaltliche Kennzeichnung *</label>
+      <select id="featured"><option value="">Bitte bestätigen</option><option value="yes">Ja</option><option value="no">Nein</option></select>
+      <p class="field-help"><strong>*</strong> kennzeichnet ausschließlich Songs über Behinderung oder Songs mit Lebenserfahrung. Das Zeichen gehört nicht zur HM-, Speicher- oder Freigabelogik.</p>
+
+      <div class="actions"><button id="generate-button" class="primary" type="button" disabled>Ausgabepakete erzeugen</button><button id="reset-button" class="secondary" type="button">Zurücksetzen</button></div>
+    </section>
+
+    <section class="panel result-panel" aria-labelledby="result-title">
+      <div class="section-heading"><div><p class="step">02</p><h2 id="result-title">Arbeitsstand</h2></div><span id="status-badge" class="status-badge neutral">Wartet auf Ordner</span></div>
+      <p id="result-intro" class="result-intro">Wähle links einen Songordner. Die Leitzentrale übernimmt danach die Vorbereitung.</p>
+      <div id="detected-block" class="result-block" hidden><h3>Automatisch erkannt</h3><dl><div><dt>MP3</dt><dd id="detected-mp3"></dd></div><div><dt>JPG</dt><dd id="detected-jpg"></dd></div><div><dt>TXT</dt><dd id="detected-txt"></dd></div><div><dt>HM</dt><dd id="detected-hm"></dd></div></dl></div>
+      <div id="errors-block" class="message-block error" hidden><h3>Stopp</h3><ul id="errors-list"></ul></div>
+      <div id="success-block" class="success-block" hidden><h3>✅ Generatorlauf abgeschlossen</h3><p id="success-summary"></p><div class="result-links"><a id="test-link" target="_blank" rel="noopener">Testkopie öffnen</a><a id="v1b-link" target="_blank" rel="noopener">V1B-Katalog öffnen</a></div><code id="output-path"></code>
+        <section class="approval-preview" aria-labelledby="approval-title"><h3 id="approval-title">Freigabevorschau</h3><dl><div><dt>Song</dt><dd id="approval-song">–</dd></div><div><dt>Vorgesehene HM-Einordnung</dt><dd id="approval-hm">–</dd></div></dl><ul class="approval-status"><li id="status-recognized">Erkannt ⬜</li><li id="status-prepared">Vorbereitet ⬜</li><li id="status-local">Lokal getestet ⬜</li><li id="status-hm">HM bestätigt ⬜</li><li id="status-reserved">Reserviert ⬜</li><li id="status-stem-approved">Stammübernahme freigegeben ⬜</li><li id="status-stem-integrated">Stamm übernommen ⬜</li><li id="status-github-approved">GitHub freigegeben ⬜</li><li id="status-github-updated">GitHub aktualisiert ⬜</li></ul><div class="approval-actions"><button id="confirm-local-test" type="button">Lokaltest als bestanden bestätigen</button><button id="reserve-number" type="button" disabled>Songnummer reservieren</button><button id="approve-stem" type="button" disabled>Stammübernahme freigeben</button><button id="approve-github" type="button" disabled>GitHub freigeben</button></div><p id="approval-message" class="field-help">Freigaben bleiben voneinander getrennt.</p></section>
+      </div>
+      <aside class="scope-note"><strong>Sicherheitsregel:</strong> Es entstehen ausschließlich Test-, GitHub- und Upload-Pakete unter <code>runs/</code>. Produktivdateien, GitHub und Google Sites werden nicht verändert.</aside>
+    </section>
+  </main>
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>

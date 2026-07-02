@@ -1,0 +1,11 @@
+.hm-reason,
+.hm-item-status {
+  flex-basis: 100%;
+  padding-left: 1.4rem;
+  font-size: .74rem;
+  line-height: 1.45;
+}
+
+.hm-reason { color: var(--muted); }
+.hm-item-status { color: var(--red); }
+.hm-item-status.confirmed { color: var(--green); }

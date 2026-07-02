@@ -1,0 +1,944 @@
+{
+  "schemaVersion": 1,
+  "catalogVersion": "V1B",
+  "title": "PulseDE Hall of Memories",
+  "basePath": "../",
+  "categories": [
+    {
+      "id": "gefuehl",
+      "number": "01",
+      "title": "Gefühl",
+      "icon": "❤️",
+      "cover": "HM_01_Gefuehl.jpg",
+      "songIds": [
+        "song-01",
+        "song-02",
+        "song-04",
+        "song-05",
+        "song-06",
+        "song-09",
+        "song-10",
+        "song-12",
+        "song-15",
+        "song-22",
+        "song-23",
+        "song-25",
+        "song-26",
+        "song-28",
+        "song-29",
+        "song-30",
+        "song-31",
+        "song-32",
+        "song-33",
+        "song-35",
+        "song-37",
+        "song-38",
+        "song-40",
+        "song-44",
+        "song-45",
+        "song-47",
+        "song-48",
+        "song-50",
+        "song-51",
+        "song-55"
+      ]
+    },
+    {
+      "id": "nachdenken",
+      "number": "02",
+      "title": "Nachdenken",
+      "icon": "🌙",
+      "cover": "HM_02_Nachdenken.jpg",
+      "songIds": [
+        "song-01",
+        "song-02",
+        "song-03",
+        "song-06",
+        "song-08",
+        "song-12",
+        "song-13",
+        "song-14",
+        "song-16",
+        "song-21",
+        "song-22",
+        "song-24",
+        "song-25",
+        "song-26",
+        "song-27",
+        "song-28",
+        "song-29",
+        "song-31",
+        "song-32",
+        "song-35",
+        "song-36",
+        "song-37",
+        "song-38",
+        "song-41",
+        "song-43",
+        "song-45",
+        "song-46",
+        "song-48",
+        "song-49",
+        "song-55"
+      ]
+    },
+    {
+      "id": "hoffnung",
+      "number": "03",
+      "title": "Hoffnung",
+      "icon": "🍀",
+      "cover": "HM_03_Hoffnung.jpg",
+      "songIds": [
+        "song-01",
+        "song-02",
+        "song-03",
+        "song-04",
+        "song-05",
+        "song-07",
+        "song-08",
+        "song-09",
+        "song-10",
+        "song-11",
+        "song-12",
+        "song-13",
+        "song-14",
+        "song-15",
+        "song-17",
+        "song-18",
+        "song-19",
+        "song-20",
+        "song-21",
+        "song-22",
+        "song-23",
+        "song-26",
+        "song-27",
+        "song-28",
+        "song-29",
+        "song-30",
+        "song-31",
+        "song-32",
+        "song-33",
+        "song-34",
+        "song-35",
+        "song-37",
+        "song-38",
+        "song-39",
+        "song-40",
+        "song-41",
+        "song-42",
+        "song-44",
+        "song-45",
+        "song-46",
+        "song-47",
+        "song-48",
+        "song-49",
+        "song-50",
+        "song-51",
+        "song-52",
+        "song-53",
+        "song-54",
+        "song-55"
+      ]
+    },
+    {
+      "id": "menschlichkeit",
+      "number": "04",
+      "title": "Menschlichkeit",
+      "icon": "🤝",
+      "cover": "HM_04_Menschlichkeit.jpg",
+      "songIds": [
+        "song-02",
+        "song-07",
+        "song-08",
+        "song-09",
+        "song-10",
+        "song-11",
+        "song-12",
+        "song-13",
+        "song-14",
+        "song-15",
+        "song-16",
+        "song-17",
+        "song-18",
+        "song-19",
+        "song-20",
+        "song-23",
+        "song-24",
+        "song-25",
+        "song-27",
+        "song-28",
+        "song-29",
+        "song-32",
+        "song-36",
+        "song-37",
+        "song-39",
+        "song-40",
+        "song-42",
+        "song-43",
+        "song-49",
+        "song-50",
+        "song-52",
+        "song-53",
+        "song-54",
+        "song-55"
+      ]
+    },
+    {
+      "id": "alltag-leben",
+      "number": "05",
+      "title": "Alltag & Leben",
+      "icon": "⚙️",
+      "cover": "HM_05_Alltag_Leben.jpg",
+      "songIds": [
+        "song-03",
+        "song-07",
+        "song-08",
+        "song-11",
+        "song-13",
+        "song-14",
+        "song-15",
+        "song-16",
+        "song-17",
+        "song-18",
+        "song-19",
+        "song-20",
+        "song-21",
+        "song-22",
+        "song-23",
+        "song-24",
+        "song-25",
+        "song-26",
+        "song-27",
+        "song-28",
+        "song-29",
+        "song-31",
+        "song-33",
+        "song-34",
+        "song-36",
+        "song-38",
+        "song-41",
+        "song-43",
+        "song-46",
+        "song-50",
+        "song-51",
+        "song-52",
+        "song-53",
+        "song-54"
+      ]
+    },
+    {
+      "id": "entscheidung",
+      "number": "06",
+      "title": "Entscheidung",
+      "icon": "⚖️",
+      "cover": "HM_06_Entscheidung.jpg",
+      "songIds": [
+        "song-04",
+        "song-05",
+        "song-06",
+        "song-07",
+        "song-08",
+        "song-09",
+        "song-13",
+        "song-14",
+        "song-15",
+        "song-16",
+        "song-17",
+        "song-18",
+        "song-19",
+        "song-20",
+        "song-21",
+        "song-24",
+        "song-27",
+        "song-28",
+        "song-29",
+        "song-30",
+        "song-32",
+        "song-33",
+        "song-34",
+        "song-35",
+        "song-36",
+        "song-37",
+        "song-39",
+        "song-40",
+        "song-41",
+        "song-42",
+        "song-43",
+        "song-44",
+        "song-45",
+        "song-46",
+        "song-47",
+        "song-48",
+        "song-49",
+        "song-50",
+        "song-51",
+        "song-52",
+        "song-53",
+        "song-54",
+        "song-55"
+      ]
+    }
+  ],
+  "songs": [
+    {
+      "id": "song-01",
+      "playlistIndex": 0,
+      "number": "01",
+      "title": "Nordlichter",
+      "featured": false,
+      "files": {
+        "audio": "01_Nordlichter.mp3",
+        "cover": "01_Nordlichter.jpg",
+        "lyrics": "01_Nordlichter.txt"
+      }
+    },
+    {
+      "id": "song-02",
+      "playlistIndex": 1,
+      "number": "02",
+      "title": "Straßenhunde",
+      "featured": false,
+      "files": {
+        "audio": "02_Straßenhunde.mp3",
+        "cover": "02_Straßenhunde.jpg",
+        "lyrics": "02_Straßenhunde.txt"
+      }
+    },
+    {
+      "id": "song-03",
+      "playlistIndex": 2,
+      "number": "03",
+      "title": "Auf der Straße zu Hause",
+      "featured": false,
+      "files": {
+        "audio": "03_Auf der Straße zu Hause.mp3",
+        "cover": "03_Auf der Straße zu Hause.jpg",
+        "lyrics": "03_Auf der Straße zu Hause.txt"
+      }
+    },
+    {
+      "id": "song-04",
+      "playlistIndex": 3,
+      "number": "04",
+      "title": "Mein Weg zurück zu dir",
+      "featured": false,
+      "files": {
+        "audio": "04_Mein Weg zurück zu dir.mp3",
+        "cover": "04_Mein Weg zurück zu dir.jpg",
+        "lyrics": "04_Mein Weg zurück zu dir.txt"
+      }
+    },
+    {
+      "id": "song-05",
+      "playlistIndex": 4,
+      "number": "05",
+      "title": "Bleib bei mir",
+      "featured": false,
+      "files": {
+        "audio": "05_Bleib bei mir.mp3",
+        "cover": "05_Bleib bei mir.jpg",
+        "lyrics": "05_Bleib bei mir.txt"
+      }
+    },
+    {
+      "id": "song-06",
+      "playlistIndex": 5,
+      "number": "06",
+      "title": "Abschied am Telefon",
+      "featured": false,
+      "files": {
+        "audio": "06_Abschied am Telefon.mp3",
+        "cover": "06_Abschied am Telefon.jpg",
+        "lyrics": "06_Abschied am Telefon.txt"
+      }
+    },
+    {
+      "id": "song-07",
+      "playlistIndex": 6,
+      "number": "07",
+      "title": "Mehr als nur ich",
+      "featured": false,
+      "files": {
+        "audio": "07_Mehr als nur ich.mp3",
+        "cover": "07_Mehr als nur ich.jpg",
+        "lyrics": "07_Mehr als nur ich.txt"
+      }
+    },
+    {
+      "id": "song-08",
+      "playlistIndex": 7,
+      "number": "08",
+      "title": "Feierabend",
+      "featured": true,
+      "files": {
+        "audio": "08_Feierabend.mp3",
+        "cover": "08_Feierabend.jpg",
+        "lyrics": "08_Feierabend.txt"
+      }
+    },
+    {
+      "id": "song-09",
+      "playlistIndex": 8,
+      "number": "09",
+      "title": "In Unserer Mitte",
+      "featured": false,
+      "files": {
+        "audio": "09_In Unserer Mitte.mp3",
+        "cover": "09_In Unserer Mitte.jpg",
+        "lyrics": "09_In Unserer Mitte.txt"
+      }
+    },
+    {
+      "id": "song-10",
+      "playlistIndex": 9,
+      "number": "10",
+      "title": "Kinderlied Fritzi und Emma auf Reisen",
+      "featured": false,
+      "files": {
+        "audio": "10_Kinderlied_Fritzi_und_Emma_auf_Reisen.mp3",
+        "cover": "10_Kinderlied_Fritzi_und_Emma_auf_Reisen.jpg",
+        "lyrics": "10_Kinderlied_Fritzi_und_Emma_auf_Reisen.txt"
+      }
+    },
+    {
+      "id": "song-11",
+      "playlistIndex": 10,
+      "number": "11",
+      "title": "Wir hoeren Dich",
+      "featured": true,
+      "files": {
+        "audio": "11_Wir_hoeren_Dich.mp3",
+        "cover": "11_Wir_hoeren_Dich.jpg",
+        "lyrics": "11_Wir_hoeren_Dich.txt"
+      }
+    },
+    {
+      "id": "song-12",
+      "playlistIndex": 11,
+      "number": "13",
+      "title": "Hey Alter du hier auf Malta",
+      "featured": false,
+      "files": {
+        "audio": "13_Hey Alter du hier auf Malta.mp3",
+        "cover": "13_Hey Alter du hier auf Malta.jpg",
+        "lyrics": "13_Hey Alter du hier auf Malta.txt"
+      }
+    },
+    {
+      "id": "song-13",
+      "playlistIndex": 12,
+      "number": "15",
+      "title": "Schatten in mir",
+      "featured": true,
+      "files": {
+        "audio": "15_Schatten in mir.mp3",
+        "cover": "15_Schatten in mir.jpg",
+        "lyrics": "15_Schatten in mir.txt"
+      }
+    },
+    {
+      "id": "song-14",
+      "playlistIndex": 13,
+      "number": "16",
+      "title": "Atemlos im Schatten der Zeit",
+      "featured": true,
+      "files": {
+        "audio": "16_Atemlos im Schatten der Zeit.mp3",
+        "cover": "16_Atemlos im Schatten der Zeit.jpg",
+        "lyrics": "16_Atemlos im Schatten der Zeit.txt"
+      }
+    },
+    {
+      "id": "song-15",
+      "playlistIndex": 14,
+      "number": "17",
+      "title": "Wenn der Spiegel mich nicht kennt",
+      "featured": true,
+      "files": {
+        "audio": "17_Wenn der Spiegel mich nicht kennt.mp3",
+        "cover": "17_Wenn der Spiegel mich nicht kennt.jpg",
+        "lyrics": "17_Wenn der Spiegel mich nicht kennt.txt"
+      }
+    },
+    {
+      "id": "song-16",
+      "playlistIndex": 15,
+      "number": "18",
+      "title": "Armutsrente",
+      "featured": true,
+      "files": {
+        "audio": "18_Armutsrente.mp3",
+        "cover": "18_Armutsrente.jpg",
+        "lyrics": "18_Armutsrente.txt"
+      }
+    },
+    {
+      "id": "song-17",
+      "playlistIndex": 16,
+      "number": "19",
+      "title": "Schritte im Nebel",
+      "featured": true,
+      "files": {
+        "audio": "19_Schritte im Nebel.mp3",
+        "cover": "19_Schritte im Nebel.jpg",
+        "lyrics": "19_Schritte im Nebel.txt"
+      }
+    },
+    {
+      "id": "song-18",
+      "playlistIndex": 17,
+      "number": "21",
+      "title": "Verschwommene Welt",
+      "featured": true,
+      "files": {
+        "audio": "21_Verschwommene Welt.mp3",
+        "cover": "21_Verschwommene Welt.jpg",
+        "lyrics": "21_Verschwommene Welt.txt"
+      }
+    },
+    {
+      "id": "song-19",
+      "playlistIndex": 18,
+      "number": "22",
+      "title": "Unsichtbarer Schmerz",
+      "featured": true,
+      "files": {
+        "audio": "22_Unsichtbarer Schmerz.mp3",
+        "cover": "22_Unsichtbarer Schmerz.jpg",
+        "lyrics": "22_Unsichtbarer Schmerz.txt"
+      }
+    },
+    {
+      "id": "song-20",
+      "playlistIndex": 19,
+      "number": "23",
+      "title": "Probleme",
+      "featured": true,
+      "files": {
+        "audio": "23_Probleme.mp3",
+        "cover": "23_Probleme.jpg",
+        "lyrics": "23_Probleme.txt"
+      }
+    },
+    {
+      "id": "song-21",
+      "playlistIndex": 20,
+      "number": "24",
+      "title": "Krise des mittleren Lebens",
+      "featured": false,
+      "files": {
+        "audio": "24_Krise des mittleren Lebens.mp3",
+        "cover": "24_Krise des mittleren Lebens.jpg",
+        "lyrics": "24_Krise des mittleren Lebens.txt"
+      }
+    },
+    {
+      "id": "song-22",
+      "playlistIndex": 21,
+      "number": "25",
+      "title": "Vergangenheit",
+      "featured": false,
+      "files": {
+        "audio": "25_Vergangenheit.mp3",
+        "cover": "25_Vergangenheit.jpg",
+        "lyrics": "25_Vergangenheit.txt"
+      }
+    },
+    {
+      "id": "song-23",
+      "playlistIndex": 22,
+      "number": "26",
+      "title": "Bleib bei mir",
+      "featured": false,
+      "files": {
+        "audio": "26_Bleib bei mir.mp3",
+        "cover": "26_Bleib bei mir.jpg",
+        "lyrics": "26_Bleib bei mir.txt"
+      }
+    },
+    {
+      "id": "song-24",
+      "playlistIndex": 23,
+      "number": "27",
+      "title": "Der Feind",
+      "featured": true,
+      "files": {
+        "audio": "27_Der Feind.mp3",
+        "cover": "27_Der Feind.jpg",
+        "lyrics": "27_Der Feind.txt"
+      }
+    },
+    {
+      "id": "song-25",
+      "playlistIndex": 24,
+      "number": "28",
+      "title": "Die Jugendzeit",
+      "featured": false,
+      "files": {
+        "audio": "28_Die Jugendzeit.mp3",
+        "cover": "28_Die Jugendzeit.jpg",
+        "lyrics": "28_Die Jugendzeit.txt"
+      }
+    },
+    {
+      "id": "song-26",
+      "playlistIndex": 25,
+      "number": "29",
+      "title": "Lautlos fällt im Herbst das Laub",
+      "featured": false,
+      "files": {
+        "audio": "29_Lautlos fällt im Herbst das Laub.mp3",
+        "cover": "29_Lautlos fällt im Herbst das Laub.jpg",
+        "lyrics": "29_Lautlos fällt im Herbst das Laub.txt"
+      }
+    },
+    {
+      "id": "song-27",
+      "playlistIndex": 26,
+      "number": "30",
+      "title": "Nichts ist für die Ewigkeit Vol 1",
+      "featured": true,
+      "files": {
+        "audio": "30_Nichts_ist_für_die_Ewigkeit_Vol_1.mp3",
+        "cover": "30_Nichts_ist_für_die_Ewigkeit_Vol_1.jpg",
+        "lyrics": "30_Nichts_ist_für_die_Ewigkeit_Vol_1.txt"
+      }
+    },
+    {
+      "id": "song-28",
+      "playlistIndex": 27,
+      "number": "31",
+      "title": "Nichts ist für die Ewigkeit Vol 2",
+      "featured": true,
+      "files": {
+        "audio": "31_Nichts_ist_für_die_Ewigkeit_Vol_2.mp3",
+        "cover": "31_Nichts_ist_für_die_Ewigkeit_Vol_2.jpg",
+        "lyrics": "31_Nichts_ist_für_die_Ewigkeit_Vol_2.txt"
+      }
+    },
+    {
+      "id": "song-29",
+      "playlistIndex": 28,
+      "number": "32",
+      "title": "Nichts ist für die Ewigkeit Vol 3",
+      "featured": true,
+      "files": {
+        "audio": "32_Nichts_ist_für_die_Ewigkeit_Vol_3.mp3",
+        "cover": "32_Nichts_ist_für_die_Ewigkeit_Vol_3.jpg",
+        "lyrics": "32_Nichts_ist_für_die_Ewigkeit_Vol_3.txt"
+      }
+    },
+    {
+      "id": "song-30",
+      "playlistIndex": 29,
+      "number": "33",
+      "title": "Sternenklare Nacht",
+      "featured": false,
+      "files": {
+        "audio": "33_Sternenklare Nacht.mp3",
+        "cover": "33_Sternenklare Nacht.jpg",
+        "lyrics": "33_Sternenklare Nacht.txt"
+      }
+    },
+    {
+      "id": "song-31",
+      "playlistIndex": 30,
+      "number": "34",
+      "title": "Oberhausen Melancholie",
+      "featured": false,
+      "files": {
+        "audio": "34_Oberhausen Melancholie.mp3",
+        "cover": "34_Oberhausen Melancholie.jpg",
+        "lyrics": "34_Oberhausen Melancholie.txt"
+      }
+    },
+    {
+      "id": "song-32",
+      "playlistIndex": 31,
+      "number": "35",
+      "title": "Am Tag, als die Flamme verlosch",
+      "featured": true,
+      "files": {
+        "audio": "35_Am Tag, als die Flamme verlosch.mp3",
+        "cover": "35_Am Tag, als die Flamme verlosch.jpg",
+        "lyrics": "35_Am Tag, als die Flamme verlosch.txt"
+      }
+    },
+    {
+      "id": "song-33",
+      "playlistIndex": 32,
+      "number": "36",
+      "title": "33 Jahre Gran Canaria",
+      "featured": false,
+      "files": {
+        "audio": "36_33 Jahre Gran Canaria.mp3",
+        "cover": "36_33 Jahre Gran Canaria.jpg",
+        "lyrics": "36_33 Jahre Gran Canaria.txt"
+      }
+    },
+    {
+      "id": "song-34",
+      "playlistIndex": 33,
+      "number": "37",
+      "title": "Vorstadt-Kids im Lichtermeer",
+      "featured": false,
+      "files": {
+        "audio": "37_Vorstadt-Kids im Lichtermeer.mp3",
+        "cover": "37_Vorstadt-Kids im Lichtermeer.jpg",
+        "lyrics": "37_Vorstadt-Kids im Lichtermeer.txt"
+      }
+    },
+    {
+      "id": "song-35",
+      "playlistIndex": 34,
+      "number": "38",
+      "title": "Santa Lucia-Insel meiner Träume",
+      "featured": false,
+      "files": {
+        "audio": "38_Santa_Lucia-Insel_meiner_Träume.mp3",
+        "cover": "38_Santa_Lucia-Insel_meiner_Träume.jpg",
+        "lyrics": "38_Santa_Lucia-Insel_meiner_Träume.txt"
+      }
+    },
+    {
+      "id": "song-36",
+      "playlistIndex": 35,
+      "number": "39",
+      "title": "Drück den Knopf und dreh am Rad",
+      "featured": true,
+      "files": {
+        "audio": "39_Drück den Knopf und dreh am Rad.mp3",
+        "cover": "39_Drück den Knopf und dreh am Rad.jpg",
+        "lyrics": "39_Drück den Knopf und dreh am Rad.txt"
+      }
+    },
+    {
+      "id": "song-37",
+      "playlistIndex": 36,
+      "number": "40",
+      "title": "Jenseits der Zeit",
+      "featured": true,
+      "files": {
+        "audio": "40_Jenseits der Zeit.mp3",
+        "cover": "40_Jenseits der Zeit.jpg",
+        "lyrics": "40_Jenseits der Zeit.txt"
+      }
+    },
+    {
+      "id": "song-38",
+      "playlistIndex": 37,
+      "number": "41",
+      "title": "Spiel für mich, Maestro",
+      "featured": false,
+      "files": {
+        "audio": "41_Spiel für mich, Maestro.mp3",
+        "cover": "41_Spiel für mich, Maestro.jpg",
+        "lyrics": "41_Spiel für mich, Maestro.txt"
+      }
+    },
+    {
+      "id": "song-39",
+      "playlistIndex": 38,
+      "number": "42",
+      "title": "Ein leiser Traum",
+      "featured": true,
+      "files": {
+        "audio": "42_Ein leiser Traum.mp3",
+        "cover": "42_Ein leiser Traum.jpg",
+        "lyrics": "42_Ein leiser Traum.txt"
+      }
+    },
+    {
+      "id": "song-40",
+      "playlistIndex": 39,
+      "number": "43",
+      "title": "Wenn du mich rufst",
+      "featured": true,
+      "files": {
+        "audio": "43_Wenn du mich rufst.mp3",
+        "cover": "43_Wenn du mich rufst.jpg",
+        "lyrics": "43_Wenn du mich rufst.txt"
+      }
+    },
+    {
+      "id": "song-41",
+      "playlistIndex": 40,
+      "number": "44",
+      "title": "Endlos weit",
+      "featured": false,
+      "files": {
+        "audio": "44_Endlos weit.mp3",
+        "cover": "44_Endlos weit.jpg",
+        "lyrics": "44_Endlos weit.txt"
+      }
+    },
+    {
+      "id": "song-42",
+      "playlistIndex": 41,
+      "number": "45",
+      "title": "100 Schmetterlinge",
+      "featured": false,
+      "files": {
+        "audio": "45_100 Schmetterlinge.mp3",
+        "cover": "45_100 Schmetterlinge.jpg",
+        "lyrics": "45_100 Schmetterlinge.txt"
+      }
+    },
+    {
+      "id": "song-43",
+      "playlistIndex": 42,
+      "number": "46",
+      "title": "Wirtschaft und Arbeitswelt",
+      "featured": false,
+      "files": {
+        "audio": "46_Wirtschaft und Arbeitswelt.mp3",
+        "cover": "46_Wirtschaft und Arbeitswelt.jpg",
+        "lyrics": "46_Wirtschaft und Arbeitswelt.txt"
+      }
+    },
+    {
+      "id": "song-44",
+      "playlistIndex": 43,
+      "number": "47",
+      "title": "Irgendwie irgendwann",
+      "featured": false,
+      "files": {
+        "audio": "47_Irgendwie irgendwann.mp3",
+        "cover": "47_Irgendwie irgendwann.jpg",
+        "lyrics": "47_Irgendwie irgendwann.txt"
+      }
+    },
+    {
+      "id": "song-45",
+      "playlistIndex": 44,
+      "number": "48",
+      "title": "Fühlst du dich allein",
+      "featured": false,
+      "files": {
+        "audio": "48_Fühlst du dich allein.mp3",
+        "cover": "48_Fühlst du dich allein.jpg",
+        "lyrics": "48_Fühlst du dich allein.txt"
+      }
+    },
+    {
+      "id": "song-46",
+      "playlistIndex": 45,
+      "number": "49",
+      "title": "19 Grad im Januar (Camper-Blues)Spanien ist so nah",
+      "featured": false,
+      "files": {
+        "audio": "49_19 Grad im Januar (Camper-Blues)Spanien ist so nah.mp3",
+        "cover": "49_19 Grad im Januar (Camper-Blues)Spanien ist so nah.jpg",
+        "lyrics": "49_19 Grad im Januar (Camper-Blues)Spanien ist so nah.txt"
+      }
+    },
+    {
+      "id": "song-47",
+      "playlistIndex": 46,
+      "number": "50",
+      "title": "Where the Ocean Meets Your Eyes",
+      "featured": false,
+      "files": {
+        "audio": "50_Where the Ocean Meets Your Eyes.mp3",
+        "cover": "50_Where the Ocean Meets Your Eyes.jpg",
+        "lyrics": "50_Where the Ocean Meets Your Eyes.txt"
+      }
+    },
+    {
+      "id": "song-48",
+      "playlistIndex": 47,
+      "number": "51",
+      "title": "Verborgene Flammen",
+      "featured": false,
+      "files": {
+        "audio": "51_Verborgene Flammen.mp3",
+        "cover": "51_Verborgene Flammen.jpg",
+        "lyrics": "51_Verborgene Flammen.txt"
+      }
+    },
+    {
+      "id": "song-49",
+      "playlistIndex": 48,
+      "number": "52",
+      "title": "Warum Kriege",
+      "featured": true,
+      "files": {
+        "audio": "52_Warum Kriege.mp3",
+        "cover": "52_Warum Kriege.jpg",
+        "lyrics": "52_Warum Kriege.txt"
+      }
+    },
+    {
+      "id": "song-50",
+      "playlistIndex": 49,
+      "number": "53",
+      "title": "Lichter im Baum",
+      "featured": true,
+      "files": {
+        "audio": "53_Lichter im Baum.mp3",
+        "cover": "53_Lichter im Baum.jpg",
+        "lyrics": "53_Lichter im Baum.txt"
+      }
+    },
+    {
+      "id": "song-51",
+      "playlistIndex": 50,
+      "number": "55",
+      "title": "Sen ve Ben",
+      "featured": false,
+      "files": {
+        "audio": "55_Sen ve Ben.mp3",
+        "cover": "55_Sen ve Ben.jpg",
+        "lyrics": "55_Sen ve Ben.txt"
+      }
+    },
+    {
+      "id": "song-52",
+      "playlistIndex": 51,
+      "number": "56",
+      "title": "Ein neues Leben Vol 1",
+      "featured": true,
+      "files": {
+        "audio": "56_Ein neues Leben_Vol_1.mp3",
+        "cover": "56_Ein neues Leben_Vol_1.jpg",
+        "lyrics": "56_Ein neues Leben_Vol_1.txt"
+      }
+    },
+    {
+      "id": "song-53",
+      "playlistIndex": 52,
+      "number": "57",
+      "title": "Licht nach mir Vol 2",
+      "featured": true,
+      "files": {
+        "audio": "57_Licht nach mir_Vol_2.mp3",
+        "cover": "57_Licht nach mir_Vol_2.jpg",
+        "lyrics": "57_Licht nach mir_Vol_2.txt"
+      }
+    },
+    {
+      "id": "song-54",
+      "playlistIndex": 53,
+      "number": "58",
+      "title": "Licht der Ewigkeit Vol 3",
+      "featured": true,
+      "files": {
+        "audio": "58_Licht der Ewigkeit_Vol_3.mp3",
+        "cover": "58_Licht der Ewigkeit_Vol_3.jpg",
+        "lyrics": "58_Licht der Ewigkeit_Vol_3.txt"
+      }
+    },
+    {
+      "id": "song-55",
+      "playlistIndex": 54,
+      "number": "12",
+      "title": "Das WIR gewinnt",
+      "featured": true,
+      "files": {
+        "audio": "12_Das WIR gewinnt.mp3",
+        "cover": "12_Das WIR gewinnt.jpg",
+        "lyrics": "12_Das WIR gewinnt.txt"
+      }
+    }
+  ]
+}
