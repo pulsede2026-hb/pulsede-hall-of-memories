@@ -181,3 +181,7 @@ Die vorhandene Freigabevorschau wurde ohne Architekturumbau um eine dauerhaft si
 Prüfstand: 29 Generatorprüfungen und 22 von 22 Kerntests erfolgreich. Die vorhandenen Nutzeränderungen an Songtext 12 und der Reservierung von Song 14 wurden bewahrt.
 
 Die Stabilisierung wurde am 03.07.2026 mit Commit `e35721c` nach `origin/main` übertragen. Google Sites selbst wurde nicht bearbeitet; die abschließende Außenprüfung erfolgt durch Harald mit Strg+F5.
+
+### Wiederaufnahme reservierter Runs
+
+Seit 03.07.2026 wird beim Neustart nicht nur der offene Schritt, sondern auch der vollständige bestehende Freigabebereich des reservierten Runs wieder sichtbar. Song, HM-Zuordnung, Testlinks, Status und alle Freigabe-Buttons bleiben damit nachvollziehbar. Bereits erledigte Buttons sind deaktiviert; ein eindeutiger Hinweis beschreibt den nächsten ausführbaren Schritt. Für Song 14 zeigt die Leitzentrale korrekt: HM 02, Stammfreigabe erteilt, als Nächstes vollständige Stammübernahme durch Codex.

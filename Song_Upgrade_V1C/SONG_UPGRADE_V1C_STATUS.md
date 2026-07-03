@@ -84,6 +84,17 @@ GitHub-Freigabe wurde durch Harald erteilt. Commit und Push folgen erst nach abs
 
 Stabilisierungscommit `e35721c` wurde erfolgreich nach `origin/main` übertragen. Offen bleibt ausschließlich Haralds abschließende Kontrolle des HOME-Players mit Strg+F5. Google Sites selbst wurde nicht bearbeitet.
 
+## Freigabebereich für reservierte Runs – 03.07.2026, 10:52 Uhr
+
+- reservierter Run wird nach Neustart vollständig wiederhergestellt
+- Freigabebereich bleibt sichtbar
+- Songnummer, Titel, HM, Testlinks, Status und vier Freigabe-Buttons werden angezeigt
+- erledigte Freigaben sind korrekt deaktiviert
+- nächster Schritt wird als Klartext angezeigt
+- Browsernachweis Song 14: `14 Moonlight Angel`, HM 02, Stammfreigabe vorhanden, nächste Aktion Stammübernahme durch Codex
+- 29 Generatorprüfungen erfolgreich
+- keine Architekturänderung, kein neues Modul, Google Sites unverändert
+
 ## 1. Stand
 
 30.06.2026, Europe/Berlin

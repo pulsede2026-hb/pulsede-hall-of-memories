@@ -50,6 +50,19 @@ function renderWorkflow() {
   renderGuide();
 }
 async function workflowRequest(url,payload){const response=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});const result=await response.json();if(!response.ok)throw new Error(result.error||"Freigabeschritt fehlgeschlagen.");return result;}
+function showRestoredRun(pending) {
+  el["success-block"].hidden=false;
+  el["success-summary"].textContent=`Song ${pending.number} ${pending.title} wurde als reservierter Lauf wieder aufgenommen.`;
+  el["output-path"].textContent=`Song_Upgrade_V1C/runs/${pending.runName}`;
+  el["test-link"].href=`./runs/${pending.runName}/testkopie/PulseDE_Home_A1_TESTRAHMEN_V4.html`;
+  el["v1b-link"].href=`./runs/${pending.runName}/testkopie/v1b/index.html`;
+  if(pending.stemApproved&&!pending.stemIntegrated)el["approval-message"].textContent="Stammübernahme ist bereits freigegeben. Nächster Schritt: vollständige Stammübernahme durch Codex.";
+  else if(pending.reserved&&!pending.stemApproved)el["approval-message"].textContent="Nummer ist reserviert. Nächster Schritt: Stammübernahme freigeben.";
+  else if(pending.stemIntegrated&&!pending.githubApproved)el["approval-message"].textContent="Stamm ist übernommen. Nächster Schritt: GitHub-Übernahme freigeben.";
+  else if(pending.githubApproved&&!pending.githubUpdated)el["approval-message"].textContent="GitHub ist freigegeben. Nächster Schritt: geprüften Stand übertragen.";
+  else el["approval-message"].textContent="Der reservierte Arbeitsstand wurde vollständig wiederhergestellt.";
+  setStatus("neutral","Offener Run",`Song ${pending.number} ${pending.title}: Der nächste Arbeitsschritt ist sichtbar.`);
+}
 function exactFiles(chosen) {
   const result = { mp3:[], jpg:[], txt:[], other:[] };
   for (const file of chosen) { const ext=(file.name.match(/\.[^.]+$/)?.[0]||"").toLowerCase(); if(ext===".mp3")result.mp3.push(file); else if([".jpg",".jpeg"].includes(ext))result.jpg.push(file); else if(ext===".txt")result.txt.push(file); else result.other.push(file); }
@@ -99,7 +112,7 @@ async function generate() {
   } catch(error) { setErrors([error.message]); setStatus("incomplete","🔴 Gestoppt","Es wurde nichts veröffentlicht. Prüfe die Meldung."); }
   finally { busy=false; renderMandatory(exactFiles(Object.values(files).filter(Boolean))); }
 }
-async function loadBaseline(){ try{const response=await fetch("/api/status",{cache:"no-store"});if(!response.ok)throw new Error();baseline=await response.json();el["number-chip"].textContent=`Nächste sichere Nummer ${baseline.nextNumber}`;if(!currentRun&&!files.mp3&&!files.jpg&&!files.txt){const pending=[...(baseline.reservations||[])].reverse().find(item=>!item.githubUpdated);if(pending){currentRun={runName:pending.runName,number:pending.number,title:pending.title,hm:[...(pending.hms||[])],featured:Boolean(pending.featured)};workflow={...pending};}}}catch{baseline=null;el["number-chip"].textContent="Generator nicht erreichbar";}renderWorkflow();renderMandatory(exactFiles(Object.values(files).filter(Boolean)));}
+async function loadBaseline(){ try{const response=await fetch("/api/status",{cache:"no-store"});if(!response.ok)throw new Error();baseline=await response.json();el["number-chip"].textContent=`Nächste sichere Nummer ${baseline.nextNumber}`;if(!currentRun&&!files.mp3&&!files.jpg&&!files.txt){const pending=[...(baseline.reservations||[])].reverse().find(item=>!item.githubUpdated);if(pending){currentRun={runName:pending.runName,number:pending.number,title:pending.title,hm:[...(pending.hms||[])],featured:Boolean(pending.featured)};workflow={...pending};showRestoredRun(pending);}}}catch{baseline=null;el["number-chip"].textContent="Generator nicht erreichbar";}renderWorkflow();renderMandatory(exactFiles(Object.values(files).filter(Boolean)));}
 function reset(){files={mp3:null,jpg:null,txt:null};hmConfirmed=false;currentRun=null;workflow=null;el["folder-input"].value="";el["song-title"].value="";el.featured.value="";el["folder-name"].textContent="Noch kein Ordner gewählt.";el["detected-block"].hidden=true;el["success-block"].hidden=true;setErrors([]);renderSuggestions({textAvailable:false,suggestions:[]});renderWorkflow();setStatus("neutral","Wartet auf Ordner","Wähle links einen Songordner. Die Leitzentrale übernimmt danach die Vorbereitung.");renderMandatory();}
 
 el["folder-input"].addEventListener("change",()=>analyzeFolder([...el["folder-input"].files]));
