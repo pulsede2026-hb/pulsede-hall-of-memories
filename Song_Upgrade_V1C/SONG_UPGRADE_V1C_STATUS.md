@@ -82,7 +82,7 @@ GitHub-Freigabe wurde durch Harald erteilt. Commit und Push folgen erst nach abs
 
 ### Nächster Schritt
 
-Geprüfte Änderungen nach GitHub übertragen und anschließend HOME-Player durch Harald mit Strg+F5 kontrollieren.
+Stabilisierungscommit `e35721c` wurde erfolgreich nach `origin/main` übertragen. Offen bleibt ausschließlich Haralds abschließende Kontrolle des HOME-Players mit Strg+F5. Google Sites selbst wurde nicht bearbeitet.
 
 ## 1. Stand
 

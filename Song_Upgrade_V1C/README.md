@@ -179,3 +179,5 @@ Die Ursache des falschen ersten Titels bei „Gesamten Ordner abspielen“ lag a
 Die vorhandene Freigabevorschau wurde ohne Architekturumbau um eine dauerhaft sichtbare Schritt-für-Schritt-Führung ergänzt. Sie zeigt erledigte Schritte, den aktuell offenen Schritt, den Folgeschritt und den vollständigen Abschluss. Beim Start wird eine noch nicht abgeschlossene Reservierung wieder aufgenommen. Im aktuellen Stand erkennt sie Song 14 korrekt als offenen Vorgang: Stammübernahme freigegeben, Stammübernahme noch auszuführen.
 
 Prüfstand: 29 Generatorprüfungen und 22 von 22 Kerntests erfolgreich. Die vorhandenen Nutzeränderungen an Songtext 12 und der Reservierung von Song 14 wurden bewahrt.
+
+Die Stabilisierung wurde am 03.07.2026 mit Commit `e35721c` nach `origin/main` übertragen. Google Sites selbst wurde nicht bearbeitet; die abschließende Außenprüfung erfolgt durch Harald mit Strg+F5.
