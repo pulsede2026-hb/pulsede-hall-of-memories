@@ -95,6 +95,18 @@ Stabilisierungscommit `e35721c` wurde erfolgreich nach `origin/main` übertragen
 - 29 Generatorprüfungen erfolgreich
 - keine Architekturänderung, kein neues Modul, Google Sites unverändert
 
+## PDF-Nachprüfung und Aktionsknopf – 03.07.2026, 11:20 Uhr
+
+- vier PDF-Nachweise visuell geprüft
+- Befund bestätigt: Freigaben sichtbar, aber tatsächlicher Stammübernahme-Knopf fehlte
+- `Stammübernahme durchführen` ergänzt und für Song 14 aktiv
+- Stammübernahme prüft vollständiges Sieben-Dateien-Paket und Medienkollisionen
+- GitHub-Freigabe bleibt bis erfolgreicher Stammübernahme deaktiviert
+- bestehende Song-14-Testkopie und ihr Übergabepaket lokal auf Indexsortierung aktualisiert
+- HM-02-Praxistest: sichtbare Reihenfolge `12, 14, 01 …`, tatsächlicher Start korrekt mit `01 Nordlichter`
+- Song 14 noch nicht in den Projektstamm übernommen
+- 29 Generatorprüfungen erfolgreich; Google Sites unverändert
+
 ## 1. Stand
 
 30.06.2026, Europe/Berlin

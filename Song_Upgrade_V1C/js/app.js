@@ -46,6 +46,7 @@ function renderWorkflow() {
   el["confirm-local-test"].disabled=!currentRun||Boolean(state.localTested);
   el["reserve-number"].disabled=!currentRun||!state.localTested||Boolean(state.reserved);
   el["approve-stem"].disabled=!state.reserved||Boolean(state.stemApproved);
+  el["integrate-stem"].disabled=!state.stemApproved||Boolean(state.stemIntegrated);
   el["approve-github"].disabled=!state.stemIntegrated||Boolean(state.githubApproved);
   renderGuide();
 }
@@ -56,7 +57,7 @@ function showRestoredRun(pending) {
   el["output-path"].textContent=`Song_Upgrade_V1C/runs/${pending.runName}`;
   el["test-link"].href=`./runs/${pending.runName}/testkopie/PulseDE_Home_A1_TESTRAHMEN_V4.html`;
   el["v1b-link"].href=`./runs/${pending.runName}/testkopie/v1b/index.html`;
-  if(pending.stemApproved&&!pending.stemIntegrated)el["approval-message"].textContent="Stammübernahme ist bereits freigegeben. Nächster Schritt: vollständige Stammübernahme durch Codex.";
+  if(pending.stemApproved&&!pending.stemIntegrated)el["approval-message"].textContent="Stammübernahme ist bereits freigegeben. Nächster Schritt: Button ‚Stammübernahme durchführen‘ anklicken.";
   else if(pending.reserved&&!pending.stemApproved)el["approval-message"].textContent="Nummer ist reserviert. Nächster Schritt: Stammübernahme freigeben.";
   else if(pending.stemIntegrated&&!pending.githubApproved)el["approval-message"].textContent="Stamm ist übernommen. Nächster Schritt: GitHub-Übernahme freigeben.";
   else if(pending.githubApproved&&!pending.githubUpdated)el["approval-message"].textContent="GitHub ist freigegeben. Nächster Schritt: geprüften Stand übertragen.";
@@ -123,6 +124,7 @@ el.featured.addEventListener("change",()=>renderMandatory(exactFiles(Object.valu
 el["confirm-local-test"].addEventListener("click",()=>{if(!workflow)return;workflow.localTested=true;el["approval-message"].textContent="Lokaltest bestätigt. Die Nummer kann jetzt dauerhaft reserviert werden.";renderWorkflow();});
 el["reserve-number"].addEventListener("click",async()=>{try{const result=await workflowRequest("/api/reserve",{runName:currentRun.runName,localTested:workflow.localTested});workflow=result.reservation;el["approval-message"].textContent=`Nummer ${workflow.number} ist reserviert. Nächste sichere Nummer: ${result.nextNumber}.`;renderWorkflow();await loadBaseline();}catch(error){setErrors([error.message]);}});
 el["approve-stem"].addEventListener("click",async()=>{try{const result=await workflowRequest("/api/workflow",{number:currentRun.number,action:"approve-stem"});workflow=result.reservation;el["approval-message"].textContent="Stammübernahme freigegeben. Die tatsächliche gemeinsame Übernahme bleibt ein eigener Schritt.";renderWorkflow();}catch(error){setErrors([error.message]);}});
+el["integrate-stem"].addEventListener("click",async()=>{try{el["integrate-stem"].disabled=true;el["approval-message"].textContent="Stammübernahme läuft: vollständiges Paket wird gemeinsam geprüft und übernommen.";const result=await workflowRequest("/api/integrate-stem",{number:currentRun.number});workflow=result.reservation;el["approval-message"].textContent=`Song ${workflow.number} wurde vollständig in den lokalen Projektstamm übernommen. Nächster Schritt: GitHub freigeben.`;renderWorkflow();await loadBaseline();}catch(error){setErrors([error.message]);el["approval-message"].textContent="Stammübernahme wurde sicher gestoppt.";renderWorkflow();}});
 el["approve-github"].addEventListener("click",async()=>{try{const result=await workflowRequest("/api/workflow",{number:currentRun.number,action:"approve-github"});workflow=result.reservation;el["approval-message"].textContent="GitHub-Übernahme freigegeben. Ein Push erfolgt weiterhin nur als eigener, protokollierter Schritt.";renderWorkflow();}catch(error){setErrors([error.message]);}});
 
 try { const response=await fetch(CONFIG.hmRulesPath,{cache:"no-store"}); if(!response.ok)throw new Error(); hmRules=await response.json(); } catch { setErrors(["HM-Regeln konnten nicht geladen werden."]); }

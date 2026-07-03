@@ -185,3 +185,7 @@ Die Stabilisierung wurde am 03.07.2026 mit Commit `e35721c` nach `origin/main` �
 ### Wiederaufnahme reservierter Runs
 
 Seit 03.07.2026 wird beim Neustart nicht nur der offene Schritt, sondern auch der vollständige bestehende Freigabebereich des reservierten Runs wieder sichtbar. Song, HM-Zuordnung, Testlinks, Status und alle Freigabe-Buttons bleiben damit nachvollziehbar. Bereits erledigte Buttons sind deaktiviert; ein eindeutiger Hinweis beschreibt den nächsten ausführbaren Schritt. Für Song 14 zeigt die Leitzentrale korrekt: HM 02, Stammfreigabe erteilt, als Nächstes vollständige Stammübernahme durch Codex.
+
+Nach Haralds PDF-Nachweis wurde die Bedienlücke vollständig geschlossen: Zwischen erteilter Stammfreigabe und GitHub-Freigabe existiert jetzt der aktive Knopf `Stammübernahme durchführen`. Er übernimmt nach erneuter Paket- und Kollisionsprüfung gemeinsam MP3, JPG, TXT, Player, Explorer, Songtext und Katalog und setzt erst danach den Status `Stamm übernommen`. Die GitHub-Freigabe bleibt bis dahin gesperrt.
+
+Die bereits vorhandene Song-14-Testkopie und ihr Übergabepaket wurden lokal auf die numerische Playlist-Sortierung aktualisiert. Sichtbare Reihenfolge `12, 14, 01 …` bleibt erlaubt; HM 02 startet nachweislich mit `01 Nordlichter`. Die Stammübernahme von Song 14 wurde bei dieser Prüfung nicht ausgelöst.

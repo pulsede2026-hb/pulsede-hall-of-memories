@@ -54,6 +54,38 @@ async function generate(payload) {
     return JSON.parse(output);
   } finally { fs.rmSync(temp, { recursive: true, force: true }); }
 }
+function sameFile(left, right) {
+  if (!fs.existsSync(left) || !fs.existsSync(right)) return false;
+  const digest = file => crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex");
+  return digest(left) === digest(right);
+}
+async function integrateStem(payload) {
+  const number = Number(payload.number);
+  if (!Number.isSafeInteger(number) || number < 1) throw new Error("Ungültige Songnummer.");
+  const reservationFile = path.join(moduleRoot, "data", "reservations.json");
+  const reservationData = JSON.parse(fs.readFileSync(reservationFile, "utf8"));
+  const reservation = reservationData.reservations.find(item => Number(item.number) === number && item.reserved && !item.released);
+  if (!reservation) throw new Error(`Keine aktive Reservierung für Nummer ${number}.`);
+  if (!reservation.stemApproved) throw new Error("Stammübernahme ist noch nicht freigegeben.");
+  if (reservation.stemIntegrated) return { ok:true, reservation, alreadyIntegrated:true };
+  const runName = String(reservation.runName || "");
+  if (!/^song-\d{2,4}-[a-z0-9-]+$/.test(runName)) throw new Error("Ungültiger Laufname in der Reservierung.");
+  const run = path.join(moduleRoot, "runs", runName);
+  const github = path.join(run, "github-paket");
+  const reportPath = path.join(run, "integrationsbericht.json");
+  if (!fs.existsSync(reportPath)) throw new Error("Integrationsbericht des Runs fehlt.");
+  const report = JSON.parse(fs.readFileSync(reportPath, "utf8"));
+  if (Number(report.song?.number) !== number) throw new Error("Songnummer in Reservierung und Integrationsbericht stimmt nicht überein.");
+  const media = Object.values(report.song.files || {});
+  if (media.length !== 3) throw new Error("MP3-, JPG- oder TXT-Angabe fehlt im Integrationsbericht.");
+  const components = ["PulseDE_HM_PLAYER_LINKS_A1_V4.html", "PulseDE_HM_EXPLORER_TEST_V1.html", "PulseDE_HM_SONGTEXT_RECHTS_A1_V4.html"];
+  const transfers = [...media.map(name => [path.join(github, name), path.join(projectRoot, name), true]), ...components.map(name => [path.join(github, name), path.join(projectRoot, name), false]), [path.join(github, "v1b", "data", "catalog.json"), path.join(projectRoot, "v1b", "data", "catalog.json"), false]];
+  for (const [source] of transfers) if (!fs.existsSync(source) || !fs.statSync(source).isFile()) throw new Error(`Paketdatei fehlt: ${path.basename(source)}`);
+  for (const [source, target, isNewMedia] of transfers) if (isNewMedia && fs.existsSync(target) && !sameFile(source, target)) throw new Error(`Stammdatei existiert bereits mit anderem Inhalt: ${path.basename(target)}`);
+  for (const [source, target] of transfers) { fs.mkdirSync(path.dirname(target), { recursive:true }); fs.copyFileSync(source, target); }
+  const output = await runGenerator(["--workflow-number", String(number), "--workflow-field", "stemIntegrated"]);
+  return JSON.parse(output);
+}
 function staticFile(urlPath, response) {
   let relative = decodeURIComponent(urlPath.slice(1));
   if (relative.endsWith("/")) relative += "index.html";
@@ -86,6 +118,7 @@ const server = http.createServer(async (request, response) => {
       const output = await runGenerator(["--root", projectRoot, "--reserve-run", path.join(moduleRoot, "runs", runName)]);
       return send(response, 200, JSON.parse(output));
     }
+    if (request.method === "POST" && url.pathname === "/api/integrate-stem") return send(response, 200, await integrateStem(await readJson(request)));
     if (request.method === "POST" && url.pathname === "/api/workflow") {
       const payload = await readJson(request); const fields = { "approve-stem":"stemApproved", "approve-github":"githubApproved" };
       const field = fields[payload.action]; if (!field) throw new Error("Unzulässige Freigabeaktion.");
