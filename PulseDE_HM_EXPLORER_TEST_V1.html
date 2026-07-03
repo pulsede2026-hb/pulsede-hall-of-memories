@@ -510,7 +510,10 @@ function closeFolder(){
 function getSelectedIndexes(songListId){
     const songList = document.getElementById(songListId);
     const checkedBoxes = songList.querySelectorAll('input[type="checkbox"][data-song-index]:checked');
-    return Array.from(checkedBoxes).map(box => Number(box.dataset.songIndex));
+    return Array.from(checkedBoxes)
+        .map(box => Number(box.dataset.songIndex))
+        .filter(Number.isInteger)
+        .sort((a, b) => a - b);
 }
 
 function playWholeFolder(songListId){

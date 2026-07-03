@@ -169,3 +169,13 @@ Nach ausdrücklicher Freigabe wurden die beiden Array-Trennzeichen ausschließli
 Reproduzierbare große Laufordner unter `runs/` bleiben lokal und werden nicht nach GitHub übertragen.
 
 GitHub wurde am 02.07.2026 erfolgreich aktualisiert. Hauptcommit: `b604cea744b894ba7882317047910da4d8f3ea82`. Google Sites selbst wurde nicht bearbeitet; der abschließende Hard-Reload-Test erfolgt durch Harald.
+
+## Stabilisierung am 03.07.2026
+
+Die Ursache des falschen ersten Titels bei „Gesamten Ordner abspielen“ lag ausschließlich in der sichtbaren HTML-Reihenfolge: Neue Explorer-Einträge werden oberhalb der Bestandsliste angezeigt und wurden bisher in genau dieser Reihenfolge an den Player übergeben. Eine besondere Neu-, Run- oder Freigabemarkierung war nicht beteiligt.
+
+`getSelectedIndexes()` sortiert die ausgewählten Playlist-Indizes jetzt numerisch aufsteigend, bevor die Warteschlange an den Player gesendet wird. Die optische Position neuer Songs bleibt unverändert. Im isolierten Regressionstest stand der neue Testtitel oben mit Index 55; HM 01 startete trotzdem korrekt mit `01 Nordlichter` und Index 0.
+
+Die vorhandene Freigabevorschau wurde ohne Architekturumbau um eine dauerhaft sichtbare Schritt-für-Schritt-Führung ergänzt. Sie zeigt erledigte Schritte, den aktuell offenen Schritt, den Folgeschritt und den vollständigen Abschluss. Beim Start wird eine noch nicht abgeschlossene Reservierung wieder aufgenommen. Im aktuellen Stand erkennt sie Song 14 korrekt als offenen Vorgang: Stammübernahme freigegeben, Stammübernahme noch auszuführen.
+
+Prüfstand: 29 Generatorprüfungen und 22 von 22 Kerntests erfolgreich. Die vorhandenen Nutzeränderungen an Songtext 12 und der Reservierung von Song 14 wurden bewahrt.

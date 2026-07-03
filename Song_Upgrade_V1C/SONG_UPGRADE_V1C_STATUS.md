@@ -54,6 +54,36 @@ GitHub-Freigabe wurde durch Harald erteilt. Commit und Push folgen erst nach abs
 - Google Sites nicht verändert
 - endgültige Außenprüfung: Harald testet nach Wartezeit mit F5 beziehungsweise Strg+F5
 
+## Stabilisierung 03.07.2026, 10:41 Uhr
+
+### Erledigte Arbeiten
+
+- Startreihenfolge der vollständigen HM-Ordnerwiedergabe untersucht und dauerhaft stabilisiert
+- Ursache bestätigt: DOM-Reihenfolge der Explorer-Einträge, keine Neu-/Run-/Freigabemarkierung
+- ausgewählte Playlist-Indizes werden vor Übergabe an den Player numerisch aufsteigend sortiert
+- optische Hervorhebung und Position neuer Songs bleiben unverändert
+- sichtbare Schritt-für-Schritt-Führung in der bestehenden Song-Leitzentrale ergänzt
+- offene Reservierungen werden beim Start der Leitzentrale wieder aufgenommen
+
+### Teststatus
+
+- isolierter Testtitel optisch oben, Playlist-Index 55
+- HM 01 startet korrekt mit `01 Nordlichter`, Index 0
+- 29 Generatorprüfungen erfolgreich
+- 22 von 22 Kerntests erfolgreich
+- Schrittführung zeigt für Song 14 korrekt: sechs Schritte erledigt, aktuell Stammübernahme, danach GitHub-Freigabe
+
+### Unverändert und geschützt
+
+- keine neue Architektur und kein neues Modul
+- Nutzerkorrektur in `12_Das WIR gewinnt.txt` unverändert bewahrt
+- vorhandene Song-14-Reservierung unverändert bewahrt
+- Google Sites noch nicht verändert
+
+### Nächster Schritt
+
+Geprüfte Änderungen nach GitHub übertragen und anschließend HOME-Player durch Harald mit Strg+F5 kontrollieren.
+
 ## 1. Stand
 
 30.06.2026, Europe/Berlin

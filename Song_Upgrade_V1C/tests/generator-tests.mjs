@@ -53,6 +53,7 @@ const playlistEntries = [...playlistBody.matchAll(/"([^"]+\.mp3)"/g)].map(match 
 assert.equal(playlistEntries.length, baseline.songs + 1);
 assert.equal(playlistEntries[baseline.nextIndex].endsWith(`${prefix}.mp3`), true);
 assert.ok(testExplorer.includes(`> ${String(expectedNumber).padStart(2,"0")} Generator Testlauf`));
+assert.match(testExplorer, /\.sort\(\(a, b\) => a - b\)/);
 const reserve = spawnSync(process.execPath, [generator, ...common, "--reserve-run", out], { encoding:"utf8" });
 assert.equal(reserve.status, 0, reserve.stderr);
 const reservationResult = JSON.parse(reserve.stdout);
