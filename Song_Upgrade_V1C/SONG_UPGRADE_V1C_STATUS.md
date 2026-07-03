@@ -244,3 +244,52 @@ Ziel des nächsten freigegebenen Arbeitsabschnitts ist die vollständige, robust
 ## 10. Gemeinsame Arbeitsregel
 
 **Vorschlagen → Abstimmen → Freigabe → Umsetzen → lokal vollständig prüfen → erst danach produktiv freigeben**
+
+## 11. Kontrollierter Stopp-Punkt – 03.07.2026, 11:43 Uhr
+
+### Aktueller Arbeitsstand
+
+- Freigabelogik und Aktionsknopf für die Stammübernahme sind vorhanden.
+- Song 14 ist vorbereitet und reserviert, aber nicht in den Projektstamm übernommen.
+- Der Arbeitsbaum war vor dieser reinen Dokumentationsaktualisierung sauber.
+- Keine weitere Reparatur und keine neue Funktion wurden begonnen.
+
+### Erledigte Arbeiten
+
+- drei aktuelle PDF-Belege visuell geprüft;
+- offenen Laufzeitstand eindeutig erfasst;
+- kontrollierten Stopp vor weiteren Eingriffen gesetzt.
+
+### Neu erstellte Dateien
+
+- keine Projektdateien.
+
+### Geänderte Dateien
+
+- `README.md` – Stopp-Punkt und offene Laufzeitfehler dokumentiert;
+- `SONG_UPGRADE_V1C_STATUS.md` – technischer Arbeitsstand aktualisiert;
+- `SONG_UPGRADE_V1C_STATUS_VISU.html` – visuelle Projektübersicht aktualisiert.
+
+### Ausdrücklich unverändert
+
+- HOME, Player, Explorer, Songtext, Hall und Katalog;
+- sämtliche MP3-, JPG- und TXT-Dateien;
+- Projektstamm und Song-14-Integrationsstatus;
+- Google Sites.
+
+### Bekannte Probleme
+
+1. Gemeldete HM-Ordnerfolge: `10 → 13 → 12 → anschließend normale Reihenfolge`. Ursache noch nicht nachgewiesen.
+2. HTML-Audio-Schieberegler erlaubt kein Vor- oder Zurückspringen. Ursache noch nicht diagnostiziert.
+3. Die 29 Generatorprüfungen und 22 Kerntests prüfen diese browserseitigen Laufzeitfälle nicht.
+
+### Nächste empfohlene Schritte
+
+1. Nach neuer Freigabe zuerst rein lesend Startalgorithmus, Warteschlangenaufbau und Audio-Ereignisse nachverfolgen.
+2. Einen stabilen Referenzfall und einen reproduzierbaren Browsertest für jeden Fehler festlegen.
+3. Zuerst nur einen Fehler in einer isolierten Testkopie korrigieren und praktisch bestätigen.
+4. Erst danach über eine zweite Korrektur oder eine Übernahme entscheiden.
+
+### Kurze Zusammenfassung für ChatGPT und Codex
+
+Der Stand ist bewusst eingefroren. Es gibt keinen Nachweis für einen Architekturdefekt, aber zwei offene Player-Laufzeitfehler. Keine Reparatur wurde begonnen; Song 14 bleibt außerhalb des Projektstamms.

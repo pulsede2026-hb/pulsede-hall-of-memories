@@ -189,3 +189,18 @@ Seit 03.07.2026 wird beim Neustart nicht nur der offene Schritt, sondern auch de
 Nach Haralds PDF-Nachweis wurde die Bedienlücke vollständig geschlossen: Zwischen erteilter Stammfreigabe und GitHub-Freigabe existiert jetzt der aktive Knopf `Stammübernahme durchführen`. Er übernimmt nach erneuter Paket- und Kollisionsprüfung gemeinsam MP3, JPG, TXT, Player, Explorer, Songtext und Katalog und setzt erst danach den Status `Stamm übernommen`. Die GitHub-Freigabe bleibt bis dahin gesperrt.
 
 Die bereits vorhandene Song-14-Testkopie und ihr Übergabepaket wurden lokal auf die numerische Playlist-Sortierung aktualisiert. Sichtbare Reihenfolge `12, 14, 01 …` bleibt erlaubt; HM 02 startet nachweislich mit `01 Nordlichter`. Die Stammübernahme von Song 14 wurde bei dieser Prüfung nicht ausgelöst.
+
+## Kontrollierter Stopp-Punkt am 03.07.2026
+
+Nach Haralds erneutem Praxistest wird die Stabilisierung bewusst unterbrochen. Es wurden keine weiteren Player- oder Logikänderungen vorgenommen.
+
+Zwei Laufzeitfehler bleiben offen:
+
+- Bei der vollständigen HM-Ordnerwiedergabe wurde die Startfolge `10 → 13 → 12 → anschließend normale Reihenfolge` beobachtet. Die tatsächliche Ursache ist noch nicht nachgewiesen; die bisherige Sortierungskorrektur gilt deshalb nicht als abschließend praktisch bestätigt.
+- Der Schieberegler des HTML-Audio-Players erlaubt derzeit kein Vor- oder Zurückspringen. `currentTime`, `duration`, `timeupdate`, `seeking` und `seeked` wurden in diesem Stopp-Arbeitspaket nicht verändert oder diagnostiziert.
+
+Die drei bereitgestellten PDF-Belege zeigen Hall, Player, Songtext und V1B-Leitzentrale im geladenen Zustand. Standbilder können die zeitliche Wiedergabefolge und die Bedienbarkeit des Schiebereglers jedoch weder beweisen noch widerlegen; Haralds praktische Beobachtung wird daher als maßgeblicher offener Fehler dokumentiert.
+
+Song 14 bleibt vorbereitet und reserviert, ist aber nicht in den Projektstamm übernommen. Die bestehenden 29 Generatorprüfungen und 22 Kerntests bleiben erfolgreich, decken diese beiden browserseitigen Laufzeitfehler jedoch nicht ab.
+
+Empfohlene Fortsetzung nach neuer Freigabe: zuerst ausschließlich lesend den vollständigen Ereignis- und Datenfluss der Ordnerwiedergabe sowie der nativen Audio-Seek-Funktion erfassen. Danach genau einen Fehler in einer isolierten Testkopie korrigieren und praktisch prüfen, bevor der zweite bearbeitet wird.
