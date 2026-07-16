@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PulseDE CMS Testrahmen – Responsive Vergleich V01</title>
+
+<style>
+:root{
+    --bg:#0d0d0f;
+    --panel:#151018;
+    --gold:#d6a735;
+    --text:#ffffff;
+    --muted:#d9d0bd;
+    --gap:clamp(14px,2vw,24px);
+    --page-pad:clamp(10px,2vw,22px);
+    --radius:18px;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    margin:0;
+    padding:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Arial, sans-serif;
+}
+
+body{
+    margin:0;
+    padding:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Arial, sans-serif;
+    text-align:center;
+    overflow-x:hidden;
+}
+
+.cms-shell{
+    width:min(100%, 1280px);
+    margin:0 auto;
+    padding:var(--page-pad);
+}
+
+.cms-note{
+    color:var(--muted);
+    font-size:clamp(13px,1.4vw,16px);
+    line-height:1.5;
+    margin:0 auto var(--gap);
+    max-width:900px;
+}
+
+.module-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:var(--gap);
+    align-items:start;
+}
+
+.module-card{
+    background:var(--panel);
+    border:2px solid var(--gold);
+    border-radius:var(--radius);
+    min-width:0;
+    overflow:hidden;
+    box-shadow:0 0 18px rgba(214,167,53,.15);
+}
+
+.module-label{
+    margin:0;
+    padding:10px 12px;
+    color:var(--gold);
+    font-weight:bold;
+    font-size:clamp(14px,1.5vw,18px);
+    background:#111;
+    border-bottom:1px solid rgba(214,167,53,.35);
+}
+
+iframe{
+    display:block;
+    width:100%;
+    border:0;
+    background:#111;
+}
+
+.player-frame,
+.text-frame{
+    height:clamp(520px, 68vh, 680px);
+}
+
+.explorer-card{
+    margin-top:var(--gap);
+}
+
+.explorer-frame{
+    height:clamp(680px, 82vh, 920px);
+}
+
+@media(max-width:900px){
+    .cms-shell{
+        padding:10px;
+    }
+
+    .module-grid{
+        grid-template-columns:1fr;
+    }
+
+    .player-frame{
+        height:620px;
+    }
+
+    .text-frame{
+        height:520px;
+    }
+
+    .explorer-frame{
+        height:78vh;
+        min-height:620px;
+        max-height:820px;
+    }
+}
+
+@media(max-width:520px){
+    .cms-shell{
+        padding:8px;
+    }
+
+    .cms-note{
+        font-size:13px;
+        margin-bottom:12px;
+    }
+
+    .module-label{
+        font-size:14px;
+        padding:8px 10px;
+    }
+
+    .module-card{
+        border-radius:14px;
+    }
+
+    .player-frame{
+        height:600px;
+    }
+
+    .text-frame{
+        height:430px;
+    }
+
+    .explorer-frame{
+        height:76vh;
+        min-height:560px;
+        max-height:760px;
+    }
+}
+</style>
+</head>
+
+<body>
+<div class="cms-shell">
+
+    <p class="cms-note">
+        Responsive Vergleich V01: Player, Songtext und Explorer bleiben getrennte Funktionsbereiche.
+        Ziel ist eine ruhigere Reihenfolge und möglichst verständliche Hauptführung auf Desktop, Tablet und Smartphone.
+    </p>
+
+    <div class="module-grid" aria-label="PulseDE Player und Songtext">
+        <section class="module-card" aria-label="Hall of Memories Player">
+            <p class="module-label">🎵 Player</p>
+            <iframe
+                id="hmPlayerFrame"
+                class="player-frame"
+                title="PulseDE Hall of Memories Player"
+                src="https://pulsede2026-hb.github.io/pulsede-hall-of-memories/PulseDE_HM_PLAYER_LINKS_A1_V4.html">
+            </iframe>
+        </section>
+
+        <section class="module-card" aria-label="Songtext Anzeige">
+            <p class="module-label">📝 Songtext</p>
+            <iframe
+                id="hmTextFrame"
+                class="text-frame"
+                title="PulseDE Songtext Anzeige"
+                src="https://pulsede2026-hb.github.io/pulsede-hall-of-memories/PulseDE_HM_SONGTEXT_RECHTS_A1_V4.html">
+            </iframe>
+        </section>
+    </div>
+
+    <p class="cms-note" style="margin-top:var(--gap);">
+        Wähle Deine Musik aus den Erlebnis-Ordnern der Hall of Memories.
+    </p>
+
+    <section class="module-card explorer-card" aria-label="Hall of Memories Explorer">
+        <p class="module-label">📂 Erlebnis-Ordner</p>
+        <iframe
+            id="hmExplorerFrame"
+            class="explorer-frame"
+            title="PulseDE Hall of Memories Explorer"
+            src="https://pulsede2026-hb.github.io/pulsede-hall-of-memories/PulseDE_HM_EXPLORER_TEST_V1.html">
+        </iframe>
+    </section>
+
+</div>
+
+<script>
+const hmPlayerFrame = document.getElementById("hmPlayerFrame");
+const hmTextFrame = document.getElementById("hmTextFrame");
+
+function sendToPlayer(message){
+    if (!hmPlayerFrame || !hmPlayerFrame.contentWindow) return;
+    hmPlayerFrame.contentWindow.postMessage(message, "*");
+}
+
+function sendToText(message){
+    if (!hmTextFrame || !hmTextFrame.contentWindow) return;
+    hmTextFrame.contentWindow.postMessage(message, "*");
+}
+
+window.addEventListener("message", function(event){
+    const data = event.data;
+    if (!data || !data.type) return;
+
+    if (
+        data.type === "HM_SELECT_SONG" ||
+        data.type === "HM_PLAY_FOLDER" ||
+        data.type === "HM_STOP_AND_CLOSE" ||
+        data.type === "HM_UPDATE_FOLDER_QUEUE" ||
+        data.type === "HM_REQUEST_CURRENT"
+    ){
+        sendToPlayer(data);
+    }
+
+    if (data.type === "HM_CURRENT_SONG"){
+        sendToText(data);
+    }
+});
+</script>
+
+</body>
+</html>
