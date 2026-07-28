@@ -507,13 +507,23 @@ function closeFolder(){
     }, "*");
 }
 
+function getSongNumber(box){
+    const label = box.closest('label.songChoice');
+    const match = label ? label.textContent.trim().match(/^(\d{1,4})\s/) : null;
+    return match ? Number(match[1]) : Number.MAX_SAFE_INTEGER;
+}
+
 function getSelectedIndexes(songListId){
     const songList = document.getElementById(songListId);
     const checkedBoxes = songList.querySelectorAll('input[type="checkbox"][data-song-index]:checked');
     return Array.from(checkedBoxes)
-        .map(box => Number(box.dataset.songIndex))
-        .filter(Number.isInteger)
-        .sort((a, b) => a - b);
+        .map(box => ({
+            index: Number(box.dataset.songIndex),
+            number: getSongNumber(box)
+        }))
+        .filter(song => Number.isInteger(song.index) && Number.isInteger(song.number))
+        .sort((a, b) => a.number - b.number || a.index - b.index)
+        .map(song => song.index);
 }
 
 function playWholeFolder(songListId){
